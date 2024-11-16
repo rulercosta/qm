@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Verification</title>
+</head>
+<body>
+    {% if error %}
+        <h1>{{ error }}</h1>
+    {% else %}
+        <h1>Certificate Verified</h1>
+        <p><strong>Participant Name:</strong> {{ participant_name }}</p>
+        <p><strong>Workshop Date:</strong> {{ workshop_date }}</p>
+        <p><strong>Workshop Code:</strong> {{ workshop_code }}</p>
+        <p><strong>College ID:</strong> {{ college_id }}</p>
+        <p><strong>Certificate ID:</strong> {{ cert_id }}</p>
+    {% endif %}
+</body>
+</html>
