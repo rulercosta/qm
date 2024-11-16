@@ -160,16 +160,14 @@
     </picture>    
     <div class="cs-content">
         <img class="cs-quote" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/top-quote.svg" alt="quote" width="40" height="33">
-        <div class="cs-review">
-            {% if error %}
-                <h1>{{ error }}</h1>
-            {% else %}
-                <h1>Certificate Verified</h1>
-                <p><strong>{{ name }}</strong> successfully completed the <strong>{{ courseid }}</strong> <strong>{{ course }}</strong> on <strong>{{ date }}</strong>.</p>
-                <br/>
-                <p>Credential Verification ID: <strong>{{ cid }}</strong></p>
-            {% endif %}
-        </div>
+        {% if error %}
+            <br/><br/><br/><br/><br/><br/><br/><br/>
+            <p class="cs-review">{{ error }}</p>
+            <br/><br/><br/><br/><br/><br/><br/><br/>
+        {% else %}
+            <span class="cs-review"><strong>{{ name }}</strong> successfully completed the <strong>{{ courseid }}</strong> <strong>{{ course }}</strong> on <strong>{{ date }}</strong>.</span>
+            <span class="cs-review">Credential Verification ID: <strong>{{ cid }}</strong></span>
+        {% endif %}
         {% if not error %}
         <div class="cs-info">
             <img class="cs-profile" aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ayushsir.png') }}" alt="profile" width="50" height="50">
