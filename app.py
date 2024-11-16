@@ -24,18 +24,26 @@ def setup_database():
         initialize_database(app, 'participants.csv')  # Import data from CSV if the database is empty
         is_initialized = True
 
+from datetime import datetime
+
 # Route to verify the certificate by its ID
 @app.route('/workshops/verify/<cert_id>')
 def verify_certificate(cert_id):
     participant = Participant.query.filter_by(cid=cert_id).first()
     if participant:
+        # Convert date to desired format
+        formatted_date = datetime.strptime(participant.date, "%Y-%m-%d").strftime("%d %B, %Y")
+
+        # Add ordinal suffix to the day
+        day = int(formatted_date.split()[0])
+        suffix = "th" if 11 <= day <= 13 else {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
+        formatted_date = formatted_date.replace(str(day), f"{day}{suffix}")
+        
         return render_template(
             'verify.html',
             name=participant.name,
-            date=participant.date,
-            courseid=participant.courseid,
-            course=participant.course,
-            cid=cert_id
+            date=formatted_date,
+            course=participant.course
         )
     else:
         return render_template('verify.html', error=f"No record found :(")
