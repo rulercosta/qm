@@ -38,7 +38,7 @@ def verify_certificate(cert_id):
             cid=cert_id
         )
     else:
-        return render_template('verify.html', error=f"""No record found for credential ID {cert_id} in our database :(""")
+        return render_template('verify.html', error=f"No record found :(")
 
 if __name__ == '__main__':
     app.run(debug=True)
