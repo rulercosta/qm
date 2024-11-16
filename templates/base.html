@@ -1,0 +1,30 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Quantum Minds{% endblock %}</title>
+    
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+
+    <!-- Page-Specific CSS -->
+    {% block page_style %}
+    /* Page-specific styles go here */
+    {% endblock %}
+</head>
+<body>
+    <header>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Content specific to each page -->
+        {% endblock %}
+    </main>
+
+    <!-- Include Footer -->
+    {% include 'footer.html' %}
+</body>
+</html>

@@ -27,18 +27,18 @@ def setup_database():
 # Route to verify the certificate by its ID
 @app.route('/workshops/verify/<cert_id>')
 def verify_certificate(cert_id):
-    participant = Participant.query.filter_by(certificate_id=cert_id).first()
+    participant = Participant.query.filter_by(cid=cert_id).first()
     if participant:
         return render_template(
             'verify.html',
-            participant_name=participant.participant_name,
-            workshop_date=participant.workshop_date,
-            workshop_code=participant.workshop_code,
-            college_id=participant.college_id,
-            cert_id=cert_id
+            name=participant.name,
+            date=participant.date,
+            courseid=participant.courseid,
+            course=participant.course,
+            cid=cert_id
         )
     else:
-        return render_template('verify.html', error="No record found for Certificate ID: " + cert_id)
+        return render_template('verify.html', error=f"""No record found for credential ID {cert_id} in our database :(""")
 
 if __name__ == '__main__':
     app.run(debug=True)

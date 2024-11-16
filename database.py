@@ -10,11 +10,12 @@ def load_data_from_csv(file_path):
             # Create a Participant object for each row
             participants.append(
                 Participant(
-                    participant_name=row['NAME'],
-                    workshop_date=row['COKEY'][:8],  # Extract date from COKEY (YYYYMMDD)
-                    workshop_code=row['COKEY'],
-                    college_id=row['SID'],
-                    certificate_id=row['CID']
+                    name=row['NAME'],
+                    sid=row['SID'],
+                    cid=row['CID'],
+                    courseid=row['COURSEID'],
+                    date=row['DATE'],
+                    course=row['COURSE']
                 )
             )
         return participants
