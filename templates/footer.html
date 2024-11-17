@@ -169,7 +169,7 @@
     <div class="cs-container">
         <div class="cs-top">
             <a aria-label="go back to home" class="cs-logo" href="">
-                <img class="cs-logo-img" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/logo.svg') }}" alt="logo" width="25">
+                <img class="cs-logo-img" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" width="25">
             </a>
             <!-- <ul class="cs-ul">
                 <li class="cs-li">
@@ -193,13 +193,18 @@
             <!--Social-->
             <ul class="cs-social">
                 <li class="cs-social-li">
+                    <a href="https://linkedin.com/in/quantumminds/" class="cs-social-link" aria-label="linkedin" target="_blank" rel="noopener">
+                        <img class="cs-social-icon cs-default" src="{{ url_for('static', filename='images/linkedin.svg') }}" alt="icon" loading="lazy" decoding="async" width="12" height="12" aria-hidden="true">
+                    </a>
+                </li>
+                <li class="cs-social-li">
                     <a href="https://x.com/quantummindsX/" class="cs-social-link" aria-label="twitter" target="_blank" rel="noopener">
-                        <img class="cs-social-icon cs-default" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/twitter-ba.svg" alt="icon" loading="lazy" decoding="async" width="12" height="12" aria-hidden="true">
+                        <img class="cs-social-icon cs-default" src="{{ url_for('static', filename='images/twitter.svg') }}" alt="icon" loading="lazy" decoding="async" width="12" height="12" aria-hidden="true">
                     </a>
                 </li>
                 <li class="cs-social-li">
                     <a href="https://www.instagram.com/quantummindsclub/" class="cs-social-link" aria-label="instagram" target="_blank" rel="noopener">
-                        <img class="cs-social-icon cs-default" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/instagram-ba.svg" alt="icon" loading="lazy" decoding="async" width="12" height="12" aria-hidden="true">
+                        <img class="cs-social-icon cs-default" src="{{ url_for('static', filename='images/instagram.svg') }}" alt="icon" loading="lazy" decoding="async" width="12" height="12" aria-hidden="true">
                     </a>
                 </li>
             </ul>

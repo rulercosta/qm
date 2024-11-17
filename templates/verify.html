@@ -151,29 +151,37 @@
 <!-- ============================================ -->
 
 <section id="reviews-306">
+    {% if error %}
     <picture class="cs-image">
-        <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/qmlogo.svg') }}">
-        <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/qmlogo.svg') }}">
+        <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/404.svg') }}">
+        <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/404.svg') }}">
         <img aria-hidden="true" loading="lazy" decoding="async" 
-             src="{{ url_for('static', filename='images/qmlogo.svg') }}" 
-             alt="Quantum Minds Logo" width="842" height="548">
-    </picture>    
+             src="{{ url_for('static', filename='images/404.svg') }}" 
+             alt="404 Error" width="842" height="548">
+    </picture>
     <div class="cs-content">
-        <img class="cs-quote" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/top-quote.svg" alt="quote" width="40" height="33">
-        {% if error %}
-            <br/><br/><br/><br/><br/><br/><br/><br/>
-            <p class="cs-review">{{ error }}</p>
-            <br/><br/><br/><br/><br/><br/><br/><br/>
-        {% else %}
-            <span class="cs-review"><strong>{{ name }}</strong> successfully completed the <strong>{{ course }}</strong> on <strong>{{ date }}</strong>.</span>
-        {% endif %}
-        {% if not error %}
+        <!-- <br/><br/><br/><br/><br/><br/><br/><br/> -->
+            <p class="cs-review">We couldn't find any record matching the provided Credential Verification ID.</p>
+            <p class="cs-review">Please ensure that you have entered the correct ID. If the issue persists, contact our support team at <a href="mailto:quantummindsclubsocial@gmail.com">support@quantumminds</a>.</p>
+        <!-- <br/><br/><br/><br/><br/><br/><br/><br/> -->
+    </div>
+    {% else %}
+    <picture class="cs-image">
+        <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/bg.svg') }}">
+        <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/bg.svg') }}">
+        <img aria-hidden="true" loading="lazy" decoding="async" 
+             src="{{ url_for('static', filename='images/bg.svg') }}" 
+             alt="Quantum Minds Logo" width="842" height="548">
+    </picture>   
+    <div class="cs-content">
+        <img class="cs-quote" aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/top-quote.svg') }}" alt="quote" width="40" height="33">
+        <span class="cs-review"><strong>{{ name }}</strong> successfully completed the <strong>{{ course }}</strong> on <strong>{{ date }}</strong>.</span>
         <div class="cs-info">
             <img class="cs-profile" aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ayushsir.png') }}" alt="profile" width="50" height="50">
             <div class="cs-flex">
                 <span class="cs-name">Ayush Tiwari
                     <a href="https://www.instagram.com/iayush913?igsh=ZnZsdWlyYjZjNm1ic" class="cs-social-link" aria-label="instagram" target="_blank" rel="noopener">
-                        <img class="cs-social-icon cs-default" src="{{ url_for('static', filename='images/connect.svg') }}" alt="icon" loading="lazy" decoding="async" width="25" height="25" aria-hidden="true">
+                        <img class="cs-social-icon cs-default" src="{{ url_for('static', filename='images/connect.svg') }}" alt="icon" loading="lazy" decoding="async" width="15" height="15" aria-hidden="true">
                     </a>
                 </span>
                 <span class="cs-job">Workshop Instructor</span>
@@ -181,7 +189,7 @@
         </div>
         {% endif %}
         <!--Bottom watermark quote-->
-        <img class="cs-watermark" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/top-quote.svg" alt="quote" width="136" height="120">
+        <img class="cs-watermark" aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/top-quote.svg') }}" alt="quote" width="136" height="120">
     </div>
 </section>
 {% endblock %}
