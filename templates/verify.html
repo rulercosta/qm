@@ -161,16 +161,15 @@
     </picture>
     <div class="cs-content">
         <!-- <br/><br/><br/><br/><br/><br/><br/><br/> -->
-            <p class="cs-review">We couldn't find any record matching the provided Credential Verification ID.</p>
-            <p class="cs-review">Please ensure that you have entered the correct ID. If the issue persists, contact our support team at <a href="mailto:quantummindsclubsocial@gmail.com">support@quantumminds</a>.</p>
+            <p class="cs-review">We couldn't find any record matching the provided Credential Verification ID.<br/><br/>Please ensure that you have entered the correct ID. If the issue persists, contact our support team at <a href="mailto:quantummindsclubsocial@gmail.com">support@quantumminds</a>.</p>
         <!-- <br/><br/><br/><br/><br/><br/><br/><br/> -->
     </div>
     {% else %}
     <picture class="cs-image">
-        <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/bg.svg') }}">
-        <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/bg.svg') }}">
+        <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/bg.webp') }}">
+        <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/bg.webp') }}">
         <img aria-hidden="true" loading="lazy" decoding="async" 
-             src="{{ url_for('static', filename='images/bg.svg') }}" 
+             src="{{ url_for('static', filename='images/bg.webp') }}" 
              alt="Quantum Minds Logo" width="842" height="548">
     </picture>   
     <div class="cs-content">
@@ -179,7 +178,7 @@
         <div class="cs-info">
             <img class="cs-profile" aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ayushsir.png') }}" alt="profile" width="50" height="50">
             <div class="cs-flex">
-                <span class="cs-name">Ayush Tiwari
+                <span class="cs-name">Ayush Tripathi
                     <a href="https://www.instagram.com/iayush913?igsh=ZnZsdWlyYjZjNm1ic" class="cs-social-link" aria-label="instagram" target="_blank" rel="noopener">
                         <img class="cs-social-icon cs-default" src="{{ url_for('static', filename='images/connect.svg') }}" alt="icon" loading="lazy" decoding="async" width="15" height="15" aria-hidden="true">
                     </a>
@@ -187,9 +186,9 @@
                 <span class="cs-job">Workshop Instructor</span>
             </div>
         </div>
-        {% endif %}
         <!--Bottom watermark quote-->
         <img class="cs-watermark" aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/top-quote.svg') }}" alt="quote" width="136" height="120">
     </div>
+    {% endif %}
 </section>
 {% endblock %}
