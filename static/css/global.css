@@ -1,9 +1,9 @@
 :root {
     /* Add these styles to your global stylesheet, which is used across all site pages. You only need to do this once. All elements in the library derive their variables and base styles from this central sheet, simplifying site-wide edits. For instance, if you want to modify how your h2's appear across the site, you just update it once in the global styles, and the changes apply everywhere. */
-    --primary: #7DF9FF;          /* Electric Blue - Vibrant and energetic */
-    --primaryLight: #56D6E8;     /* Softer Electric Blue - Light and dynamic */
-    --secondary: #00BFFF;        /* Blue Bolt - Lightning-inspired */
-    --secondaryLight: #33CCFF;   /* Lighter shade for accents */
+    --primary: #00B4D8;          /* Vibrant Cyan - pops against dark blues */
+    --primaryLight: #48CAE4;     /* Softer Cyan Blue - perfect for highlights */
+    --secondary: #0077B6;        /* Deep Ocean Blue - excellent contrast for accents */
+    --secondaryLight: #90E0EF;   /* Light Cyan Blue - clean and soft on dark themes */
     --headerColor: #1a1a1a;
     --bodyTextColor: #4e4b66;
     --bodyTextColorWhite: #fafbfc;

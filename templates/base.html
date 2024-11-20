@@ -11,12 +11,12 @@
 
     <!-- Page-Specific CSS -->
     {% block page_style %}
-    /* Page-specific styles go here */
+    <!-- Page-specific styles go here -->
     {% endblock %}
 </head>
 <body>
-    <header>
-    </header>
+    <!-- Include Header -->
+    {% include 'header.html' %}
 
     <main>
         {% block content %}
