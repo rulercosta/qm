@@ -196,7 +196,7 @@
             <span class="cs-topper">Quantum Minds Workshop Certificate</span>
             <h1 class="cs-title">Congratulations on Your Achievement!</h1>
             <p class="cs-text">
-                Well done on successfully completing the {{ course }} hosted by Quantum Minds! This certificate is a testament to your dedication, passion for learning, and ability to embrace innovative ideas. Your participation marks a significant step in your journey of innovation and learning and makes you ready to showcase your skills to the world. Keep pushing boundaries and making strides in your journey of knowledge!
+                Well done on successfully completing the <strong>{{ course }}</strong> hosted by <strong>Quantum Minds</strong>! This certificate is a testament to your dedication, passion for learning, and ability to embrace innovative ideas. Your participation marks a significant step in your journey of innovation and learning and makes you ready to showcase your skills to the world. Keep pushing boundaries and making strides in your journey of knowledge!
             </p>
         </div>
     </div>
@@ -204,7 +204,7 @@
 
 {% else %}
 <section id="reviews-306">
-    <br/><br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/>
 </section>
 
 {% endif %}
@@ -223,7 +223,7 @@
     </picture>
     <div class="cs-content">
         <!-- <br/><br/><br/><br/><br/><br/><br/><br/> -->
-            <p class="cs-review">We couldn't find any record matching the provided Credential Verification ID.<br/><br/>If the issue persists, contact our support team at <a href="mailto:quantummindsclubsocial@gmail.com">support@quantumminds</a>.</p>
+            <p class="cs-review">We couldn't find any record matching the provided Credential Verification ID. Make sure that you entered the correct credential ID. If the issue persists, contact our support team at <a href="mailto:quantummindsclubsocial@gmail.com">support@quantumminds</a>.</p>
         <!-- <br/><br/><br/><br/><br/><br/><br/><br/> -->
     </div>
     {% else %}
@@ -232,7 +232,7 @@
         <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/bg.webp') }}">
         <img aria-hidden="true" loading="lazy" decoding="async" 
              src="{{ url_for('static', filename='images/bg.webp') }}" 
-             alt="Quantum Minds Logo" width="842" height="548">
+             alt="Certificate logo" width="842" height="548">
     </picture>   
     <div class="cs-content">
         <img class="cs-quote" aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/top-quote.svg') }}" alt="quote" width="40" height="33">
@@ -253,4 +253,5 @@
     </div>
     {% endif %}
 </section>
+
 {% endblock %}
