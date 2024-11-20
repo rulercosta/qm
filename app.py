@@ -1,12 +1,11 @@
-import os
 from flask import Flask, render_template
-from models import db, Participant
-from database import initialize_database
+from models import db, Participant, Instructor
+from database import init_db
 
 app = Flask(__name__)
 
 # Database configuration (SQLite or PostgreSQL, depending on your preference)
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///database.db')
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///database.db')v
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -21,32 +20,29 @@ def setup_database():
     global is_initialized
     if not is_initialized:
         db.create_all()  # Create tables if they don't exist
-        initialize_database(app, 'participants.csv')  # Import data from CSV if the database is empty
+        init_db(app)  # Initialize the database from CSV if the database is empty
         is_initialized = True
 
 from datetime import datetime
 
 # Route to verify the certificate by its ID
-@app.route('/workshops/verify/<cert_id>')
-def verify_certificate(cert_id):
-    participant = Participant.query.filter_by(cid=cert_id).first()
+@app.route('/workshops/verify/<cid>')
+def verify_certificate(cid):
+    participant = Participant.query.filter_by(cid=cid).first()
     if participant:
-        # Convert date to desired format
-        formatted_date = datetime.strptime(participant.date, "%Y-%m-%d").strftime("%d %B, %Y")
+        # Fetch the related instructor details using the courseid
+        instructor = Instructor.query.filter_by(courseid=participant.courseid).first()
 
-        # Add ordinal suffix to the day
-        day = int(formatted_date.split()[0])
-        suffix = "th" if 11 <= day <= 13 else {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
-        formatted_date = formatted_date.replace(str(day), f"{day}{suffix}")
-        
         return render_template(
             'verify.html',
             name=participant.name,
-            date=formatted_date,
-            course=participant.course
+            instructor=instructor.name,
+            profile=instructor.profile,
+            course=instructor.course,
+            date=participant.date.strftime('%d %B, %Y') 
         )
     else:
-        return render_template('verify.html', error=f"No record found :(")
+        return render_template('verify.html', error=f"No record found")
 
 if __name__ == '__main__':
     app.run(debug=True)

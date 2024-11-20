@@ -1,29 +1,42 @@
+import os
 import csv
-from models import db, Participant
+from datetime import datetime
+from models import db, Participant, Instructor
 
-# Function to load data from CSV into the database
-def load_data_from_csv(file_path):
-    with open(file_path, 'r') as file:
-        csv_reader = csv.DictReader(file)
-        participants = []
-        for row in csv_reader:
-            # Create a Participant object for each row
-            participants.append(
-                Participant(
-                    name=row['NAME'],
-                    sid=row['SID'],
-                    cid=row['CID'],
-                    courseid=row['COURSEID'],
-                    date=row['DATE'],
-                    course=row['COURSE']
-                )
-            )
-        return participants
-
-# Function to initialize the database and import data if empty
-def initialize_database(app, csv_file):
+def init_db(app):
+    """Initialize the database and create tables if they don't exist."""
     with app.app_context():
-        if not Participant.query.first():  # Check if the database is empty
-            participants = load_data_from_csv(csv_file)
-            db.session.bulk_save_objects(participants)  # Bulk insert participants
-            db.session.commit()
+        db.create_all()
+
+        # Populate the database if it's empty
+        if not Participant.query.first() and not Instructor.query.first():
+            populate_database()
+
+def populate_database():
+    """Populate the database from CSV files."""
+    # Load instructors.csv
+    with open('instructors.csv', newline='', encoding='utf-8') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            instructor = Instructor(
+                courseid=row['COURSEID'],
+                course=row['COURSE'],
+                name=row['NAME'],
+                profile=row['PROFILE']
+            )
+            db.session.add(instructor)
+
+    # Load participants.csv
+    with open('participants.csv', newline='', encoding='utf-8') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            participant = Participant(
+                cid=row['CID'],
+                courseid=row['COURSEID'],
+                date=datetime.strptime(row['DATE'], '%Y-%m-%d').date(),
+                sid=row['SID'],
+                name=row['NAME']
+            )
+            db.session.add(participant)
+
+    db.session.commit()

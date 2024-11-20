@@ -3,15 +3,29 @@ from flask_sqlalchemy import SQLAlchemy
 # Initialize SQLAlchemy
 db = SQLAlchemy()
 
-# Define the Participant model
 class Participant(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    sid = db.Column(db.String(15), nullable=False)
-    cid = db.Column(db.String(100), unique=True, nullable=False)
-    courseid = db.Column(db.String(15), nullable=False)
-    date = db.Column(db.String(50), nullable=False)
-    course = db.Column(db.String(100), nullable=False)
+    __tablename__ = 'participants'
+    cid = db.Column(db.String, unique=True, primary_key=True)  # Certificate ID
+    courseid = db.Column(db.String, db.ForeignKey('instructors.courseid'), nullable=False)
+    date = db.Column(db.Date, nullable=False)  # Workshop date
+    sid = db.Column(db.String, nullable=False)  # Student ID
+    name = db.Column(db.String, nullable=False)  # Student name
+
+    # Relationship to link participants to their course
+    course = db.relationship('Instructor', back_populates='participants')
 
     def __repr__(self):
         return f"<Participant {self.name}>"
+
+class Instructor(db.Model):
+    __tablename__ = 'instructors'
+    courseid = db.Column(db.String, unique=True, primary_key=True)  # Course ID
+    course = db.Column(db.String, nullable=False)  # Course name
+    name = db.Column(db.String, nullable=False)  # Instructor name
+    profile = db.Column(db.String, nullable=False)  # Profile image filename
+
+    # Relationship to link instructors to their participants
+    participants = db.relationship('Participant', back_populates='course')
+
+    def __repr__(self):
+        return f"<Instructor {self.name}>"
