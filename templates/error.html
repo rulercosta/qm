@@ -1,0 +1,16 @@
+<!-- templates/verify.html -->
+{% extends 'base.html' %}
+
+{% block title %}ERROR 404 NOT FOUND{% endblock %}
+
+{% block content %}
+<br/><br/><br/><br/><br/>
+<section>
+    <picture>
+        <img aria-hidden="true" loading="lazy" decoding="async" 
+        src="{{ url_for('static', filename='images/404.svg') }}" 
+        alt="404 Error" width="100%" height="auto">
+    </picture>
+</section>
+<br/><br/><br/><br/>
+{% endblock %}

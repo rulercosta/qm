@@ -26,7 +26,7 @@ def setup_database():
 from datetime import datetime
 
 # Route to verify the certificate by its ID
-@app.route('/workshops/verify/<cid>')
+@app.route('/programmes/workshops/verify/<cid>')
 def verify_certificate(cid):
     participant = Participant.query.filter_by(cid=cid).first()
     if participant:
@@ -43,6 +43,38 @@ def verify_certificate(cid):
         )
     else:
         return render_template('verify.html', error=f"No record found")
+
+@app.route('/programmes/workshops/verify')
+def verify():
+    return render_template('error.html')
+
+@app.route('/programmes/workshops')
+def workshops():
+    return render_template('error.html')
+
+@app.route('/programmes/events')
+def events():
+    return render_template('error.html')
+
+@app.route('/programmes')
+def programmes():
+    return render_template('error.html')
+
+@app.route('/home')
+def home():
+    return render_template('error.html')
+
+@app.route('/about')
+def about():
+    return render_template('error.html')
+
+@app.route('/faqs')
+def faqs():
+    return render_template('error.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('error.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

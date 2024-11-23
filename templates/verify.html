@@ -39,8 +39,9 @@
   }
   #content-1450 .cs-text {
     /* 16px - 20px */
-    font-size: clamp(1rem, 1vw, 1.25rem);
-    /* margin: 0 0 2rem 0; */
+    font-size: clamp(1.25rem, 1vw, 2rem);
+    text-align: justify;
+    margin: 1.5rem 0 0 0;
   }
 }
 
@@ -51,7 +52,7 @@
 /* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
     #reviews-306 {
-        background-color: #f7f7f7;
+        background-color: #ffffff;
         /* prevents overflow from overlapping quote icon */
         overflow: hidden;
         position: relative;
@@ -170,7 +171,7 @@
 /* Dark Mode */
 @media only screen and (min-width: 0rem) {
     body.dark-mode #reviews-306 {
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, 0);
     }
     body.dark-mode #reviews-306 .cs-review,
     body.dark-mode #reviews-306 .cs-name {
@@ -196,7 +197,7 @@
             <span class="cs-topper">Quantum Minds Workshop Certificate</span>
             <h1 class="cs-title">Congratulations on Your Achievement!</h1>
             <p class="cs-text">
-                Well done on successfully completing the <strong>{{ course }}</strong> hosted by <strong>Quantum Minds</strong>! This certificate is a testament to your dedication, passion for learning, and ability to embrace innovative ideas. Your participation marks a significant step in your journey of innovation and learning and makes you ready to showcase your skills to the world. Keep pushing boundaries and making strides in your journey of knowledge!
+                Well done on successfully completing <strong>{{ course }}</strong> hosted by <strong>Quantum Minds</strong>! This certificate is a testament to your dedication, passion for learning, and ability to embrace innovative ideas. Your participation marks a significant step in your journey of innovation and learning and makes you ready to showcase your skills to the world. Keep pushing boundaries and making strides in your journey of knowledge!
             </p>
         </div>
     </div>
