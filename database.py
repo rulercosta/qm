@@ -15,7 +15,7 @@ def init_db(app):
 def populate_database():
     """Populate the database from CSV files."""
     # Load instructors.csv
-    with open('instructors.csv', newline='', encoding='utf-8') as csvfile:
+    with open('data/instructors.csv', newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             instructor = Instructor(
@@ -27,7 +27,7 @@ def populate_database():
             db.session.add(instructor)
 
     # Load participants.csv
-    with open('participants.csv', newline='', encoding='utf-8') as csvfile:
+    with open('data/participants.csv', newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             participant = Participant(
