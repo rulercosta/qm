@@ -42,8 +42,35 @@
     /* 16px - 20px */
     font-size: clamp(1.25rem, 1vw, 2rem);
     text-align: justify;
-    margin: 1.5rem 0 0 0;
+    margin: 1.5rem 0 2rem 0;
   }
+  .cs-button-4 {
+    text-align: center;
+    font-size: 1rem;
+    /* 46px - 56px */
+    line-height: clamp(2.875rem, 8vw, 3.5rem);
+    text-decoration: none;
+    font-weight: 700;
+    min-width: 10.875rem;
+    margin: auto;
+    color: var(--bodyTextColorWhite); /* White color for text */
+    padding: 0 1.5rem;
+    /* prevents padding and border from affecting height and width */
+    box-sizing: border-box;
+    background-color: var(--primary); /* Primary cyan background */
+    box-shadow: 4px 4px 0px 0px var(--secondary); /* Deep Ocean Blue for shadow */
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    transition:
+        background-color 0.3s,
+        box-shadow 0.3s;
+    }
+
+    .cs-button-4:hover {
+        background-color: var(--secondary); /* Deep Ocean Blue on hover */
+        box-shadow: 0px 0px 0px 0px var(--primaryLight); /* Softer Cyan Blue for hover shadow */
+    }
 }
 
 /*-- -------------------------- -->
@@ -199,9 +226,28 @@
             <p class="cs-text">
                 Well done on successfully completing <strong>{{ course }}</strong> hosted by <strong>Quantum Minds</strong>! This certificate is a testament to your dedication, passion for learning, and ability to embrace innovative ideas. Your participation marks a significant step in your journey of innovation and learning and makes you ready to showcase your skills to the world. Keep pushing boundaries and making strides in your journey of knowledge!
             </p>
+            <a href="#" class="cs-button-4" aria-label="download certificate" onclick="downloadCertificate()">Share your achievement with others</a>
         </div>
     </div>
 </section>
+
+<script>
+    function downloadCertificate() {
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = '/programmes/workshops/verify/{{ cid }}/download';  // Pass the cid in the URL
+  
+      // Add hidden input field for cid (if you want to pass it explicitly)
+      const cidInput = document.createElement('input');
+      cidInput.type = 'hidden';
+      cidInput.name = 'cid';  // Match the parameter in the route
+      cidInput.value = '{{ cid }}';  // This should be passed from the backend
+  
+      form.appendChild(cidInput);
+      document.body.appendChild(form);
+      form.submit();
+    }
+  </script>
 
 {% else %}
 <section id="reviews-306">

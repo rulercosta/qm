@@ -1,13 +1,29 @@
-from flask import Flask, render_template
+import os
+from flask import Flask, render_template, send_file, session
 from models import db, Participant, Instructor
 from database import init_db
+from flask_session import Session
+from dotenv import load_dotenv
+import cert_gen
+
+load_dotenv()
 
 app = Flask(__name__)
 
 # Database configuration (SQLite or PostgreSQL, depending on your preference)
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///database.db')v
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///database.db')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Flask-Session configuration
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_FILE_DIR'] = os.path.join(os.getcwd(), 'flask_session')  # Directory for session files
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_USE_SIGNER'] = True
+app.secret_key = os.getenv('SESSION_SECRET_KEY')
+
+# Initialize Flask-Session
+Session(app)
 
 # Initialize the database
 db.init_app(app)
@@ -25,24 +41,73 @@ def setup_database():
 
 from datetime import datetime
 
+def format_date_with_ordinal(date):
+    day = date.day
+    month = date.strftime('%B')
+    year = date.strftime('%Y')
+
+    # Determine the ordinal suffix
+    if 10 <= day % 100 <= 20:
+        suffix = 'th'
+    else:
+        suffix = {1: 'st', 2: 'nd', 3: 'rd'}.get(day % 10, 'th')
+    
+    return f"{day}{suffix} {month}, {year}"
+
 # Route to verify the certificate by its ID
 @app.route('/programmes/workshops/verify/<cid>')
 def verify_certificate(cid):
     participant = Participant.query.filter_by(cid=cid).first()
     if participant:
-        # Fetch the related instructor details using the courseid
         instructor = Instructor.query.filter_by(courseid=participant.courseid).first()
+
+        # Store participant and cid in session
+        session['participant'] = {
+            'name': participant.name,
+            'workshop': instructor.course,
+            'instructor': instructor.name,
+            'date': format_date_with_ordinal(participant.date)
+        }
+        session['cid'] = cid  # Store Certificate ID in session
 
         return render_template(
             'verify.html',
+            cid=cid,
             name=participant.name,
             instructor=instructor.name,
             profile=instructor.profile,
             course=instructor.course,
-            date=participant.date.strftime('%d %B, %Y') 
+            date=participant.date.strftime('%d %B, %Y')
         )
     else:
-        return render_template('verify.html', error=f"No record found")
+        return render_template('verify.html', error="No record found")
+    
+@app.route('/programmes/workshops/verify/<cid>/download', methods=['POST'])
+def download_certificate(cid):
+    # Retrieve participant data from session
+    participant_data = session.get('participant')
+    
+    if not participant_data:
+        return "Session expired or invalid. Please verify the certificate again.", 400
+    
+    qr_data = f"https://quantummindsclub.onrender.com/programmes/workshops/verify/{cid}"
+    
+    # Use session data to generate the certificate
+    certificate_image = cert_gen.generate_certificate_image(
+        participant_data['name'],
+        qr_data,
+        "static/images/certificate_template.png",
+        participant_data['workshop'],
+        participant_data['instructor']
+    )
+    pdf_buffer = cert_gen.generate_certificate_pdf(certificate_image)
+
+    return send_file(
+        pdf_buffer,
+        as_attachment=True,
+        download_name=f"{participant_data['name']}_certificate.pdf",
+        mimetype='application/pdf'
+    )
 
 @app.route('/programmes/workshops/verify')
 def verify():
