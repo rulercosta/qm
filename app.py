@@ -20,7 +20,11 @@ app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_FILE_DIR'] = os.path.join(os.getcwd(), 'flask_session')  # Directory for session files
 app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_USE_SIGNER'] = True
-app.secret_key = os.getenv('SESSION_SECRET_KEY')
+
+if os.getenv('FLASK_ENV') == 'production':
+    app.secret_key = os.getenv('SESSION_SECRET_KEY')
+else:
+    app.secret_key = '3b2f730c388fae72df8fca6a1d977087c1c4a94f04f0f0b7'
 
 # Initialize Flask-Session
 Session(app)
