@@ -77,7 +77,7 @@ def verify_certificate(cid):
             instructor=instructor.name,
             profile=instructor.profile,
             course=instructor.course,
-            date=participant.date.strftime('%d %B, %Y')
+            date=format_date_with_ordinal(participant.date)
         )
     else:
         return render_template('verify.html', error="No record found")
@@ -98,7 +98,8 @@ def download_certificate(cid):
         qr_data,
         "static/images/certificate_template.png",
         participant_data['workshop'],
-        participant_data['instructor']
+        participant_data['instructor'],
+        participant_data['date']
     )
     pdf_buffer = cert_gen.generate_certificate_pdf(certificate_image)
 
