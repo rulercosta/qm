@@ -110,37 +110,21 @@ def download_certificate(cid):
         mimetype='application/pdf'
     )
 
-@app.route('/programmes/workshops/verify')
-def verify():
-    return render_template('error.html')
-
 @app.route('/programmes/workshops')
 def workshops():
     return render_template('error.html')
 
-@app.route('/programmes/events')
-def events():
-    return render_template('error.html')
-
-@app.route('/programmes')
-def programmes():
-    return render_template('error.html')
-
 @app.route('/home')
 def home():
-    return render_template('error.html')
+    return render_template('home.html')
 
 @app.route('/about')
 def about():
-    return render_template('error.html')
-
-@app.route('/faqs')
-def faqs():
-    return render_template('error.html')
+    return render_template('about.html')
 
 @app.route('/contact')
 def contact():
-    return render_template('error.html')
+    return render_template('contact.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

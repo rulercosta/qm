@@ -61,7 +61,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 5rem;
+    /* right: 5rem; */
     width: 3rem;
     height: 3rem;
     background: transparent;
@@ -192,7 +192,7 @@
     box-sizing: border-box;
     padding: 0;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     z-index: 10;
   }
@@ -218,7 +218,7 @@
   }
   #cs-navigation .cs-nav {
     /* sends it to the right in the 3rd position */
-    order: 3;
+    order: -3;
   }
   #cs-navigation .cs-active .cs-line1 {
     top: 50%;
@@ -278,8 +278,8 @@
     border-radius: 0 0 1.5rem 1.5rem;
     position: absolute;
     top: 20%;
-    right: 0;
-    left: auto;
+    left: 0;
+    right: auto;
     z-index: -1;
     overflow: hidden;
     transform: scaleY(0);
@@ -302,7 +302,7 @@
     overflow: hidden;
   }
   #cs-navigation .cs-li {
-    text-align: right;
+    text-align: left;
     list-style: none;
     width: 100%;
     margin-right: 0;
@@ -370,13 +370,6 @@
   }
   body.dark-mode #cs-navigation .cs-toggle {
     background-color: var(--secondary);
-  }
-  body.dark-mode #cs-navigation .cs-phone {
-    color: var(--bodyTextColorWhite);
-  }
-  body.dark-mode #cs-navigation .cs-phone-icon {
-    /* turns it white */
-    filter: grayscale(1) brightness(1000%);
   }
   body.dark-mode #cs-navigation .cs-line {
     background-color: #fff;
@@ -708,44 +701,39 @@
                 </div>
             </button>
             <!-- We need a wrapper div so we can set a fixed height on the cs-ul in case the nav list gets too long from too many dropdowns being opened and needs to have an overflow scroll. This wrapper acts as the background so it can go the full height of the screen and not cut off any overflowing nav items while the cs-ul stops short of the bottom of the screen, which keeps all nav items in view no matter how mnay there are-->
-            <!-- <div class="cs-ul-wrapper">
+            <div class="cs-ul-wrapper">
                 <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
                     <li class="cs-li">
-                        <a href=/home class="cs-li-link cs-active">
+                        <a href="{{ url_for('home') }}" class="cs-li-link">
                             Home
                         </a>
                     </li>
                     <li class="cs-li">
-                        <a href=/about class="cs-li-link">
+                        <a href="{{ url_for('about') }}" class="cs-li-link">
                             About
                         </a>
                     </li>
                     <li class="cs-li cs-dropdown" tabindex="0">
-                        <a href=/programmes class="cs-li-link">
+                        <span class="cs-li-link">
                             Programmes
                             <img class="cs-drop-icon" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/down.svg" alt="dropdown icon" width="15" height="15" decoding="async" aria-hidden="true">
-                        </a>
+                        </span>
                         <ul class="cs-drop-ul">
                             <li class="cs-drop-li">
                                 <a href=/programmes/workshops class="cs-li-link cs-drop-link">Workshops</a>
                             </li>
-                            <li class="cs-drop-li">
+                            <!-- <li class="cs-drop-li">
                                 <a href=/programmes/events class="cs-li-link cs-drop-link">Events</a>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
                     <li class="cs-li">
-                        <a href=/faqs class="cs-li-link">
-                            FAQs
-                        </a>
-                    </li>
-                    <li class="cs-li">
-                        <a href=/contact class="cs-li-link">
+                        <a href="{{ url_for('contact') }}" class="cs-li-link">
                             Contact
                         </a>
                     </li>
                 </ul>
-            </div> -->
+            </div>
         </nav>
         <!--Dark Mode toggle-->
         <!-- Place at the bottom of your container that wraps around your <nav> navigation list -->
@@ -846,5 +834,25 @@
     document.getElementById('dark-mode-toggle').addEventListener('click', () => {
     	// on click, check localStorage for the dark mode value, use to apply the opposite of what's saved
     	localStorage.getItem('theme') === 'light' ? enableDarkMode() : disableDarkMode();
+    });
+
+    // Function to highlight the active navbar link based on the current page URL
+    document.addEventListener('DOMContentLoaded', function () {
+      // Get the current URL's pathname
+      const currentUrl = window.location.pathname;
+
+      // Select all navbar links within the cs-nav class
+      const navLinks = document.querySelectorAll('.cs-nav a');
+
+      // Remove cs-active from all navbar links
+      navLinks.forEach(link => link.classList.remove('cs-active'));
+    
+      // Add cs-active to the link that matches the current URL
+      navLinks.forEach(link => {
+        // Check if the href of the link matches the current URL (relative path)
+        if (link.href.includes(currentUrl)) {
+          link.classList.add('cs-active');
+        }
+      });
     });
 </script>

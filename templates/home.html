@@ -1,0 +1,1286 @@
+<!-- templates/verify.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block page_style %}
+<style>
+/*-- -------------------------- -->
+<---           Hero             -->
+<--- -------------------------- -*/
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+    #hero-227 {
+        /* Centers button */
+        text-align: center;
+        /* changes on tablet */
+        padding: 0 1rem;
+        position: relative;
+        z-index: 1;
+        /* prevents overflow from the lines extending past the screen width */
+        overflow: hidden;
+    }
+    #hero-227 .cs-picture {
+        /* Background Image */
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -2;
+    }
+    #hero-227 .cs-picture:before {
+        /* Black Color Overlay */
+        content: "";
+        width: 100%;
+        height: 100%;
+        background: #000;
+        opacity: 0.6;
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        /* prevents the cursor from interacting with it */
+        pointer-events: none;
+    }
+    #hero-227 .cs-picture img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        /* Makes image act like a background-image */
+        object-fit: cover;
+    }
+    #hero-227 .cs-container {
+        width: 100%;
+        max-width: 80rem;
+        /* we put the padding top and bottom on the container instead of #Hero so the pseudo element lines go to the top and bottom of the section */
+        /* 144px - 300px - leaving extra space for the navigation */
+        /* changes on tablet */
+        padding: clamp(9rem, 25.95vw, 18.75rem) 0 0;
+        /* 60px - 200px */
+        padding-bottom: clamp(3.75rem, 12.5vw, 25rem);
+        margin: auto;
+        position: relative;
+    }
+    #hero-227 .cs-container:before {
+        /* Left Line */
+        content: "";
+        width: 1px;
+        height: 100%;
+        background: -moz-linear-gradient(
+            top,
+            rgba(250, 251, 252, 0.5) 0%,
+            rgba(250, 251, 252, 0) 100%
+        );
+        /* FF3.6-15 */
+        background: -webkit-linear-gradient(
+            top,
+            rgba(250, 251, 252, 0.5) 0%,
+            rgba(250, 251, 252, 0) 100%
+        );
+        /* Chrome10-25,Safari5.1-6 */
+        opacity: 1;
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+    }
+    #hero-227 .cs-flex-group {
+        /* 60px - 220px */
+        margin-bottom: clamp(3.75rem, 15.5vw, 13.75rem);
+        /* changes on tablet */
+        margin-left: 1rem;
+        width: 80vw;
+        /* 464px - 562px */
+        max-width: clamp(29rem, 60vw, 35.125rem);
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+    }
+    #hero-227 .cs-topper {
+        /* 13px - 16px */
+        font-size: clamp(0.8125rem, 1.6vw, 1rem);
+        line-height: 1.2em;
+        text-transform: uppercase;
+        text-align: left;
+        letter-spacing: 0.1rem;
+        font-weight: 700;
+        color: var(--primaryLight);
+        margin-bottom: 1rem;
+        display: block;
+    }
+    #hero-227 .cs-title {
+        /* 39px - 61px */
+        font-size: clamp(2.4375rem, 6.4vw, 3.8125rem);
+        font-weight: 900;
+        line-height: 1.2em;
+        text-align: left;
+        width: 100%;
+        /* 32px - 40px */
+        margin: 0 auto clamp(2rem, 4vw, 2.5rem) 0;
+        color: var(--bodyTextColorWhite);
+        position: relative;
+    }
+    #hero-227 .cs-text {
+        /* 16px - 20px */
+        font-size: clamp(1rem, 1.95vw, 1.25rem);
+        line-height: 1.5em;
+        text-align: left;
+        width: 100%;
+        /* 32px - 40px */
+        margin: 0 auto clamp(2rem, 4vw, 2.5rem) 0;
+        /* 40px - 48px */
+        margin-bottom: clamp(2.5rem, 4vw, 3rem);
+        color: var(--bodyTextColorWhite);
+    }
+    #hero-227 .cs-button-solid {
+        font-size: 1rem;
+        /* 46px - 56px */
+        line-height: clamp(2.875rem, 5.5vw, 3.5rem);
+        width: 11.25rem;
+        text-decoration: none;
+        font-weight: 700;
+        margin: 0 1.25rem 1rem 0;
+        color: #fff;
+        padding: 0;
+        background-color: var(--primary);
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+    }
+    #hero-227 .cs-button-solid:before {
+        content: "";
+        position: absolute;
+        display: block;
+        height: 100%;
+        width: 0%;
+        background: #000;
+        opacity: 1;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: width 0.3s;
+    }
+    #hero-227 .cs-button-solid:hover:before {
+        width: 100%;
+    }
+    #hero-227 .cs-button-transparent {
+        font-size: 1rem;
+        /* 46px - 56px */
+        line-height: clamp(2.875rem, 5.5vw, 3.5rem);
+        width: 11.25rem;
+        /* 46px - 56px */
+        height: clamp(2.875rem, 5.5vw, 3.5rem);
+        text-decoration: none;
+        font-weight: 700;
+        margin: 0;
+        color: #fff;
+        padding: 0;
+        background-color: transparent;
+        border: 1px solid var(--bodyTextColorWhite);
+        box-sizing: border-box;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+    }
+    #hero-227 .cs-button-transparent:before {
+        content: "";
+        position: absolute;
+        display: block;
+        background: #000;
+        opacity: 1;
+        /* so it sits on top of the border */
+        top: -1px;
+        left: -1px;
+        right: -1px;
+        bottom: -1px;
+        z-index: -1;
+        transform-origin: left;
+        /* this is what creates the grow affect on hover */
+        transform: scaleX(0);
+        transition: transform 0.3s;
+    }
+    #hero-227 .cs-button-transparent:hover:before {
+        transform: scaleX(1);
+    }
+    #hero-227 .cs-button-transparent .cs-img {
+        display: block;
+        margin-right: 0.75rem;
+    }
+    #hero-227 .cs-card-group {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    #hero-227 .cs-item {
+        list-style: none;
+        position: relative;
+        box-sizing: border-box;
+    }
+    #hero-227 .cs-item:before {
+        /* Top Line */
+        content: "";
+        width: 100vw;
+        height: 1px;
+        background: -moz-linear-gradient(
+            left,
+            rgba(250, 251, 252, 0.5) 0%,
+            rgba(250, 251, 252, 0) 100%
+        );
+        /* FF3.6-15 */
+        background: -webkit-linear-gradient(
+            left,
+            rgba(250, 251, 252, 0.5) 0%,
+            rgba(250, 251, 252, 0) 100%
+        );
+        /* Chrome10-25,Safari5.1-6 */
+        opacity: 1;
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    #hero-227 .cs-item:last-of-type:after {
+        /* Bottom line on last card */
+        content: "";
+        width: 100vw;
+        height: 1px;
+        background: -moz-linear-gradient(
+            left,
+            rgba(250, 251, 252, 0.5) 0%,
+            rgba(250, 251, 252, 0) 100%
+        );
+        /* FF3.6-15 */
+        background: -webkit-linear-gradient(
+            left,
+            rgba(250, 251, 252, 0.5) 0%,
+            rgba(250, 251, 252, 0) 100%
+        );
+        /* Chrome10-25,Safari5.1-6 */
+        opacity: 1;
+        position: absolute;
+        display: block;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    #hero-227 .cs-link {
+        text-align: left;
+        text-decoration: none;
+        /* changes on tablet */
+        padding: 1.75rem 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        position: relative;
+    }
+    #hero-227 .cs-link:hover:before {
+        opacity: 0.4;
+    }
+    #hero-227 .cs-link:before {
+        /* Hover Box */
+        content: "";
+        width: 100%;
+        height: 100%;
+        background: var(--primary);
+        opacity: 0;
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: opacity 0.3s;
+    }
+    #hero-227 .cs-number {
+        /* 20px - 25px */
+        font-size: clamp(1.25rem, 2vw, 1.5625rem);
+        line-height: 1.2em;
+        font-weight: 900;
+        /* 24px - 32px */
+        margin-bottom: clamp(1.5rem, 4vw, 2rem);
+        color: var(--primaryLight);
+        display: block;
+    }
+    #hero-227 .cs-h2 {
+        /* 16px - 20px */
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        font-weight: 900;
+        line-height: 1.2em;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 1rem;
+        color: var(--bodyTextColorWhite);
+        position: relative;
+        z-index: 10000;
+    }
+    #hero-227 .cs-item-text {
+        /* 14px - 16px */
+        font-size: clamp(0.875rem, 3vw, 1rem);
+        margin: 0;
+        padding: 0;
+        max-width: 31.25rem;
+        color: var(--bodyTextColorWhite);
+    }
+}
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+    #hero-227 {
+        /* 32px - 40px */
+        padding: 0 clamp(2rem, 5vw, 2.5rem);
+    }
+    #hero-227 .cs-container {
+        padding-bottom: 4rem;
+    }
+    #hero-227 .cs-container:after {
+        /* Right Line */
+        content: "";
+        width: 1px;
+        height: 100%;
+        background: -moz-linear-gradient(
+            top,
+            rgba(250, 251, 252, 0) 0%,
+            rgba(250, 251, 252, 0.5) 100%
+        );
+        /* FF3.6-15 */
+        background: -webkit-linear-gradient(
+            top,
+            rgba(250, 251, 252, 0) 0%,
+            rgba(250, 251, 252, 0.5) 100%
+        );
+        /* Chrome10-25,Safari5.1-6 */
+        opacity: 1;
+        position: absolute;
+        display: block;
+        top: 0;
+        right: 0;
+    }
+    #hero-227 .cs-flex-group {
+        /* 44px - 88px */
+        margin-left: clamp(2.75rem, 5.9vw, 5.5rem);
+    }
+    #hero-227 .cs-button-solid {
+        margin-bottom: 0;
+    }
+    #hero-227 .cs-card-group {
+        flex-direction: row;
+        position: relative;
+    }
+    #hero-227 .cs-card-group:before {
+        /* Top Line */
+        content: "";
+        /* make it extend past the left and right of the screen */
+        width: 150vw;
+        height: 1px;
+        background: -moz-linear-gradient(
+            left,
+            rgba(250, 251, 252, 0.5) 0%,
+            rgba(250, 251, 252, 0) 100%
+        );
+        /* FF3.6-15 */
+        background: -webkit-linear-gradient(
+            left,
+            rgba(250, 251, 252, 0.5) 0%,
+            rgba(250, 251, 252, 0) 100%
+        );
+        /* Chrome10-25,Safari5.1-6 */
+        opacity: 1;
+        position: absolute;
+        display: block;
+        top: 0;
+        /* these two properties center the line horizontally */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    #hero-227 .cs-item:before {
+        width: 1px;
+        height: 100vh;
+        background: -moz-linear-gradient(
+            top,
+            rgba(250, 251, 252, 0) 0%,
+            rgba(250, 251, 252, 0.5) 100%
+        );
+        /* FF3.6-15 */
+        background: -webkit-linear-gradient(
+            top,
+            rgba(250, 251, 252, 0) 0%,
+            rgba(250, 251, 252, 0.5) 100%
+        );
+        /* Chrome10-25,Safari5.1-6 */
+        top: auto;
+        left: auto;
+        right: 0;
+        bottom: -4rem;
+    }
+    #hero-227 .cs-item:nth-of-type(1) {
+        /* makes the first line under the buttons shorter */
+    }
+    #hero-227 .cs-item:nth-of-type(1):before {
+        height: 39.375rem;
+    }
+    #hero-227 .cs-item:last-of-type:before,
+    #hero-227 .cs-item:last-of-type:after {
+        display: none;
+    }
+    #hero-227 .cs-link {
+        /* 44px - 64px top & bottom, 48px - 88px left & right */
+        padding: clamp(2.75rem, 5.9vw, 5.5rem) clamp(3rem, 5.9vw, 5.5rem);
+    }
+}
+/* Desktop Parallax Effect - 1300px */
+@media only screen and (min-width: 81.25rem) {
+    #hero-227 {
+        background: url("{{ url_for('static', filename='images/wormhole.png') }}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        /* creates parallax effect on background image */
+        background-attachment: fixed;
+        /* remove img tag so we can make parallax work */
+    }
+    #hero-227 .cs-picture img {
+        display: none;
+    }
+}
+/* Dark Mode */
+@media only screen and (min-width: 0rem) {
+    body.dark-mode #hero-227 .cs-background:before {
+        opacity: 0.8;
+    }
+}
+
+/*-- -------------------------- -->
+<---         Gallery            -->
+<--- -------------------------- -*/
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+  #gallery-1716 {
+    padding: var(--sectionPadding);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+  #gallery-1716 .cs-container {
+    width: 100%;
+    max-width: 80rem;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 48px - 64px */
+    gap: clamp(3rem, 6vw, 4rem);
+  }
+  #gallery-1716 .cs-content {
+    /* set text align to left if content needs to be left aligned */
+    text-align: left;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* centers content horizontally, set to flex-start to left align */
+    align-items: flex-start;
+  }
+  #gallery-1716 .cs-text {
+    margin-bottom: 1rem;
+  }
+  #gallery-1716 .cs-text:last-of-type {
+    /* 32px - 64px */
+    margin-bottom: clamp(2rem, 7vw, 4rem);
+  }
+  #gallery-1716 .cs-text:last-of-type:before {
+    /* colored overlay rectangle - positioned absolute to the section tag because it is the nearest parent with a decalred position relative */
+    content: '';
+    width: 100%;
+    height: 80%;
+    background: var(--primary);
+    opacity: .1;
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+  }
+  #gallery-1716 .cs-button-solid {
+    font-size: 1rem;
+    /* 46px - 56px */
+    line-height: clamp(2.875rem, 5.5vw, 3.5rem);
+    text-decoration: none;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+    color: #fff;
+    min-width: 9.375rem;
+    padding: 0 1.5rem;
+    background-color: var(--primary);
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    /* prevents padding from adding to the width */
+    box-sizing: border-box;
+  }
+  #gallery-1716 .cs-button-solid:before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    background: #000;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: width .3s;
+  }
+  #gallery-1716 .cs-button-solid:hover:before {
+    width: 100%;
+  }
+  #gallery-1716 .cs-gallery {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    /* sends it to the top in the 1st position */
+    order: -1;
+  }
+  #gallery-1716 .cs-picture {
+    width: 100%;
+    /* changes at tablet */
+    height: 100vw;
+    max-height: 25rem;
+    display: block;
+    position: relative;
+    z-index: 1;
+    grid-column: span 4;
+  }
+  #gallery-1716 .cs-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+  #gallery-1716 .cs-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+  #gallery-1716 .cs-content {
+    max-width: 19rem;
+    /* 32px - 64px, ensures theres always a gap at the bottom to space out the content from the bottom of the container and let the colored rectangle shape be a little bigger and take up more space */
+    padding-bottom: clamp(2rem, 7vw, 4rem);
+  }
+  #gallery-1716 .cs-text:last-of-type {
+    /* add position relative so the colored rectangle is now absolutely positioned to the cs-text parent. We also only want these styles on the last paragraph tag */
+    position: relative;
+    z-index: 1;
+  }
+  #gallery-1716 .cs-text:last-of-type:before {
+    width: 250vw;
+    height: 100vw;
+    top: calc(100% + 1.8rem);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  #gallery-1716 .cs-gallery {
+    height: auto;
+  }
+  #gallery-1716 .cs-picture {
+    height: 100%;
+    max-height: 100%;
+    /* 280px - 420px */
+    min-height: clamp(17.5rem, 37vw, 26.25rem);
+  }
+}
+/* Dark Mode */
+@media only screen and (min-width: 0rem) {
+  body.dark-mode #gallery-1716 .cs-title,
+  body.dark-mode #gallery-1716 .cs-text {
+    color: var(--bodyTextColorWhite);
+  }
+  body.dark-mode #gallery-1716 .cs-text {
+    opacity: .8;
+  }
+  body.dark-mode #gallery-1716 .cs-text:last-of-type:before {
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 1;
+  }
+}
+/*-- -------------------------- -->
+<---          Gallery           -->
+<--- -------------------------- -*/
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+    #gallery-973 {
+        padding: var(--sectionPadding);
+    }
+    #gallery-973 .cs-container {
+        width: 100%;
+        /* changes to 1280px at small desktop */
+        max-width: 34.375rem;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+    }
+    #gallery-973 .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: center;
+    }
+
+    #gallery-973 .cs-title {
+        max-width: 20ch;
+    }
+    #gallery-973 .cs-gallery {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    #gallery-973 .cs-image {
+        width: 50%;
+        aspect-ratio: 1;
+        /* clips the image corners */
+        overflow: hidden;
+        display: block;
+        position: relative;
+    }
+    #gallery-973 .cs-image img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        /* makes it act like a background image */
+        object-fit: cover;
+    }
+}
+/* Small Desktop - 1024px */
+@media only screen and (min-width: 64rem) {
+    #gallery-973 .cs-container {
+        max-width: 80rem;
+    }
+    #gallery-973 .cs-image {
+        width: 25%;
+        height: 25rem;
+    }
+}
+/* Dark Mode */
+@media only screen and (min-width: 0rem) {
+    body.dark-mode #gallery-973 .cs-title,
+    body.dark-mode #gallery-973 .cs-text {
+        color: var(--bodyTextColorWhite);
+    }
+}
+/*-- -------------------------- -->
+<---            FAQ             -->
+<--- -------------------------- -*/
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+    #faq-489 {
+        padding: var(--sectionPadding);
+        background: #fafbfc;
+    }
+    #faq-489 .cs-container {
+        width: 100%;
+        /* changes to 1280px at tablet */
+        max-width: 34.375rem;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        /* 40px - 48px */
+        gap: clamp(2.5rem, 5vw, 3rem);
+    }
+    #faq-489 .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align: left;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: flex-start;
+    }
+
+    #faq-489 .cs-color {
+        color: var(--primary);
+    }
+
+    #faq-489 .cs-title {
+        /* 17 characters wide including spaces */
+        max-width: 17ch;
+    }
+    #faq-489 .cs-text {
+        /* 32px - 48px */
+        margin-bottom: clamp(2rem, 3vw, 3rem);
+    }
+    #faq-489 .cs-button-solid {
+        font-size: 1rem;
+        /* 46px - 56px */
+        line-height: clamp(2.875rem, 5.5vw, 3.5rem);
+        text-decoration: none;
+        font-weight: 700;
+        text-align: center;
+        margin: 0;
+        color: #fff;
+        min-width: 9.375rem;
+        padding: 0 1.5rem;
+        background-color: var(--primary);
+        border-radius: 0.25rem;
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        /* prevents padding from adding to the width */
+        box-sizing: border-box;
+    }
+    #faq-489 .cs-button-solid:before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 0%;
+        background: #000;
+        opacity: 1;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        border-radius: 0.25rem;
+        transition: width 0.3s;
+    }
+    #faq-489 .cs-button-solid:hover:before {
+        width: 100%;
+    }
+    #faq-489 .cs-faq-group {
+        max-width: 46.25rem;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+    #faq-489 .cs-faq-item {
+        list-style: none;
+        width: 100%;
+        /* prevents border from affecting width and height */
+        box-sizing: border-box;
+        border: 1px solid #f1f1f4;
+        transition:
+            border 0.3s,
+            padding 0.3s,
+            border-color 0.3s;
+    }
+    #faq-489 .cs-faq-item:hover {
+        border-color: var(--primary);
+    }
+    #faq-489 .cs-faq-item.active {
+        padding-bottom: 1rem;
+        border-color: var(--primary);
+    }
+    #faq-489 .cs-faq-item.active .cs-button {
+        color: var(--primary);
+    }
+    #faq-489 .cs-faq-item.active .cs-button:before {
+        transform: translateY(-50%) rotate(180deg);
+        opacity: 0;
+        background-color: var(--primary);
+    }
+    #faq-489 .cs-faq-item.active .cs-button:after {
+        transform: translateY(-50%) rotate(360deg);
+        background-color: var(--primary);
+    }
+    #faq-489 .cs-faq-item.active .cs-item-p {
+        height: auto;
+        margin-top: 0.5rem;
+        opacity: 1;
+    }
+    #faq-489 .cs-button {
+        /* 20px - 25px */
+        font-size: clamp(1.25rem, 1vw, 1.5625rem);
+        line-height: 1.2em;
+        text-align: left;
+        font-weight: bold;
+        padding: 1rem 1.5rem;
+        border: none;
+        background: transparent;
+        color: var(--headerColor);
+        display: block;
+        width: 100%;
+        position: relative;
+        transition:
+            background-color 0.3s,
+            color 0.3s;
+    }
+    #faq-489 .cs-button:hover {
+        cursor: pointer;
+    }
+    #faq-489 .cs-button:before {
+        /* horizontal line */
+        content: "";
+        width: 1rem;
+        height: 0.1875rem;
+        background-color: currentColor;
+        opacity: 1;
+        border-radius: 1px;
+        position: absolute;
+        display: block;
+        top: 50%;
+        right: 1.5rem;
+        transform: translateY(-50%);
+        transition:
+            transform 0.5s,
+            opacity 0.3s;
+    }
+    #faq-489 .cs-button:after {
+        /* vertical line */
+        content: "";
+        width: 1rem;
+        height: 0.1875rem;
+        background-color: currentColor;
+        opacity: 1;
+        border-radius: 1px;
+        position: absolute;
+        display: block;
+        top: 50%;
+        right: 1.5rem;
+        transform: translateY(-50%) rotate(90deg);
+        transform-origin: center;
+        transition: transform 0.5s;
+    }
+    #faq-489 .cs-button-text {
+        width: 80%;
+        display: block;
+    }
+    #faq-489 .cs-item-p {
+        /* 14px - 16px */
+        font-size: clamp(0.875rem, 1.5vw, 1rem);
+        line-height: 1.5em;
+        width: 90%;
+        height: 0;
+        margin: 0;
+        /* prevents padding and border from affecting height and width */
+        box-sizing: border-box;
+        padding: 0 1.5rem;
+        opacity: 0;
+        color: var(--bodyTextColor);
+        /* clips the text so it doesn't show up */
+        overflow: hidden;
+        transition:
+            opacity 0.3s,
+            padding-bottom 0.3s;
+    }
+}
+/* Desktop - 1024px */
+@media only screen and (min-width: 48rem) {
+    #faq-489 .cs-container {
+        max-width: 80rem;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 3.25rem;
+    }
+    #faq-489 .cs-content {
+        margin-top: 3.125rem;
+    }
+    #faq-489 .cs-title,
+    #faq-489 .cs-topper {
+        text-align: left;
+        margin-left: 0;
+    }
+    #faq-489 .cs-faq-group {
+        width: clamp(56%, 58vw, 58%);
+        flex: none;
+    }
+}
+/* Dark Mode */
+@media only screen and (min-width: 0rem) {
+    body.dark-mode #faq-489 {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+    body.dark-mode #faq-489 .cs-topper {
+        color: var(--primaryLight);
+    }
+    body.dark-mode #faq-489 .cs-title,
+    body.dark-mode #faq-489 .cs-text,
+    body.dark-mode #faq-489 .cs-item-p {
+        color: var(--bodyTextColorWhite);
+    }
+    body.dark-mode #faq-489 .cs-text,
+    body.dark-mode #faq-489 .cs-item-p {
+        opacity: 0.8;
+    }
+    body.dark-mode #faq-489 .cs-faq-item {
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+    body.dark-mode #faq-489 .cs-faq-item:hover {
+        border-color: var(--primary);
+    }
+    body.dark-mode #faq-489 .cs-faq-item.active {
+        border-color: var(--primaryLight);
+    }
+    body.dark-mode #faq-489 .cs-faq-item.active .cs-button {
+        color: var(--primaryLight);
+    }
+    body.dark-mode #faq-489 .cs-faq-item.active .cs-button:before,
+    body.dark-mode #faq-489 .cs-faq-item.active .cs-button:after {
+        background-color: var(--primaryLight);
+    }
+    body.dark-mode #faq-489 .cs-button {
+        color: var(--bodyTextColorWhite);
+    }
+    body.dark-mode #faq-489 .cs-button:before,
+    body.dark-mode #faq-489 .cs-button:after {
+        background-color: var(--bodyTextColorWhite);
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ============================================ -->
+<!--                    Hero                      -->
+<!-- ============================================ -->
+
+<section id="hero-227">
+    <div class="cs-container">
+        <div class="cs-flex-group">
+            <span class="cs-topper">Welcome to Quantum Minds</span>
+            <h1 class="cs-title">Empowering Minds to Shape the Future of Technology</h1>
+            <p class="cs-text">
+                Join us in exploring and innovating in fields such as Space Tech, Defense, AI, Cybersecurity, and more.
+            </p>
+            <a href="{{ url_for('about') }}" class="cs-button-solid">Learn More About Us</a>
+            <a href="{{ url_for('contact') }}" class="cs-button-transparent">
+                <img class="cs-img" decoding="async" src="https://csimg.nyc3.digitaloceanspaces.com/Hero/play.svg" alt="play icon" width="17" height="17" aria-hidden="true">
+                Get in Touch
+            </a>
+        </div>
+        <!--Service Cards-->
+        <ul class="cs-card-group">
+            <li class="cs-item">
+                <a class="cs-link" href="">
+                    <span class="cs-number">Space Technology</span>
+                    <h2 class="cs-h2">Exploring the Final Frontier</h2>
+                    <p class="cs-item-text">
+                        We delve into cutting-edge advancements in space exploration, contributing to missions and innovations that push the boundaries of human knowledge.
+                    </p>
+                </a>
+            </li>
+            <li class="cs-item">
+                <a class="cs-link" href="">
+                    <span class="cs-number">Defense Technology</span>
+                    <h2 class="cs-h2">Securing Our Future</h2>
+                    <p class="cs-item-text">
+                        Focusing on technological solutions to enhance national security, we collaborate on projects related to defense technology and preparedness.
+                    </p>
+                </a>
+            </li>
+            <li class="cs-item">
+                <a class="cs-link" href="">
+                    <span class="cs-number">Artificial Intelligence</span>
+                    <h2 class="cs-h2">Innovating with AI</h2>
+                    <p class="cs-item-text">
+                        We develop AI-powered solutions to solve real-world problems, focusing on machine learning, data analytics, and automation.
+                    </p>
+                </a>
+            </li>
+        </ul>
+        <ul class="cs-card-group">
+            <li class="cs-item">
+                <a class="cs-link" href="">
+                    <span class="cs-number">Cybersecurity</span>
+                    <h2 class="cs-h2">Safeguarding the Digital World</h2>
+                    <p class="cs-item-text">
+                        Our projects in cybersecurity aim to protect digital infrastructures and secure sensitive information in an increasingly connected world.
+                    </p>
+                </a>
+            </li>
+            <li class="cs-item">
+                <a class="cs-link" href="">
+                    <span class="cs-number">Startups & Entrepreneurship</span>
+                    <h2 class="cs-h2">Fostering Innovation</h2>
+                    <p class="cs-item-text">
+                        We support aspiring entrepreneurs in turning their ideas into startups, helping them navigate the complexities of business development and innovation.
+                    </p>
+                </a>
+            </li>
+            <li class="cs-item">
+                <a class="cs-link" href="">
+                    <span class="cs-number">Research & Development</span>
+                    <h2 class="cs-h2">Driving Research and Innovation</h2>
+                    <p class="cs-item-text">
+                        With a strong research orientation, we encourage members to engage in cutting-edge research and collaborate on solving real-world technological challenges.
+                    </p>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Background Image -->
+    <picture class="cs-picture">
+        <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/wormhole.png') }}">
+        <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/wormhole.png') }}">
+        <img decoding="async" src="{{ url_for('static', filename='images/wormhole.png') }}" alt="mountains" width="2250" height="1500" aria-hidden="true">
+    </picture>
+</section>
+
+<!-- ============================================ -->
+<!--                  Gallery                     -->
+<!-- ============================================ -->
+
+<section id="gallery-1716">
+    <div class="cs-container">
+        <div class="cs-content">
+            <span class="cs-topper">Gallery</span>
+            <h2 class="cs-title">Our Journey Through Innovation</h2>
+            <!--If you remove the cs-text, the rectangle shape will disappear.  If you need to remove it, transfer the :before and .cs-text:last-of-type styles to the cs-title on mobile and desktop-->
+            <p class="cs-text">
+                Explore moments of creativity, collaboration, and progress. Our gallery showcases key events, projects, and achievements of Quantum Minds.
+            </p>
+            <a href="" id="view-all-btn" class="cs-button-solid">View More</a>
+        </div>
+        <div class="cs-gallery">
+            <picture class="cs-picture">
+                <!--Mobile Image-->
+                <source media="(max-width: 600px)"
+                        srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <!--Tablet and above Image-->
+                <source media="(min-width: 601px)"
+                        srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async"
+                        src="{{ url_for('static', filename='images/ai.jpg') }}" alt="picture"
+                        width="480" height="549">
+            </picture>
+            <picture class="cs-picture">
+                <!--Mobile Image-->
+                <source media="(max-width: 600px)"
+                        srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <!--Tablet and above Image-->
+                <source media="(min-width: 601px)"
+                        srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async"
+                        src="{{ url_for('static', filename='images/ai.jpg') }}" alt="picture"
+                        width="480" height="549">
+            </picture>
+            <picture class="cs-picture">
+                <!--Mobile Image-->
+                <source media="(max-width: 600px)"
+                        srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <!--Tablet and above Image-->
+                <source media="(min-width: 601px)"
+                        srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async"
+                        src="{{ url_for('static', filename='images/ai.jpg') }}" alt="picture"
+                        width="480" height="549">
+            </picture>
+        </div>
+    </div>
+</section>
+
+<script>
+// Select the "View All" link and the next section
+const viewAllLink = document.getElementById('view-all-btn');
+
+// Add click event listener to the "View All" link
+viewAllLink.addEventListener('click', (event) => {
+    // Prevent default anchor link behavior (jumping to the section)
+    event.preventDefault();
+
+    // Smooth scroll to the next section
+    const nextSection = document.getElementById('gallery-973'); // Replace with the ID of the section you want to scroll to
+    nextSection.scrollIntoView({
+        behavior: 'smooth', // Ensures smooth scrolling
+        block: 'start' // Scrolls to the top of the next section
+    });
+});
+</script>
+
+<!-- ============================================ -->
+<!--                   Gallery                    -->
+<!-- ============================================ -->
+
+<section id="gallery-973">
+    <div class="cs-container">
+        <div class="cs-content">
+            <span class="cs-topper">Explore Our Visual Journey</span>
+            <h2 class="cs-title">Capturing Moments of Innovation and Collaboration</h2>
+            <p class="cs-text">
+                Discover how Quantum Minds Club is shaping the future through hands-on projects, research, and community events.
+            </p>
+        </div>
+        <div class="cs-gallery">
+            <!--Picture 1-->
+            <picture class="cs-image">
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ai.jpg') }}" alt="gallery" width="305" height="400">
+            </picture>
+            <!--Picture 2-->
+            <picture class="cs-image">
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ai.jpg') }}" alt="gallery" width="305" height="400">
+            </picture>
+            <!--Picture 3-->
+            <picture class="cs-image">
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ai.jpg') }}" alt="gallery" width="305" height="400">
+            </picture>
+            <!--Picture 4-->
+            <picture class="cs-image">
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ai.jpg') }}" alt="gallery" width="305" height="400">
+            </picture>
+            <!--Picture 5-->
+            <picture class="cs-image">
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ai.jpg') }}" alt="gallery" width="305" height="400">
+            </picture>
+            <!--Picture 6-->
+            <picture class="cs-image">
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ai.jpg') }}" alt="gallery" width="305" height="400">
+            </picture>
+            <!--Picture 7-->
+            <picture class="cs-image">
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ai.jpg') }}" alt="gallery" width="305" height="400">
+            </picture>
+            <!--Picture 8-->
+            <picture class="cs-image">
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ai.jpg') }}" alt="gallery" width="305" height="400">
+            </picture>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!--                     FAQ                      -->
+<!-- ============================================ -->
+
+<section id="faq-489">
+    <div class="cs-container">
+        <div class="cs-content">
+            <span class="cs-topper">Frequently Asked Questions</span>
+            <h2 class="cs-title">If Your Question Is Not Here, Feel Free To <span class="cs-color">Contact Us</span></h2>
+            <p class="cs-text">
+                If you have more questions or need further clarification, don't hesitate to contact us. We're always here to help and welcome new members to join us in shaping the future of technology.
+            </p>
+            <a href="{{ url_for('contact') }}" class="cs-button-solid">Contact Us</a>
+        </div>
+        <ul class="cs-faq-group">
+            <!-- Active class added as default -->
+            <li class="cs-faq-item">
+                <button class="cs-button">
+                    <span class="cs-button-text">
+                        What is Quantum Minds?
+                    </span>
+                </button>
+                <p class="cs-item-p">
+                    Quantum Minds is a student-driven research and innovation club at the United College of Engineering and Research. We focus on a wide range of technological fields, including space technology, defense, AI, cybersecurity, and more. Our mission is to empower students to explore, innovate, and contribute to real-world technological advancements.
+                </p>
+            </li>
+            <li class="cs-faq-item">
+                <button class="cs-button">
+                    <span class="cs-button-text">
+                        How can I become a member of Quantum Minds?
+                    </span>
+                </button>
+                <p class="cs-item-p">
+                    To become a member, you need to meet the club's eligibility criteria, which includes academic excellence (minimum GPA of 7.5) and technical proficiency in relevant fields. You can apply through the club's membership portal or get in touch with the club administrators for more details. 
+                </p>
+            </li>
+            <li class="cs-faq-item">
+                <button class="cs-button">
+                    <span class="cs-button-text">
+                        What are the key areas of focus for Quantum Minds?
+                    </span>
+                </button>
+                <p class="cs-item-p">
+                    We focus on several core areas, including:
+                    Space Technology: Advancing research and development in space exploration.
+                    Defense Technology: Innovating for national security and preparedness.
+                    Artificial Intelligence: Leveraging AI for real-world problem-solving.
+                    Cybersecurity: Developing solutions to secure digital environments.
+                    Research and Innovation: Engaging in cutting-edge technological research.
+                    Entrepreneurship and Startups: Supporting aspiring entrepreneurs in launching their tech ventures.
+                </p>
+            </li>
+            <li class="cs-faq-item">
+                <button class="cs-button">
+                    <span class="cs-button-text">
+                        How do I participate in Quantum Minds events and workshops?
+                    </span>
+                </button>
+                <p class="cs-item-p">
+                    You can participate in events and workshops by registering on the club's website or through direct invitations. Keep an eye on our Events page for upcoming opportunities and announcements. 
+                </p>
+            </li>
+            <li class="cs-faq-item">
+                <button class="cs-button">
+                    <span class="cs-button-text">
+                        Do I need any prior experience to join Quantum Minds?
+                    </span>
+                </button>
+                <p class="cs-item-p">
+                    While prior experience in relevant technical fields can be beneficial, it's not a requirement. We welcome students from all academic backgrounds who are passionate about technology and innovation. Members can learn and develop new skills through hands-on projects, workshops, and collaboration with experts. 
+                </p>
+            </li>
+            <li class="cs-faq-item">
+                <button class="cs-button">
+                    <span class="cs-button-text">
+                        How can I collaborate with Quantum Minds?
+                    </span>
+                </button>
+                <p class="cs-item-p">
+                    If you're an organization, faculty, or individual interested in collaborating with Quantum Minds, please visit our Contact Us page to reach out. We are open to partnerships, mentorship, and industry collaborations to enhance our members' learning experiences. 
+                </p>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const faqItems = Array.from(document.querySelectorAll('.cs-faq-item'));
+        for (const item of faqItems) {
+            const onClick = () => {
+            item.classList.toggle('active')
+        }
+        item.addEventListener('click', onClick)
+        }
+    </script>
+</section>
+{% endblock %}
