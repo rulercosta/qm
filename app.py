@@ -1,10 +1,12 @@
 import os
-from flask import Flask, render_template, send_file, session
-from models import db, Participant, Instructor
+from flask import Flask, render_template, send_file, session, request, flash, redirect, url_for
+from models import db, Participant, Instructor, ContactForm
 from database import init_db
 from flask_session import Session
 from dotenv import load_dotenv
 import cert_gen
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 
 load_dotenv()
 
@@ -114,6 +116,10 @@ def download_certificate(cid):
 def workshops():
     return render_template('error.html')
 
+@app.route('/')
+def root():
+    return redirect(url_for('home'))
+
 @app.route('/home')
 def home():
     return render_template('home.html')
@@ -122,9 +128,44 @@ def home():
 def about():
     return render_template('about.html')
 
-@app.route('/contact')
+@app.route('/contact', methods=['GET', 'POST'])
 def contact():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        phone = request.form.get('phone')
+        referral = request.form.get('referral')
+        message_content = request.form.get('message')
+
+        if not (name and email and phone and referral and message_content):
+            flash('Please fill in all fields.', 'error')
+            return redirect(url_for('contact'))
+
+        # Save to database
+        try:
+            submission = ContactForm(
+                name=name,
+                email=email,
+                phone=phone,
+                referral=referral,
+                message=message_content
+            )
+            db.session.add(submission)
+            db.session.commit()
+            flash('Your message has been received successfully!', 'success')
+        except Exception as e:
+            db.session.rollback()
+            flash('An error occurred while saving your message. Please try again later.', 'error')
+            print(f"Error: {e}")
+
+        return redirect(url_for('contact'))
+
     return render_template('contact.html')
+
+admin = Admin(app, name='Admin Dashboard', template_mode='bootstrap4')
+admin.add_view(ModelView(ContactForm, db.session))
+admin.add_view(ModelView(Instructor, db.session))
+admin.add_view(ModelView(Participant, db.session))
 
 if __name__ == '__main__':
     app.run(debug=True)

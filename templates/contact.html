@@ -83,45 +83,6 @@
             display: block;
             position: relative;
         }
-        #cs-contact-549 .cs-background:before {
-            /* yellow dot */
-            content: "";
-            width: 1.125rem;
-            height: 1.125rem;
-            background: var(--primary);
-            border-radius: 50%;
-            opacity: 1;
-            position: absolute;
-            display: block;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10;
-        }
-        #cs-contact-549 .cs-background:after {
-            /* yellow animated ring */
-            content: "";
-            width: 1.125rem;
-            height: 1.125rem;
-            background: transparent;
-            border-radius: 50%;
-            border: 1px solid var(--primary);
-            opacity: 1;
-            position: absolute;
-            display: block;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            z-index: 10;
-            transition:
-                transform 0.4s,
-                opacity 0.4s;
-            animation-name: scaleFade;
-            animation-duration: 2s;
-            animation-timing-function: linear;
-            animation-fill-mode: forwards;
-            animation-iteration-count: infinite;
-        }
         #cs-contact-549 .cs-background img {
             position: absolute;
             top: 0;
@@ -311,38 +272,32 @@
             </p>
         </div>
         <!--Swap the image out for a screenshot of the Google Map location for your client, or you can add the embedded iframe from google and add the cs-background class to it and it should work, remove the animated dots in the CSS if you do that-->
-        <picture class="cs-background">
-            <!--Mobile Image-->
-            <source media="(max-width: 600px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Contact-Page/generic-map.png">
-            <!--Tablet and above Image-->
-            <source media="(min-width: 601px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Contact-Page/generic-map.png">
-            <img loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Contact-Page/generic-map.png" alt="appliance" width="1280" height="568" aria-hidden="true">
-        </picture>
+        <iframe class="cs-background" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1617.6353010771552!2d81.91091829924964!3d25.34337240337759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3985497f856b1d35%3A0xf727c4fc418f7b17!2sUnited%20College%20of%20Engineering%20and%20Research!5e0!3m2!1sen!2sin!4v1735049028561!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <!--Form-->
         <form class="cs-form" id="cs-form-549" name="Contact Form" method="post">
             <label class="cs-label">
                 Name
                 <input class="cs-input" required type="text" id="name-549" name="name" placeholder="Name">
-                <img class="cs-icon" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Contact-Page/person-gold.svg" alt="person icon" width="32" height="32">
+                <img class="cs-icon" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/person.svg') }}" alt="person icon" width="32" height="32">
             </label>
             <label class="cs-label cs-email">
                 Email
                 <input class="cs-input" required type="text" id="email-549" name="email" placeholder="Email">
-                <img class="cs-icon" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Contact-Page/mail-gold.svg" alt="mail icon" width="32" height="32">
+                <img class="cs-icon" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/mail.svg') }}" alt="mail icon" width="32" height="32">
             </label>
             <label class="cs-label cs-phone">
                 Phone
                 <input class="cs-input" required type="text" id="phone-549" name="phone" placeholder="Phone">
-                <img class="cs-icon" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Contact-Page/phone-golden.svg" alt="phone icon" width="32" height="32">
+                <img class="cs-icon" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/phone.svg') }}" alt="phone icon" width="32" height="32">
             </label>
             <label class="cs-label cs-phone">
                 How did you hear about us?
-                <input class="cs-input" required type="text" id="phone-549" name="phone" placeholder="Google">
-                <img class="cs-icon" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Contact-Page/refer.svg" alt="talking icon" width="32" height="32">
+                <input class="cs-input" required type="text" id="phone-549" name="referral" placeholder="Google">
+                <img class="cs-icon" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/refer.svg') }}" alt="talking icon" width="32" height="32">
             </label>
             <label class="cs-label cs-textarea-label">
                 Message
-                <textarea class="cs-textarea" required name="Message" id="message-549" placeholder="Write message..."></textarea>
+                <textarea class="cs-textarea" required name="message" id="message-549" placeholder="Write message..."></textarea>
             </label>
             <button class="cs-submit" type="submit">Send</button>
         </form>

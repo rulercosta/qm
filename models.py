@@ -29,3 +29,17 @@ class Instructor(db.Model):
 
     def __repr__(self):
         return f"<Instructor {self.name}>"
+
+class ContactForm(db.Model):
+    __tablename__ = 'formsubmissions'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+    phone = db.Column(db.String(15), nullable=False)
+    referral = db.Column(db.String(255), nullable=False)
+    message = db.Column(db.Text, nullable=False)
+    timestamp = db.Column(db.DateTime, nullable=False, default=db.func.now())
+
+    def __repr__(self):
+        return f"<ContactFormSubmission {self.name} - {self.email}>"
+
