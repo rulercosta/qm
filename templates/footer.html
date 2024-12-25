@@ -168,21 +168,21 @@
         
     <div class="cs-container">
         <div class="cs-top">
-            <a aria-label="go back to home" class="cs-logo" href="{{ url_for('home') }}">
+            <a aria-label="go back to home" class="cs-logo" href="{{ url_for('home_routes.home') }}">
                 <img class="cs-logo-img" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/logo.svg') }}" alt="logo" width="25">
             </a>
             <ul class="cs-ul">
                 <li class="cs-li">
-                    <a href="/home" class="cs-link">Home</a>
+                    <a href="{{ url_for('home_routes.home') }}" class="cs-link">Home</a>
                 </li>
                 <li class="cs-li">
-                    <a href="/about" class="cs-link">About</a>
+                    <a href="{{ url_for('home_routes.about') }}" class="cs-link">About</a>
                 </li>
                 <!-- <li class="cs-li">
                     <a href="/programmes" class="cs-link">Programmes</a>
                 </li> -->
                 <li class="cs-li">
-                    <a href="/contact" class="cs-link">Contact</a>
+                    <a href="{{ url_for('contact_routes.contact') }}" class="cs-link">Contact</a>
                 </li>
             </ul>
         </div>

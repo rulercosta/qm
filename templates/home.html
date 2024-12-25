@@ -976,8 +976,8 @@
             <p class="cs-text">
                 Join us in exploring and innovating in fields such as Space Tech, Defense, AI, Cybersecurity, and more.
             </p>
-            <a href="{{ url_for('about') }}" class="cs-button-solid">Learn More</a>
-            <a href="{{ url_for('contact') }}" class="cs-button-transparent">
+            <a href="{{ url_for('home_routes.home') }}" class="cs-button-solid">Learn More</a>
+            <a href="{{ url_for('contact_routes.contact') }}" class="cs-button-transparent">
                 <img class="cs-img" decoding="async" src="https://csimg.nyc3.digitaloceanspaces.com/Hero/play.svg" alt="play icon" width="17" height="17" aria-hidden="true">
                 Get in Touch
             </a>
@@ -1200,7 +1200,7 @@ viewAllLink.addEventListener('click', (event) => {
             <p class="cs-text">
                 If you have more questions or need further clarification, don't hesitate to contact us. We're always here to help and welcome new members to join us in shaping the future of technology.
             </p>
-            <a href="{{ url_for('contact') }}" class="cs-button-solid">Contact Us</a>
+            <a href="{{ url_for('contact_routes.contact') }}" class="cs-button-solid">Contact Us</a>
         </div>
         <ul class="cs-faq-group">
             <!-- Active class added as default -->

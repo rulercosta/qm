@@ -686,7 +686,7 @@
 <header id="cs-navigation">
     <div class="cs-container">
         <!--Nav Logo-->
-        <a href=/home class="cs-logo" aria-label="back to home">
+        <a href="{{ url_for('home_routes.home') }}" class="cs-logo" aria-label="back to home">
             <img class="light" src="{{ url_for('static', filename='images/logo-light.svg') }}" alt="logo" width="210" height="29" aria-hidden="true" decoding="async">
             <img class="dark" src="{{ url_for('static', filename='images/logo-dark.svg') }}" alt="logo" width="210" height="29" aria-hidden="true" decoding="async">
         </a>
@@ -704,12 +704,12 @@
             <div class="cs-ul-wrapper">
                 <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
                     <li class="cs-li">
-                        <a href="{{ url_for('home') }}" class="cs-li-link">
+                        <a href="{{ url_for('home_routes.home') }}" class="cs-li-link">
                             Home
                         </a>
                     </li>
                     <li class="cs-li">
-                        <a href="{{ url_for('about') }}" class="cs-li-link">
+                        <a href="{{ url_for('home_routes.about') }}" class="cs-li-link">
                             About
                         </a>
                     </li>
@@ -720,7 +720,7 @@
                         </span>
                         <ul class="cs-drop-ul">
                             <li class="cs-drop-li">
-                                <a href=/programmes/workshops class="cs-li-link cs-drop-link">Workshops</a>
+                                <a href="{{ url_for('workshop_routes.workshops') }}" class="cs-li-link cs-drop-link">Workshops</a>
                             </li>
                             <!-- <li class="cs-drop-li">
                                 <a href=/programmes/events class="cs-li-link cs-drop-link">Events</a>
@@ -728,7 +728,7 @@
                         </ul>
                     </li>
                     <li class="cs-li">
-                        <a href="{{ url_for('contact') }}" class="cs-li-link">
+                        <a href="{{ url_for('contact_routes.contact') }}" class="cs-li-link">
                             Contact
                         </a>
                     </li>

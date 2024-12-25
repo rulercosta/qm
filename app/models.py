@@ -1,7 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-
-# Initialize SQLAlchemy
-db = SQLAlchemy()
+from app.extensions import db
 
 class Participant(db.Model):
     __tablename__ = 'participants'
@@ -42,4 +40,3 @@ class ContactForm(db.Model):
 
     def __repr__(self):
         return f"<ContactFormSubmission {self.name} - {self.email}>"
-
