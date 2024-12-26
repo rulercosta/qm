@@ -19,12 +19,4 @@ def create_app():
     app.register_blueprint(contact_routes.bp)
     app.register_blueprint(admin_routes.bp)
 
-    # Initialize admin panel automatically by Flask-Admin
-    # Admin setup is now directly handled in admin_routes, no need to call init_admin
-
-    # Create tables only for local development
-    if os.getenv("FLASK_ENV") == "development":
-        with app.app_context():
-            db.create_all()
-
     return app
