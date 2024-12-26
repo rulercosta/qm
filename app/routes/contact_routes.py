@@ -33,6 +33,6 @@ def contact():
             flash('An error occurred while saving your message. Please try again later.', 'error')
             print(f"Error: {e}")
 
-        return redirect(url_for('contact'))
+        return redirect(url_for('contact_routes.contact'))
 
     return render_template('contact.html')
