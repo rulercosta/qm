@@ -1,0 +1,248 @@
+/*-- -------------------------- -->
+<---       Contact Form         -->
+<--- -------------------------- -*/
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+    @keyframes scaleFade {
+        0% {
+            transform: translate(-50%, -50%) scale(0);
+        }
+        50% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.4);
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(1.7);
+            opacity: 0;
+        }
+    }
+    #cs-contact-549 {
+        padding: var(--sectionPadding);
+    }
+    #cs-contact-549 .cs-container {
+        width: 100%;
+        max-width: 80rem;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+    }
+    #cs-contact-549 .cs-content {
+        /* set text aling to left if content needs to be left aligned */
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: center;
+    }
+    #cs-contact-549 .cs-topper {
+        font-size: var(--topperFontSize);
+        line-height: 1.2em;
+        text-transform: uppercase;
+        text-align: inherit;
+        letter-spacing: 0.1em;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 0.25rem;
+        display: block;
+    }
+    #cs-contact-549 .cs-title {
+        font-size: var(--headerFontSize);
+        font-weight: 900;
+        line-height: 1.2em;
+        text-align: inherit;
+        /* max width of 24 characters including spaces */
+        max-width: 24ch;
+        margin: 0 0 1rem 0;
+        color: var(--headerColor);
+        position: relative;
+    }
+    #cs-contact-549 .cs-text {
+        font-size: var(--bodyFontSize);
+        line-height: 1.5em;
+        text-align: inherit;
+        width: 100%;
+        max-width: 40.625rem;
+        margin: 0;
+        color: var(--bodyTextColor);
+    }
+    #cs-contact-549 .cs-background {
+        width: 100%;
+        height: 19.5rem;
+        display: block;
+        position: relative;
+    }
+    #cs-contact-549 .cs-background img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+    #cs-contact-549 .cs-form {
+        width: 100%;
+        max-width: 66.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+    #cs-contact-549 .cs-label {
+        /* 16px - 20px */
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        line-height: 1.5em;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        position: relative;
+    }
+    #cs-contact-549 .cs-input,
+    #cs-contact-549 .cs-textarea,
+    #cs-contact-549 select,
+    #cs-contact-549 .cs-select {
+        /* added options for the select tag in case you add it, that way it will also have the same styles, add the cs-select class for better specificity when targeting it */
+        /* 16px - 20px */
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        font-family: inherit;
+        margin: 0;
+        /* 24px - 40px */
+        padding: 0 clamp(1.5rem, 5vw, 2.5rem) 0;
+        width: 100%;
+        /* 70px - 90px */
+        height: clamp(4.375rem, 7vw, 5.625rem);
+        background-color: #f1f1f4;
+        /* prevents border and padding from affecting height and width */
+        box-sizing: border-box;
+        border: 3px solid transparent;
+        display: block;
+        position: relative;
+        transition: border-color 0.3s;
+    }
+    #cs-contact-549 .cs-input:hover,
+    #cs-contact-549 .cs-textarea:hover,
+    #cs-contact-549 select:hover,
+    #cs-contact-549 .cs-select:hover,
+    #cs-contact-549 .cs-input:focus,
+    #cs-contact-549 .cs-textarea:focus,
+    #cs-contact-549 select:focus,
+    #cs-contact-549 .cs-select:focus {
+        /* focus has a black outline, we override it here */
+        outline: none;
+        border-color: var(--primaryLight);
+    }
+    #cs-contact-549 .cs-textarea {
+        width: 100%;
+        margin: 0;
+        padding-top: 1rem;
+        /* changes at tablet */
+        min-height: 12.5rem;
+    }
+    #cs-contact-549 .cs-icon {
+        width: 1.875rem;
+        height: auto;
+        position: absolute;
+        /* 24px - 40px, matches the padding left and right of input */
+        right: clamp(1.5rem, 5vw, 2.5rem);
+        /* these two center the icon inside the label */
+        bottom: 50%;
+        transform: translateY(115%);
+    }
+    #cs-contact-549 .cs-submit {
+        /* 20px - 25px */
+        font-size: clamp(1.25rem, 2vw, 1.5625rem);
+        /* 56px - 84px */
+        line-height: clamp(3.5rem, 6.5vw, 5.25rem);
+        text-decoration: none;
+        font-weight: 700;
+        text-align: center;
+        /* 28px - 44px, minus the gap value. Should be 48px - 64px, but with a 20px gap on the flexbox, we account for that space when adding our margin top value so its 48px - 64px */
+        margin: clamp(1.75rem, 6vw, 2.75rem) auto 0;
+        color: #1a1a1a;
+        border: none;
+        /* 150px - 234px */
+        min-width: clamp(9.374rem, 18vw, 14.625rem);
+        padding: 0 1.5rem;
+        background-color: var(--primaryLight);
+        border-radius: 0.25rem;
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        /* prevents padding from adding to the width */
+        box-sizing: border-box;
+        transition: color 0.3s;
+    }
+    #cs-contact-549 .cs-submit:before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 0%;
+        background: #000;
+        opacity: 1;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        border-radius: 0.25rem;
+        transition: width 0.3s;
+    }
+    #cs-contact-549 .cs-submit:hover {
+        color: #fff;
+        cursor: pointer;
+    }
+    #cs-contact-549 .cs-submit:hover:before {
+        width: 100%;
+    }
+}
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+    #cs-contact-549 .cs-background {
+        /* 310px - 568px */
+        height: clamp(19.375rem, 43vw, 35.5rem);
+    }
+    #cs-contact-549 .cs-form {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    #cs-contact-549 .cs-label {
+        width: 48%;
+    }
+    #cs-contact-549 .cs-textarea-label {
+        width: 100%;
+    }
+    #cs-contact-549 .cs-textarea {
+        /* 280px - 358px */
+        min-height: clamp(17.5rem, 28vw, 22.375rem);
+    }
+}
+/* Dark Mode */
+@media only screen and (min-width: 0rem) {
+    body.dark-mode #cs-contact-549 .cs-topper {
+        color: var(--primaryLight);
+    }
+    body.dark-mode #cs-contact-549 .cs-title,
+    body.dark-mode #cs-contact-549 .cs-text {
+        color: var(--bodyTextColorWhite);
+    }
+    body.dark-mode #cs-contact-549 .cs-text {
+        opacity: 0.8;
+    }
+    body.dark-mode #cs-contact-549 .cs-label {
+        color: var(--bodyTextColorWhite);
+    }
+    body.dark-mode #cs-contact-549 .cs-input,
+    body.dark-mode #cs-contact-549 .cs-textarea {
+        background-color: var(--accent);
+        color: var(--bodyTextColorWhite);
+    }
+    body.dark-mode #cs-contact-549 .cs-input::placeholder,
+    body.dark-mode #cs-contact-549 .cs-textarea::placeholder {
+        color: var(--bodyTextColorWhite);
+        opacity: 0.5;
+    }
+}

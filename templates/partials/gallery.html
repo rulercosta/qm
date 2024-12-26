@@ -1,0 +1,71 @@
+<!-- partials/gallery.html -->
+
+{% block page_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/partials/gallery.css') }}">
+{% endblock %}
+
+<!-- ============================================ -->
+<!--                   Gallery                    -->
+<!-- ============================================ -->
+
+<section id="gallery-973">
+    <div class="cs-container">
+        <div class="cs-content">
+            <span class="cs-topper">Explore Our Visual Journey</span>
+            <h2 class="cs-title">Capturing Moments of Innovation and Collaboration</h2>
+            <p class="cs-text">
+                Discover how Quantum Minds Club is shaping the future through hands-on projects, research, and community events.
+            </p>
+        </div>
+        <div class="cs-gallery">
+            <!--Picture 1-->
+            <picture class="cs-image">
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ai.jpg') }}" alt="gallery" width="305" height="400">
+            </picture>
+            <!--Picture 2-->
+            <picture class="cs-image">
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ai.jpg') }}" alt="gallery" width="305" height="400">
+            </picture>
+            <!--Picture 3-->
+            <picture class="cs-image">
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ai.jpg') }}" alt="gallery" width="305" height="400">
+            </picture>
+            <!--Picture 4-->
+            <picture class="cs-image">
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ai.jpg') }}" alt="gallery" width="305" height="400">
+            </picture>
+            <!--Picture 5-->
+            <picture class="cs-image">
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ai.jpg') }}" alt="gallery" width="305" height="400">
+            </picture>
+            <!--Picture 6-->
+            <picture class="cs-image">
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ai.jpg') }}" alt="gallery" width="305" height="400">
+            </picture>
+            <!--Picture 7-->
+            <picture class="cs-image">
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ai.jpg') }}" alt="gallery" width="305" height="400">
+            </picture>
+            <!--Picture 8-->
+            <picture class="cs-image">
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ai.jpg') }}" alt="gallery" width="305" height="400">
+            </picture>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,101 @@
+<!-- partials/faqs.html -->
+
+{% block page_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/partials/faqs.css') }}">
+{% endblock %}
+
+<!-- ============================================ -->
+<!--                     FAQ                      -->
+<!-- ============================================ -->
+
+<section id="faq-489">
+    <div class="cs-container">
+        <div class="cs-content">
+            <span class="cs-topper">Frequently Asked Questions</span>
+            <h2 class="cs-title">If Your Question Is Not Here, Feel Free To <span class="cs-color">Contact Us</span></h2>
+            <p class="cs-text">
+                If you have more questions or need further clarification, don't hesitate to contact us. We're always here to help and welcome new members to join us in shaping the future of technology.
+            </p>
+            {% if skip_section %}
+            <a href="" id="view-all-btn" class="cs-button-solid">Contact Us</a>
+            {% else %}
+            <a href="{{ url_for('contact_routes.contact') }}" class="cs-button-solid">Contact Us</a>
+            {% endif %}
+        </div>
+        <ul class="cs-faq-group">
+            <li class="cs-faq-item">
+                <button class="cs-button">
+                    <span class="cs-button-text">
+                        What is Quantum Minds?
+                    </span>
+                </button>
+                <p class="cs-item-p">
+                    Quantum Minds is a student-driven research and innovation club at the United College of Engineering and Research. We focus on a wide range of technological fields, including space technology, defense, AI, cybersecurity, and more. Our mission is to empower students to explore, innovate, and contribute to real-world technological advancements.
+                </p>
+            </li>
+            <li class="cs-faq-item">
+                <button class="cs-button">
+                    <span class="cs-button-text">
+                        How can I become a member of Quantum Minds?
+                    </span>
+                </button>
+                <p class="cs-item-p">
+                    To become a member, you need to meet the club's eligibility criteria, which includes academic excellence (minimum GPA of 7.5) and technical proficiency in relevant fields. You can apply through the club's membership portal or get in touch with the club administrators for more details. 
+                </p>
+            </li>
+            <li class="cs-faq-item">
+                <button class="cs-button">
+                    <span class="cs-button-text">
+                        What are the key areas of focus for Quantum Minds?
+                    </span>
+                </button>
+                <p class="cs-item-p">
+                    We focus on several core areas, including:
+                    Space Technology,
+                    Defense Technology,
+                    Artificial Intelligence,
+                    Cybersecurity,
+                    Research and Innovation,
+                    Entrepreneurship and Startups.
+                </p>
+            </li>
+            <li class="cs-faq-item">
+                <button class="cs-button">
+                    <span class="cs-button-text">
+                        How do I participate in Quantum Minds events and workshops?
+                    </span>
+                </button>
+                <p class="cs-item-p">
+                    You can participate in events and workshops by registering on the club's website or through direct invitations. Keep an eye on our Events page for upcoming opportunities and announcements. 
+                </p>
+            </li>
+            <li class="cs-faq-item">
+                <button class="cs-button">
+                    <span class="cs-button-text">
+                        Do I need any prior experience to join Quantum Minds?
+                    </span>
+                </button>
+                <p class="cs-item-p">
+                    While prior experience in relevant technical fields can be beneficial, it's not a requirement. We welcome students from all academic backgrounds who are passionate about technology and innovation. Members can learn and develop new skills through hands-on projects, workshops, and collaboration with experts. 
+                </p>
+            </li>
+            <li class="cs-faq-item">
+                <button class="cs-button">
+                    <span class="cs-button-text">
+                        How can I collaborate with Quantum Minds?
+                    </span>
+                </button>
+                <p class="cs-item-p">
+                    If you're an organization, faculty, or individual interested in collaborating with Quantum Minds, please visit our Contact Us page to reach out. We are open to partnerships, mentorship, and industry collaborations to enhance our members' learning experiences. 
+                </p>
+            </li>
+        </ul>
+    </div>
+</section>
+
+{% block page_script %}
+<script src="{{ url_for('static', filename='js/faqs.js') }}"></script>
+{% if skip_section %}
+<script src="{{ url_for('static', filename='js/skip_section.js') }}"></script>
+{% endif %}
+{% endblock %}

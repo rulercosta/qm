@@ -1,0 +1,147 @@
+<!-- partials/areas.html -->
+
+{% block page_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/partials/areas.css') }}">
+{% endblock %}
+
+<!-- ============================================ -->
+<!--                  Services                    -->
+<!-- ============================================ -->
+
+<section id="services-1628">
+    <div class="cs-container">
+        <div class="cs-content">
+            <div class="cs-flex">
+                <span class="cs-topper">Our Focus Areas</span>
+                <h2 class="cs-title">Innovating Across Diverse Technological Domains</h2>
+            </div>
+            <p class="cs-text">
+                At Quantum Minds, we are dedicated to exploring and pioneering advancements across a range of critical technological fields. From the mysteries of space to the digital realm of cybersecurity, we bring together expertise from various disciplines to solve real-world challenges. Our focus areas include:
+            </p>
+        </div>                  
+        <ul class="cs-card-group">
+            <li class="cs-item">
+                <span class="cs-link">
+                    <picture class="cs-picture">
+                        <!--Mobile Image-->
+                        <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                        <!--Tablet and above Image-->
+                        <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/ai.jpg') }}">
+                        <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/ai.jpg') }}" alt="room" width="413" height="420">
+                    </picture>
+                    <h3 class="cs-h3">Artificial Intelligence</h3>
+                    <p class="cs-item-text">
+                        Innovating intelligent systems and advancing machine learning technologies to solve complex challenges.
+                    </p>
+                </span>
+            </li>
+            <li class="cs-item">
+                <span class="cs-link">
+                    <picture class="cs-picture">
+                        <!--Mobile Image-->
+                        <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/field.jpg') }}">
+                        <!--Tablet and above Image-->
+                        <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/field.jpg') }}">
+                        <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/field.jpg') }}" alt="room" width="413" height="420">
+                    </picture>
+                    <h3 class="cs-h3">Agricultural Engineering</h3>
+                    <p class="cs-item-text">
+                        Revolutionizing farming practices through technological advancements, ensuring food security and sustainable practices.
+                    </p>
+                </span>
+            </li>
+            <li class="cs-item">
+                <span class="cs-link">
+                    <picture class="cs-picture">
+                        <!--Mobile Image-->
+                        <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/jet.jpg') }}">
+                        <!--Tablet and above Image-->
+                        <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/jet.jpg') }}">
+                        <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/jet.jpg') }}" alt="room" width="413" height="420">
+                    </picture>
+                    <h3 class="cs-h3">Defense Technology</h3>
+                    <p class="cs-item-text">
+                        Developing cutting-edge defense technologies to enhance national security and preparedness.
+                    </p>
+                </span>
+            </li>
+            <li class="cs-item">
+                <span class="cs-link">
+                    <picture class="cs-picture">
+                        <!--Mobile Image-->
+                        <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/network.jpg') }}">
+                        <!--Tablet and above Image-->
+                        <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/network.jpg') }}">
+                        <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/network.jpg') }}" alt="room" width="413" height="420">
+                    </picture>
+                    <h3 class="cs-h3">Cybersecurity</h3>
+                    <p class="cs-item-text">
+                        Protecting digital ecosystems by developing robust security solutions to combat modern cyber threats.
+                    </p>
+                </span>
+            </li>
+        </ul>
+        <ul class="cs-card-group">
+            <li class="cs-item">
+                <span class="cs-link">
+                    <picture class="cs-picture">
+                        <!--Mobile Image-->
+                        <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/analysis.jpg') }}">
+                        <!--Tablet and above Image-->
+                        <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/analysis.jpg') }}">
+                        <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/analysis.jpg') }}" alt="room" width="413" height="420">
+                    </picture>
+                    <h3 class="cs-h3">Bio-Medical Engineering</h3>
+                    <p class="cs-item-text">
+                        Bridging medicine and technology to design innovative healthcare solutions for improved patient care.
+                    </p>
+                </span>
+            </li>
+            <li class="cs-item">
+                <span class="cs-link">
+                    <picture class="cs-picture">
+                        <!--Mobile Image-->
+                        <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/world.jpg') }}">
+                        <!--Tablet and above Image-->
+                        <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/world.jpg') }}">
+                        <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/world.jpg') }}" alt="room" width="413" height="420">
+                    </picture>
+                    <h3 class="cs-h3">Space Technology</h3>
+                    <p class="cs-item-text">
+                        Exploring advancements in space exploration, aligning with grand ambitions like those of ISRO.
+                    </p>
+                </span>
+            </li>
+            <li class="cs-item">
+                <span class="cs-link">
+                    <picture class="cs-picture">
+                        <!--Mobile Image-->
+                        <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/robot.jpg') }}">
+                        <!--Tablet and above Image-->
+                        <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/robot.jpg') }}">
+                        <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/robot.jpg') }}" alt="room" width="413" height="420">
+                    </picture>
+                    <h3 class="cs-h3">Robotics</h3>
+                    <p class="cs-item-text">
+                        Creating autonomous and intelligent robotic systems to revolutionize various industries.
+                    </p>
+                </span>
+            </li>
+            <li class="cs-item">
+                <span class="cs-link">
+                    <picture class="cs-picture">
+                        <!--Mobile Image-->
+                        <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/drone.jpg') }}">
+                        <!--Tablet and above Image-->
+                        <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/drone.jpg') }}">
+                        <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/drone.jpg') }}" alt="room" width="413" height="420">
+                    </picture>
+                    <h3 class="cs-h3">Drone Technology</h3>
+                    <p class="cs-item-text">
+                        Leveraging drones for diverse applications, from surveillance to precision agriculture.
+                    </p>
+                </span>
+            </li>
+        </ul>
+    </div>
+</section>

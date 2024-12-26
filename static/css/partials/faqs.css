@@ -1,0 +1,263 @@
+/*-- -------------------------- -->
+<---            FAQ             -->
+<--- -------------------------- -*/
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+    #faq-489 {
+        padding: var(--sectionPadding);
+        background: #fafbfc;
+    }
+    #faq-489 .cs-container {
+        width: 100%;
+        /* changes to 1280px at tablet */
+        max-width: 34.375rem;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        /* 40px - 48px */
+        gap: clamp(2.5rem, 5vw, 3rem);
+    }
+    #faq-489 .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align: left;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: flex-start;
+    }
+
+    #faq-489 .cs-color {
+        color: var(--primary);
+    }
+
+    #faq-489 .cs-title {
+        /* 17 characters wide including spaces */
+        max-width: 17ch;
+    }
+    #faq-489 .cs-text {
+        /* 32px - 48px */
+        margin-bottom: clamp(2rem, 3vw, 3rem);
+    }
+    #faq-489 .cs-button-solid {
+        font-size: 1rem;
+        /* 46px - 56px */
+        line-height: clamp(2.875rem, 5.5vw, 3.5rem);
+        text-decoration: none;
+        font-weight: 700;
+        text-align: center;
+        margin: 0;
+        color: #fff;
+        min-width: 9.375rem;
+        padding: 0 1.5rem;
+        background-color: var(--primary);
+        border-radius: 0.25rem;
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        /* prevents padding from adding to the width */
+        box-sizing: border-box;
+    }
+    #faq-489 .cs-button-solid:before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 0%;
+        background: #000;
+        opacity: 1;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        border-radius: 0.25rem;
+        transition: width 0.3s;
+    }
+    #faq-489 .cs-button-solid:hover:before {
+        width: 100%;
+    }
+    #faq-489 .cs-faq-group {
+        max-width: 46.25rem;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+    #faq-489 .cs-faq-item {
+        list-style: none;
+        width: 100%;
+        /* prevents border from affecting width and height */
+        box-sizing: border-box;
+        border: 1px solid #f1f1f4;
+        transition:
+            border 0.3s,
+            padding 0.3s,
+            border-color 0.3s;
+    }
+    #faq-489 .cs-faq-item:hover {
+        border-color: var(--primary);
+    }
+    #faq-489 .cs-faq-item.active {
+        padding-bottom: 1rem;
+        border-color: var(--primary);
+    }
+    #faq-489 .cs-faq-item.active .cs-button {
+        color: var(--primary);
+    }
+    #faq-489 .cs-faq-item.active .cs-button:before {
+        transform: translateY(-50%) rotate(180deg);
+        opacity: 0;
+        background-color: var(--primary);
+    }
+    #faq-489 .cs-faq-item.active .cs-button:after {
+        transform: translateY(-50%) rotate(360deg);
+        background-color: var(--primary);
+    }
+    #faq-489 .cs-faq-item.active .cs-item-p {
+        height: auto;
+        margin-top: 0.5rem;
+        opacity: 1;
+    }
+    #faq-489 .cs-button {
+        /* 20px - 25px */
+        font-size: clamp(1.25rem, 1vw, 1.5625rem);
+        line-height: 1.2em;
+        text-align: left;
+        font-weight: bold;
+        padding: 1rem 1.5rem;
+        border: none;
+        background: transparent;
+        color: var(--headerColor);
+        display: block;
+        width: 100%;
+        position: relative;
+        transition:
+            background-color 0.3s,
+            color 0.3s;
+    }
+    #faq-489 .cs-button:hover {
+        cursor: pointer;
+    }
+    #faq-489 .cs-button:before {
+        /* horizontal line */
+        content: "";
+        width: 1rem;
+        height: 0.1875rem;
+        background-color: currentColor;
+        opacity: 1;
+        border-radius: 1px;
+        position: absolute;
+        display: block;
+        top: 50%;
+        right: 1.5rem;
+        transform: translateY(-50%);
+        transition:
+            transform 0.5s,
+            opacity 0.3s;
+    }
+    #faq-489 .cs-button:after {
+        /* vertical line */
+        content: "";
+        width: 1rem;
+        height: 0.1875rem;
+        background-color: currentColor;
+        opacity: 1;
+        border-radius: 1px;
+        position: absolute;
+        display: block;
+        top: 50%;
+        right: 1.5rem;
+        transform: translateY(-50%) rotate(90deg);
+        transform-origin: center;
+        transition: transform 0.5s;
+    }
+    #faq-489 .cs-button-text {
+        width: 80%;
+        display: block;
+    }
+    #faq-489 .cs-item-p {
+        /* 14px - 16px */
+        font-size: clamp(0.875rem, 1.5vw, 1rem);
+        line-height: 1.5em;
+        width: 90%;
+        height: 0;
+        margin: 0;
+        /* prevents padding and border from affecting height and width */
+        box-sizing: border-box;
+        padding: 0 1.5rem;
+        opacity: 0;
+        color: var(--bodyTextColor);
+        /* clips the text so it doesn't show up */
+        overflow: hidden;
+        transition:
+            opacity 0.3s,
+            padding-bottom 0.3s;
+    }
+}
+/* Desktop - 1024px */
+@media only screen and (min-width: 48rem) {
+    #faq-489 .cs-container {
+        max-width: 80rem;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 3.25rem;
+    }
+    #faq-489 .cs-content {
+        margin-top: 3.125rem;
+    }
+    #faq-489 .cs-title,
+    #faq-489 .cs-topper {
+        text-align: left;
+        margin-left: 0;
+    }
+    #faq-489 .cs-faq-group {
+        width: clamp(56%, 58vw, 58%);
+        flex: none;
+    }
+}
+/* Dark Mode */
+@media only screen and (min-width: 0rem) {
+    body.dark-mode #faq-489 {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+    body.dark-mode #faq-489 .cs-topper {
+        color: var(--primaryLight);
+    }
+    body.dark-mode #faq-489 .cs-title,
+    body.dark-mode #faq-489 .cs-text,
+    body.dark-mode #faq-489 .cs-item-p {
+        color: var(--bodyTextColorWhite);
+    }
+    body.dark-mode #faq-489 .cs-text,
+    body.dark-mode #faq-489 .cs-item-p {
+        opacity: 0.8;
+    }
+    body.dark-mode #faq-489 .cs-faq-item {
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+    body.dark-mode #faq-489 .cs-faq-item:hover {
+        border-color: var(--primary);
+    }
+    body.dark-mode #faq-489 .cs-faq-item.active {
+        border-color: var(--primaryLight);
+    }
+    body.dark-mode #faq-489 .cs-faq-item.active .cs-button {
+        color: var(--primaryLight);
+    }
+    body.dark-mode #faq-489 .cs-faq-item.active .cs-button:before,
+    body.dark-mode #faq-489 .cs-faq-item.active .cs-button:after {
+        background-color: var(--primaryLight);
+    }
+    body.dark-mode #faq-489 .cs-button {
+        color: var(--bodyTextColorWhite);
+    }
+    body.dark-mode #faq-489 .cs-button:before,
+    body.dark-mode #faq-489 .cs-button:after {
+        background-color: var(--bodyTextColorWhite);
+    }
+}

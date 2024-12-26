@@ -8,7 +8,10 @@
     
     <!-- Global CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
-
+    
+    <!-- Dark CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dark.css') }}">
+    
     <!-- Page-Specific CSS -->
     {% block page_style %}
     <!-- Page-specific styles go here -->
@@ -16,7 +19,7 @@
 </head>
 <body>
     <!-- Include Header -->
-    {% include 'header.html' %}
+    {% include 'components/header.html' %}
 
     <main>
         {% block content %}
@@ -25,6 +28,10 @@
     </main>
 
     <!-- Include Footer -->
-    {% include 'footer.html' %}
+    {% include 'components/footer.html' %}
+
+    {% block page_script %}
+    <!-- Page-specific scripts go here -->
+    {% endblock %}
 </body>
 </html>

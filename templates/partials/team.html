@@ -1,0 +1,72 @@
+<!-- partials/team.html -->
+
+{% block page_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/partials/team.css') }}">
+{% endblock %}
+
+<!-- ============================================ -->
+<!--                 Meet The Team                -->
+<!-- ============================================ -->
+
+<section id="meet-team-220">
+    <div class="cs-container">
+        <div class="cs-content">
+            <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/Ornament.svg') }}" alt="chef" width="456" height="31">
+            <span class="cs-topper">Meet The Team</span>
+            <h2 class="cs-title">Team Behind Quantum Minds</h2>
+            <!-- <p class="cs-text">
+                Quantum Minds unites students from various disciplines to innovate and tackle real-world challenges, with each member contributing their expertise and creativity.
+            </p> -->
+        </div>
+        <ul class="cs-card-group">
+            <li class="cs-item">
+                <picture class="cs-picture">
+                    <img aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/user.png') }}" alt="portrait" width="275" height="132">
+                </picture>
+                <span class="cs-name">Name</span>
+                <span class="cs-job-title">Position</span>
+                <!-- Social Flexbox -->
+                <div class="cs-social">
+                    <a href="" class="cs-link" aria-label="Twitter" target="_blank" rel="noopener">
+                        <img aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/twitter.svg') }}" alt="twitter" width="15" height="13">
+                    </a>
+                    <a href="" class="cs-link" aria-label="Linked in" target="_blank" rel="noopener">
+                        <img aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/linkedin.svg') }}" alt="linkedin" width="17" height="16">
+                    </a>
+                </div>
+            </li>
+            <li class="cs-item">
+                <picture class="cs-picture">
+                    <img aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/user.png') }}" alt="portrait" width="275" height="132">
+                </picture>
+                <span class="cs-name">Name</span>
+                <span class="cs-job-title">Position</span>
+                <!-- Social Flexbox -->
+                <div class="cs-social">
+                    <a href="" class="cs-link" aria-label="Twitter" target="_blank" rel="noopener">
+                        <img aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/twitter.svg') }}" alt="twitter" width="15" height="13">
+                    </a>
+                    <a href="" class="cs-link" aria-label="Linked in" target="_blank" rel="noopener">
+                        <img aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/linkedin.svg') }}" alt="linkedin" width="17" height="16">
+                    </a>
+                </div>
+            </li>
+            <li class="cs-item">
+                <picture class="cs-picture">
+                    <img aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/user.png') }}" alt="portrait" width="275" height="132">
+                </picture>
+                <span class="cs-name">Name</span>
+                <span class="cs-job-title">Position</span>
+                <!-- Social Flexbox -->
+                <div class="cs-social">
+                    <a href="" class="cs-link" aria-label="Twitter" target="_blank" rel="noopener">
+                        <img aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/twitter.svg') }}" alt="twitter" width="15" height="13">
+                    </a>
+                    <a href="" class="cs-link" aria-label="Linked in" target="_blank" rel="noopener">
+                        <img aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/linkedin.svg') }}" alt="linkedin" width="17" height="16">
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>

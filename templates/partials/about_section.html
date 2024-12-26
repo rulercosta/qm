@@ -1,0 +1,35 @@
+<!-- partials/about_section.html -->
+ 
+{% block page_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/partials/about_section.css') }}">
+{% endblock %}
+
+<!-- ============================================ -->
+<!--                  Services                    -->
+<!-- ============================================ -->
+
+<section id="services-564">
+    <div class="cs-container">
+        <picture class="cs-picture">
+            <!--Mobile Image-->
+            <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/united-college-of-engineering-research-allahabad.jpg') }}">
+            <!--Tablet and above Image-->
+            <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/united-college-of-engineering-research-allahabad.jpg') }}">
+            <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/united-college-of-engineering-research-allahabad.jpg') }}" alt="computer" width="630" height="528" aria-hidden="true">
+        </picture>
+        <div class="cs-content">
+            <span class="cs-topper cs-color">About UCER</span>
+            <h2 class="cs-title">Shaping the Future of Technology</h2>
+            <h3 class="cs-h3">A Hub for <span class="cs-color">Innovation</span> and <span class="cs-color">Technological Excellence</span></h3>
+            <p class="cs-text">
+                United College of Engineering and Research (UCER) is a premier institution dedicated to delivering high-quality education and fostering innovation in the field of engineering and technology. With a strong focus on research and development, UCER provides an environment where students can explore, experiment, and excel in diverse domains. The college is equipped with state-of-the-art facilities, expert faculty, and an ethos that encourages entrepreneurship, creativity, and problem-solving. UCER is home to students who are not only passionate about learning but are also driven to make a real-world impact through their innovative ideas. As a member of UCER, Quantum Minds Club represents the spirit of innovation and excellence that defines the college, providing students with the opportunity to engage in cutting-edge projects, industry collaborations, and hands-on learning.
+            </p>
+            <ul class="cs-ul">
+                <li class="cs-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Services/arrow-green.svg" alt="arrow" width="16" height="18">
+                    <a class="cs-h3" href="http://www.united.ac.in" target="_blank" style="text-decoration: none;">Visit UCER Website</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,56 @@
+<!-- partials/about_text.html -->
+
+{% block page_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/partials/about_text.css') }}">
+{% endblock %}
+
+<!-- ============================================ -->
+<!--                Side By Side                  -->
+<!-- ============================================ -->
+
+<section id="sbs-1099">
+    <br/><br/><br/><br/>
+    <div class="cs-container">
+        <div class="cs-image-group">
+            <!--Top left image-->
+            <picture class="cs-picture cs-picture1">
+                <!--Mobile Image-->
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/reading.png') }}">
+                <!--Tablet and above Image-->
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/reading.png') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/reading.png') }}" alt="appliance" width="323" height="447">
+            </picture>
+            <!--Bottom right image-->
+            <picture class="cs-picture cs-picture2">
+                <!--Mobile Image-->
+                <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/search.png') }}">
+                <!--Tablet and above Image-->
+                <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/search.png') }}">
+                <img loading="lazy" decoding="async" src="{{ url_for('static', filename='images/search.png') }}" alt="appliance" width="305" height="441">
+            </picture>
+            <!--Stripe background-->
+            <img class="cs-stripes" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/stripes-short.svg" alt="stripes" width="548" height="487" aria-hidden="true">
+        </div>
+        <div class="cs-content">
+            <span class="cs-topper">Mission & Vision</span>
+            <h2 class="cs-title">About Quantum Minds</h2>
+            <p class="cs-text">
+                Quantum Minds is a vibrant, student-driven community at the United College of Engineering and Research, dedicated to pushing the boundaries of technology through innovation and collaboration. Our club brings together students from diverse disciplines to work on projects that span across cutting-edge fields such as space technology, defense, artificial intelligence, cybersecurity, and more.
+            </p>
+            <ul class="cs-ul">
+                <li class="cs-li">
+                    <h3 class="cs-h3">Mission Statement</h3>
+                    <p class="cs-li-text">
+                        To foster a vibrant community of interdisciplinary talents, driving breakthroughs in areas such as space technology, defense, AI, and cybersecurity. Through hands-on projects, research, and collaboration, we aim to develop solutions that address real-world challenges and contribute to the advancement of society.
+                    </p>
+                </li>
+                <li class="cs-li">
+                    <h3 class="cs-h3">Our Vision</h3>
+                    <p class="cs-li-text">
+                        Empowering minds to innovate, collaborate, and create a future where technology bridges the gap between imagination and reality.
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

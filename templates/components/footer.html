@@ -1,0 +1,60 @@
+<!-- components/footer.html -->
+ 
+{% block page_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/components/footer.css') }}">
+{% endblock %}
+
+<!-- ============================================ -->
+<!--                  Footer                      -->
+<!-- ============================================ -->
+
+<footer id="footer-1390">        
+    <div class="cs-container">
+        <div class="cs-top">
+            <a aria-label="go back to home" class="cs-logo" href="{{ url_for('home_routes.home') }}">
+                <img class="cs-logo-img" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/logo.svg') }}" alt="logo" width="25">
+            </a>
+            <ul class="cs-ul">
+                <li class="cs-li">
+                    <a href="{{ url_for('home_routes.home') }}" class="cs-link">Home</a>
+                </li>
+                <li class="cs-li">
+                    <a href="{{ url_for('home_routes.about') }}" class="cs-link">About</a>
+                </li>
+                <!-- <li class="cs-li">
+                    <a href="/programmes" class="cs-link">Programmes</a>
+                </li> -->
+                <li class="cs-li">
+                    <a href="{{ url_for('contact_routes.contact') }}" class="cs-link">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div class="cs-bottom">
+            <!--Social-->
+            <ul class="cs-social">
+                <li class="cs-social-li">
+                    <a href="https://linkedin.com/in/quantumminds/" class="cs-social-link" aria-label="linkedin" target="_blank" rel="noopener">
+                        <img class="cs-social-icon cs-default" src="{{ url_for('static', filename='images/linkedin.svg') }}" alt="icon" loading="lazy" decoding="async" width="12" height="12" aria-hidden="true">
+                    </a>
+                </li>
+                <li class="cs-social-li">
+                    <a href="https://x.com/quantummindsX/" class="cs-social-link" aria-label="twitter" target="_blank" rel="noopener">
+                        <img class="cs-social-icon cs-default" src="{{ url_for('static', filename='images/twitter.svg') }}" alt="icon" loading="lazy" decoding="async" width="12" height="12" aria-hidden="true">
+                    </a>
+                </li>
+                <li class="cs-social-li">
+                    <a href="https://www.instagram.com/quantummindsclub/" class="cs-social-link" aria-label="instagram" target="_blank" rel="noopener">
+                        <img class="cs-social-icon cs-default" src="{{ url_for('static', filename='images/instagram.svg') }}" alt="icon" loading="lazy" decoding="async" width="12" height="12" aria-hidden="true">
+                    </a>
+                </li>
+            </ul>
+            <span class="cs-copyright">
+                © UCER - <a href="https://www.instagram.com/quantummindsclub/" class="cs-copyright-link">Quantum Minds</a>
+            </span>
+            <div class="cs-flex">
+                <a href="https://www.instagram.com/rulercosta/" class="cs-copyright-link">Made with ❤️ by rulercosta</a>
+                <!-- <span class="cs-separater">|</span> -->
+            </div>
+        </div>
+    </div>
+</footer>
