@@ -4,4 +4,4 @@ bp = Blueprint('explore_routes', __name__)
 
 @bp.route('/explore')
 def explore():
-    return render_template('explore.html')
+    return render_template('explore.jinja')

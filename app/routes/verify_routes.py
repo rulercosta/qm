@@ -22,7 +22,7 @@ def verify_certificate(cid):
         session['cid'] = cid  # Store Certificate ID in session
 
         return render_template(
-            'verify.html',
+            'verify.jinja',
             cid=cid,
             name=participant.name,
             instructor=instructor.name,
@@ -31,7 +31,7 @@ def verify_certificate(cid):
             date=format_date_with_ordinal(participant.date)
         )
     else:
-        return render_template('verify.html', error="No record found")
+        return render_template('verify.jinja', error="No record found")
 
 @bp.route('/events/workshops/verify/<cid>/download', methods=['POST'])
 def download_certificate(cid):
