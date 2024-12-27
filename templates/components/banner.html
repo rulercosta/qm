@@ -1,0 +1,172 @@
+<!-- components/banner.html -->
+{% macro banner(img_url="",img_alt="",error=True,content='',master_img=None,master_img_alt=None,master_title="",error_content='') %}
+    <style>
+    /*-- -------------------------- -->
+    <---          Verify            -->
+    <--- -------------------------- -*/
+
+    /* Mobile - 360px */
+    @media only screen and (min-width: 0rem) {
+        #reviews-306 {
+            background-color: #ffffff;
+            /* prevents overflow from overlapping quote icon */
+            overflow: hidden;
+            position: relative;
+        }
+        #reviews-306 .cs-image {
+            width: 100%;
+            max-height: 28.125rem;
+            display: block;
+            position: relative;
+            aspect-ratio: 0.94736842;
+        }
+        #reviews-306 .cs-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+        #reviews-306 .cs-content {
+            max-width: 39.375rem;
+            padding: var(--sectionPadding);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            position: relative;
+        }
+        #reviews-306 .cs-review {
+            /* 25px - 39px */
+            font-size: clamp(1.5625rem, 3.9vw, 2.4375rem);
+            text-align: left;
+            margin: 0;
+            /* 28px - 40px */
+            margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+            color: var(--bodyTextColor);
+        }
+        #reviews-306 .cs-quote {
+            width: 2.5rem;
+            height: auto;
+            margin-bottom: 2rem;
+            display: block;
+        }
+        #reviews-306 .cs-info {
+            display: flex;
+            justify-content: auto;
+            align-items: center;
+        }
+        #reviews-306 .cs-flex {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-basis: content;
+        }
+        #reviews-306 .cs-profile {
+            width: 3.125rem;
+            height: auto;
+            margin-right: 0.75rem;
+            border-radius: 50%;
+            display: block;
+        }
+        #reviews-306 .cs-name {
+            /* 20px - 25px */
+            font-size: clamp(1.25rem, 2vw, 1.5625rem);
+            font-weight: 700;
+            line-height: 1.2em;
+            color: var(--headerColor);
+            display: block;
+            flex-basis: content;
+        }
+        #reviews-306 .cs-job {
+            font-size: 1rem;
+            line-height: 1.5em;
+            font-weight: 400;
+            width: 12.5rem;
+            color: var(--bodyTextColor);
+            display: block;
+            flex-basis: content;
+        }
+        #reviews-306 .cs-watermark {
+            /* 87px - 136px */
+            width: clamp(5.4375rem, 12.2vw, 8.5rem);
+            height: auto;
+            opacity: 0.09;
+            position: absolute;
+            bottom: 0;
+            right: 1.25rem;
+        }
+    }
+    /* Tablet - 768px */
+    @media only screen and (min-width: 48rem) {
+        #reviews-306 {
+            display: flex;
+            justify-content: flex-start;
+            align-items: stretch;
+        }
+        #reviews-306 .cs-image {
+            width: 44%;
+            height: auto;
+            max-height: 100%;
+            /* prevent flexbox from squishing it */
+            flex: none;
+            aspect-ratio: initial;
+        }
+        #reviews-306 .cs-content {
+            /* 76px - 128px */
+            padding-left: clamp(4.75rem, 10vw, 8rem);
+            padding-right: 2rem;
+        }
+        #reviews-306 .cs-watermark {
+            /* 16px - 175px */
+            right: calc(clamp(1rem, 9.5vw, 10.9375rem) * -1);
+        }
+    }
+    /* Dark Mode */
+    @media only screen and (min-width: 0rem) {
+        body.dark-mode #reviews-306 {
+            background-color: rgba(0, 0, 0, 0);
+        }
+        body.dark-mode #reviews-306 .cs-review,
+        body.dark-mode #reviews-306 .cs-name {
+            color: var(--bodyTextColorWhite);
+        }
+        body.dark-mode #reviews-306 .cs-job {
+            color: var(--bodyTextColorWhite);
+            opacity: 0.7;
+        }
+    }
+    </style>
+    <section id="reviews-306">
+        <picture class="cs-image">
+            <source media="(max-width: 600px)" srcset="{{ img_url }}">
+            <source media="(min-width: 601px)" srcset="{{ img_url }}">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="{{ img_url }}" alt="{{ img_alt }}" width="842" height="548">
+        </picture>
+        <div class="cs-content">
+            {% if not error %}    
+                <img class="cs-quote" aria-hidden="true" loading="lazy" decoding="async" src="https://i.postimg.cc/9MBVq97P/top-quote.png" alt="quote" width="40" height="33">
+                <span class="cs-review">
+                    {{ content | safe }}
+                </span>
+                <div class="cs-info">
+                    <img class="cs-profile" aria-hidden="true" loading="lazy" decoding="async" src="{{ master_img }}" 
+                    alt="{{ master_img_alt }}" width="50" height="50">
+                    <div class="cs-flex">
+                        <span class="cs-name">
+                            {{ master_img_alt }}
+                        </span>
+                        <span class="cs-job">{{ master_title }}</span>
+                    </div>
+                </div>
+                <img class="cs-watermark" aria-hidden="true" loading="lazy" decoding="async" src="https://i.postimg.cc/9MBVq97P/top-quote.png" alt="quote" width="136" height="120">
+            {% else %}
+                <span class="cs-review">
+                    {{ error_content | safe }}
+                </span>
+            {% endif %}
+        </div>
+    </section>
+{% endmacro %}

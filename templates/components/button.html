@@ -1,0 +1,37 @@
+<!-- components/button.html -->
+{% macro button(label="",alt_text="",script="",img_url="",text="Button Text") %}
+    <style>
+      .cs-button-4 {
+        text-align: center;
+        font-size: 1rem;
+        /* 46px - 56px */
+        line-height: clamp(2.875rem, 8vw, 3.5rem);
+        text-decoration: none;
+        font-weight: 700;
+        min-width: 10.875rem;
+        margin: auto;
+        color: var(--bodyTextColorWhite); /* White color for text */
+        padding: 0 1.5rem;
+        /* prevents padding and border from affecting height and width */
+        box-sizing: border-box;
+        background-color: var(--primary); /* Primary cyan background */
+        box-shadow: 4px 4px 0px 0px var(--secondary); /* Deep Ocean Blue for shadow */
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        transition:
+            background-color 0.3s,
+            box-shadow 0.3s;
+        }
+
+        .cs-button-4:hover {
+            background-color: var(--secondary); /* Deep Ocean Blue on hover */
+            box-shadow: 0px 0px 0px 0px var(--primaryLight); /* Softer Cyan Blue for hover shadow */
+        }
+    </style>
+
+    <a href="#" class="cs-button-4" aria-label="{{ label }}" onclick="{{ script }}">
+        <img src="{{ img_url }}" alt="{{ alt_text }}" style="vertical-align: middle; margin-right: 8px; width: 20px; height: auto;" />
+        {{ text }}
+    </a>
+{% endmacro %}

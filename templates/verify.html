@@ -7,297 +7,44 @@
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/dark.css') }}">
 
-<style>
-/*-- -------------------------- -->
-<---          Content           -->
-<--- -------------------------- -*/
-
-/* Mobile - 360px */
-@media only screen and (min-width: 0rem) {
-  #content-1450 {
-    padding: var(--sectionPadding);
-  }
-  #content-1450 .cs-container {
-    width: 100%;
-    max-width: 80rem;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 0rem;
-    /* 48px - 64px */
-    gap: clamp(3rem, 6vw, 4rem);
-  }
-  #content-1450 .cs-content {
-    /* set text align to left if content needs to be left aligned */
-    text-align: center;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    /* centers content horizontally, set to flex-start to left align */
-    align-items: center;
-  }
-  #content-1450 .cs-title,
-  #content-1450 .cs-text {
-    max-width: 100%;
-  }
-  #content-1450 .cs-text {
-    /* 16px - 20px */
-    font-size: clamp(1.25rem, 1vw, 2rem);
-    text-align: justify;
-    margin: 1.5rem 0 2rem 0;
-  }
-  .cs-button-4 {
-    text-align: center;
-    font-size: 1rem;
-    /* 46px - 56px */
-    line-height: clamp(2.875rem, 8vw, 3.5rem);
-    text-decoration: none;
-    font-weight: 700;
-    min-width: 10.875rem;
-    margin: auto;
-    color: var(--bodyTextColorWhite); /* White color for text */
-    padding: 0 1.5rem;
-    /* prevents padding and border from affecting height and width */
-    box-sizing: border-box;
-    background-color: var(--primary); /* Primary cyan background */
-    box-shadow: 4px 4px 0px 0px var(--secondary); /* Deep Ocean Blue for shadow */
-    display: inline-block;
-    position: relative;
-    z-index: 1;
-    transition:
-        background-color 0.3s,
-        box-shadow 0.3s;
-    }
-
-    .cs-button-4:hover {
-        background-color: var(--secondary); /* Deep Ocean Blue on hover */
-        box-shadow: 0px 0px 0px 0px var(--primaryLight); /* Softer Cyan Blue for hover shadow */
-    }
-}
-
-/*-- -------------------------- -->
-<---          Verify            -->
-<--- -------------------------- -*/
-
-/* Mobile - 360px */
-@media only screen and (min-width: 0rem) {
-    #reviews-306 {
-        background-color: #ffffff;
-        /* prevents overflow from overlapping quote icon */
-        overflow: hidden;
-        position: relative;
-    }
-    #reviews-306 .cs-image {
-        width: 100%;
-        max-height: 28.125rem;
-        display: block;
-        position: relative;
-        aspect-ratio: 0.94736842;
-    }
-    #reviews-306 .cs-image img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-    }
-    #reviews-306 .cs-content {
-        max-width: 39.375rem;
-        padding: var(--sectionPadding);
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        flex-direction: column;
-        position: relative;
-    }
-    #reviews-306 .cs-review {
-        /* 25px - 39px */
-        font-size: clamp(1.5625rem, 3.9vw, 2.4375rem);
-        text-align: left;
-        margin: 0;
-        /* 28px - 40px */
-        margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
-        color: var(--bodyTextColor);
-    }
-    #reviews-306 .cs-quote {
-        width: 2.5rem;
-        height: auto;
-        margin-bottom: 2rem;
-        display: block;
-    }
-    #reviews-306 .cs-info {
-        display: flex;
-        justify-content: auto;
-        align-items: center;
-    }
-    #reviews-306 .cs-flex {
-        display: inline-flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        flex-basis: content;
-    }
-    #reviews-306 .cs-profile {
-        width: 3.125rem;
-        height: auto;
-        margin-right: 0.75rem;
-        border-radius: 50%;
-        display: block;
-    }
-    #reviews-306 .cs-name {
-        /* 20px - 25px */
-        font-size: clamp(1.25rem, 2vw, 1.5625rem);
-        font-weight: 700;
-        line-height: 1.2em;
-        color: var(--headerColor);
-        display: block;
-        flex-basis: content;
-    }
-    #reviews-306 .cs-job {
-        font-size: 1rem;
-        line-height: 1.5em;
-        font-weight: 400;
-        width: 12.5rem;
-        color: var(--bodyTextColor);
-        display: block;
-        flex-basis: content;
-    }
-    #reviews-306 .cs-watermark {
-        /* 87px - 136px */
-        width: clamp(5.4375rem, 12.2vw, 8.5rem);
-        height: auto;
-        opacity: 0.09;
-        position: absolute;
-        bottom: 0;
-        right: 1.25rem;
-    }
-}
-/* Tablet - 768px */
-@media only screen and (min-width: 48rem) {
-    #reviews-306 {
-        display: flex;
-        justify-content: flex-start;
-        align-items: stretch;
-    }
-    #reviews-306 .cs-image {
-        width: 44%;
-        height: auto;
-        max-height: 100%;
-        /* prevent flexbox from squishing it */
-        flex: none;
-        aspect-ratio: initial;
-    }
-    #reviews-306 .cs-content {
-        /* 76px - 128px */
-        padding-left: clamp(4.75rem, 10vw, 8rem);
-        padding-right: 2rem;
-    }
-    #reviews-306 .cs-watermark {
-        /* 16px - 175px */
-        right: calc(clamp(1rem, 9.5vw, 10.9375rem) * -1);
-    }
-}
-/* Dark Mode */
-@media only screen and (min-width: 0rem) {
-    body.dark-mode #reviews-306 {
-        background-color: rgba(0, 0, 0, 0);
-    }
-    body.dark-mode #reviews-306 .cs-review,
-    body.dark-mode #reviews-306 .cs-name {
-        color: var(--bodyTextColorWhite);
-    }
-    body.dark-mode #reviews-306 .cs-job {
-        color: var(--bodyTextColorWhite);
-        opacity: 0.7;
-    }
-}
-</style>
 {% endblock %}
 
 {% block content %}
 {% include 'components/header_padding.html' %}
 
-<!-- ============================================ -->
-<!--                  Content                     -->
-<!-- ============================================ -->
 {% if not error %}
-<section id="content-1450">
-    <div class="cs-container">
-        <div class="cs-content">
-            <span class="cs-topper">Quantum Minds Workshop Certificate</span>
-            <h1 class="cs-title">Congratulations on Your Achievement!</h1>
-            <p class="cs-text">
-                Well done on successfully completing workshop on <strong>{{ course }}</strong> hosted by <strong>Quantum Minds</strong>! This certificate is a testament to your dedication, passion for learning, and ability to embrace innovative ideas. Your participation marks a significant step in your journey of innovation and learning and makes you ready to showcase your skills to the world. Keep pushing boundaries and making strides in your journey of knowledge!
-            </p>
-            <a href="#" class="cs-button-4" aria-label="download certificate" onclick="downloadCertificate()">
-                <img src="{{ url_for('static', filename='images/share-button.svg') }}" alt="Share Icon" style="vertical-align: middle; margin-right: 8px; width: 20px; height: auto;" />
-                Share Your Achievement</a>
-        </div>
-    </div>
-</section>
 
-<script>
-    function downloadCertificate() {
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = '/events/workshops/verify/{{ cid }}/download';  // Pass the cid in the URL
-  
-      // Add hidden input field for cid (if you want to pass it explicitly)
-      const cidInput = document.createElement('input');
-      cidInput.type = 'hidden';
-      cidInput.name = 'cid';  // Match the parameter in the route
-      cidInput.value = '{{ cid }}';  // This should be passed from the backend
-  
-      form.appendChild(cidInput);
-      document.body.appendChild(form);
-      form.submit();
-    }
-  </script>
+    {% import 'components/single_action.html' as ui %}
+    {{ ui.action(title="Quantum Minds Workshop Certificate",
+    heading="Congratulations on Your Achievement!",
+    content='Well done on successfully completing workshop on <strong>' ~ course ~ '</strong> hosted by <strong>Quantum Minds</strong>! This certificate is a testament to your dedication, passion for learning, and ability to embrace innovative ideas. Your participation marks a significant step in your journey of innovation and learning and makes you ready to showcase your skills to the world. Keep pushing boundaries and making strides in your journey of knowledge!',
+    button_label="download certificate",
+    button_img_url="https://i.postimg.cc/Z5Z88B07/share-button.png",
+    button_script="downloadCertificate()",
+    button_alt_text="Share Icon",
+    button_text="Share Your Achievement") }}
 
 {% endif %}
 
-<!-- ============================================ -->
-<!--                  Verify                      -->
-<!-- ============================================ -->
-<section id="reviews-306">
-    {% if error %}
-    <picture class="cs-image">
-        <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/404.svg') }}">
-        <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/404.svg') }}">
-        <img aria-hidden="true" loading="lazy" decoding="async" 
-             src="{{ url_for('static', filename='images/404.svg') }}" 
-             alt="404 Error" width="842" height="548">
-    </picture>
-    <div class="cs-content">
-            <p class="cs-review">We couldn't find any record matching the provided Credential Verification ID. Make sure that you have entered the correct ID. If the issue persists, contact our support team at <a href="mailto:quantummindsclubsocial@gmail.com">support@quantumminds</a>.</p>
-    </div>
-    {% else %}
-    <picture class="cs-image">
-        <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/bg.webp') }}">
-        <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/bg.webp') }}">
-        <img aria-hidden="true" loading="lazy" decoding="async" 
-             src="{{ url_for('static', filename='images/bg.webp') }}" 
-             alt="Certificate logo" width="842" height="548">
-    </picture>   
-    <div class="cs-content">
-        <img class="cs-quote" aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/top-quote.svg') }}" alt="quote" width="40" height="33">
-        <span class="cs-review"><strong>{{ name }}</strong> successfully completed <strong>{{ course }} Workshop</strong> on <strong>{{ date }}</strong>.</span>
-        <div class="cs-info">
-            <img class="cs-profile" aria-hidden="true" loading="lazy" decoding="async" src="{{ profile }}" 
-            alt="{{ instructor }}" width="50" height="50">
-            <div class="cs-flex">
-                <span class="cs-name">{{ instructor }}
+{% import 'components/banner.html' as ui %}
+{% if error %}
 
-                </span>
-                <span class="cs-job">Workshop Instructor</span>
-            </div>
-        </div>
-        <!--Bottom watermark quote-->
-        <img class="cs-watermark" aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/top-quote.svg') }}" alt="quote" width="136" height="120">
-    </div>
-    {% endif %}
-</section>
+    {{ ui.banner(img_url="https://i.postimg.cc/mDhCXr6f/404.png",
+    img_alt="404 error",
+    error_content='We could not find any record matching the provided information. If the issue persists, contact our support team at <a href="mailto:quantummindsclubsocial@gmail.com">support@quantumminds</a>.') }}
+
+{% else %}
+    
+    {{ ui.banner(img_url="https://i.postimg.cc/fbzCPj6S/bg.webp",
+    img_alt="Certificate",
+    error=False,
+    content='<strong>' ~ name ~ '</strong> successfully completed <strong>' ~ course ~ ' Workshop</strong> on <strong>' ~ date ~ '</strong>.',
+    master_img=profile,
+    master_img_alt=instructor,
+    master_title="Workshop Instructor") }}
+
+    <script src="{{ url_for('static', filename='js/downloadCertificate.js') }}"></script>
+
+{% endif %}
 
 {% endblock %}
