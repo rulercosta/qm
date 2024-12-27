@@ -13,5 +13,15 @@
 {% include 'partials/areas.html' %}
 {% include 'partials/objectives.html' %}
 {% include 'partials/team.html' %}
-{% include 'partials/about_section.html' %}
+
+{% import 'components/external_section.html' as ui %}
+{{ ui.section(img_url="https://i.postimg.cc/zGQjxyTn/united-college-of-engineering-research-allahabad.webp",
+img_alt="United College of Engineering and Research",
+topper="About UCER",
+title="Shaping the Future of Technology",
+heading='A Hub for <span class="cs-color">Innovation</span> and <span class="cs-color">Technological Excellence</span>',
+text="United College of Engineering and Research (UCER) is a premier institution dedicated to delivering high-quality education and fostering innovation in the field of engineering and technology. With a strong focus on research and development, UCER provides an environment where students can explore, experiment, and excel in diverse domains. The college is equipped with state-of-the-art facilities, expert faculty, and an ethos that encourages entrepreneurship, creativity, and problem-solving. UCER is home to students who are not only passionate about learning but are also driven to make a real-world impact through their innovative ideas. As a member of UCER, Quantum Minds Club represents the spirit of innovation and excellence that defines the college, providing students with the opportunity to engage in cutting-edge projects, industry collaborations, and hands-on learning.",
+url="http://www.united.ac.in",
+url_text="Visit UCER Website") }}
+
 {% endblock %}

@@ -1,11 +1,6 @@
 <!-- components/single_action.html -->
 {% macro action(title="",heading="",content='',button_label="",button_img_url="",button_script="",button_alt_text="",button_text="") %}
     <style>
-    /*-- -------------------------- -->
-    <---          Content           -->
-    <--- -------------------------- -*/
-
-    /* Mobile - 360px */
     @media only screen and (min-width: 0rem) {
       #content-1450 {
         padding: var(--sectionPadding);
@@ -18,16 +13,13 @@
         flex-direction: column;
         align-items: center;
         padding-top: 0rem;
-        /* 48px - 64px */
         gap: clamp(3rem, 6vw, 4rem);
       }
       #content-1450 .cs-content {
-        /* set text align to left if content needs to be left aligned */
         text-align: center;
         width: 100%;
         display: flex;
         flex-direction: column;
-        /* centers content horizontally, set to flex-start to left align */
         align-items: center;
       }
       #content-1450 .cs-title,
@@ -35,7 +27,6 @@
         max-width: 100%;
       }
       #content-1450 .cs-text {
-        /* 16px - 20px */
         font-size: clamp(1.25rem, 1vw, 2rem);
         text-align: center;
         margin: 1.5rem 0 2rem 0;

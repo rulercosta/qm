@@ -4,18 +4,19 @@
 {% block title %}Certificate Verification{% endblock %}
 
 {% block page_style %}
-
 <link rel="stylesheet" href="{{ url_for('static', filename='css/dark.css') }}">
-
 {% endblock %}
 
 {% block content %}
 {% include 'components/header_padding.html' %}
-
-{% if not error %}
-
-    {% import 'components/single_action.html' as ui %}
-    {{ ui.action(title="Quantum Minds Workshop Certificate",
+{% import 'components/banner.html' as main_ui %}
+{% if error %}
+    {{ main_ui.banner(img_url="https://i.postimg.cc/mDhCXr6f/404.png",
+    img_alt="404 error",
+    error_content='We could not find any record matching the provided information. If the issue persists, contact our support team at <a href="mailto:quantummindsclubsocial@gmail.com">support@quantumminds</a>.') }}
+{% else %}
+    {% import 'components/single_action.html' as top_ui %}
+    {{ top_ui.action(title="Quantum Minds Workshop Certificate",
     heading="Congratulations on Your Achievement!",
     content='Well done on successfully completing workshop on <strong>' ~ course ~ '</strong> hosted by <strong>Quantum Minds</strong>! This certificate is a testament to your dedication, passion for learning, and ability to embrace innovative ideas. Your participation marks a significant step in your journey of innovation and learning and makes you ready to showcase your skills to the world. Keep pushing boundaries and making strides in your journey of knowledge!',
     button_label="download certificate",
@@ -23,28 +24,13 @@
     button_script="downloadCertificate()",
     button_alt_text="Share Icon",
     button_text="Share Your Achievement") }}
-
-{% endif %}
-
-{% import 'components/banner.html' as ui %}
-{% if error %}
-
-    {{ ui.banner(img_url="https://i.postimg.cc/mDhCXr6f/404.png",
-    img_alt="404 error",
-    error_content='We could not find any record matching the provided information. If the issue persists, contact our support team at <a href="mailto:quantummindsclubsocial@gmail.com">support@quantumminds</a>.') }}
-
-{% else %}
-    
-    {{ ui.banner(img_url="https://i.postimg.cc/fbzCPj6S/bg.webp",
+    {{ main_ui.banner(img_url="https://i.postimg.cc/fbzCPj6S/bg.webp",
     img_alt="Certificate",
     error=False,
     content='<strong>' ~ name ~ '</strong> successfully completed <strong>' ~ course ~ ' Workshop</strong> on <strong>' ~ date ~ '</strong>.',
     master_img=profile,
     master_img_alt=instructor,
     master_title="Workshop Instructor") }}
-
     <script src="{{ url_for('static', filename='js/downloadCertificate.js') }}"></script>
-
 {% endif %}
-
 {% endblock %}

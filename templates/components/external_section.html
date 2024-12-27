@@ -1,0 +1,28 @@
+<!-- components/external_section.html -->
+ {% macro section(img_url="",img_alt="",topper="",title="",heading='',text="",url="",url_text="") %}
+    {% block page_style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/about_section.css') }}">
+    {% endblock %}
+
+    <section id="services-564">
+        <div class="cs-container">
+            <picture class="cs-picture">
+                <source media="(max-width: 600px)" srcset="{{ img_url }}">
+                <source media="(min-width: 601px)" srcset="{{ img_url }}">
+                <img loading="lazy" decoding="async" src="{{ img_url }}" alt="{{ img_alt }}" width="630" height="528" aria-hidden="true">
+            </picture>
+            <div class="cs-content">
+                <span class="cs-topper cs-color">{{ topper }}</span>
+                <h2 class="cs-title">{{ title }}</h2>
+                <h3 class="cs-h3">{{ heading | safe }}</h3>
+                <p class="cs-text">{{ text }}</p>
+                <ul class="cs-ul">
+                    <li class="cs-li">
+                        <a class="cs-h3" href="{{ url }}" target="_blank" style="text-decoration: none;">{{ url_text }}
+                        <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Services/arrow-green.svg" alt="arrow" width="16" height="18"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+{% endmacro %}
