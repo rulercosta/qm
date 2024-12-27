@@ -3,7 +3,12 @@
 
 {% block title %}About{% endblock %}
 
+{% block page_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dark.css') }}">
+{% endblock %}
+
 {% block content %}
+{% include 'components/header_padding.html' %}
 {% include 'partials/about_text.html' %}
 {% include 'partials/areas.html' %}
 {% include 'partials/objectives.html' %}

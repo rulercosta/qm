@@ -715,17 +715,19 @@
                     </li>
                     <li class="cs-li cs-dropdown" tabindex="0">
                         <span class="cs-li-link">
-                            Programmes
+                            Events
                             <img class="cs-drop-icon" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/down.svg" alt="dropdown icon" width="15" height="15" decoding="async" aria-hidden="true">
                         </span>
                         <ul class="cs-drop-ul">
                             <li class="cs-drop-li">
-                                <a href="{{ url_for('workshop_routes.workshops') }}" class="cs-li-link cs-drop-link">Workshops</a>
+                                <a href="{{ url_for('events_routes.events') }}" class="cs-li-link cs-drop-link">Workshops</a>
                             </li>
-                            <!-- <li class="cs-drop-li">
-                                <a href=/programmes/events class="cs-li-link cs-drop-link">Events</a>
-                            </li> -->
                         </ul>
+                    </li>
+                    <li class="cs-li">
+                        <a href="{{ url_for('explore_routes.explore') }}" class="cs-li-link">
+                            Explore
+                        </a>
                     </li>
                     <li class="cs-li">
                         <a href="{{ url_for('contact_routes.contact') }}" class="cs-li-link">
@@ -768,7 +770,7 @@ function ariaExpanded() {
         csUL.setAttribute('aria-expanded', 'false');
     }
 }
-    // This script adds a class to the body after scrolling 100px
+// This script adds a class to the body after scrolling 100px
 // and we used these body.scroll styles to create some on scroll 
 // animations with the navbar
 

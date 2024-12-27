@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from app.extensions import db, session, admin
-from app.routes import home_routes, workshop_routes, contact_routes, admin_routes
+from app.routes import home_routes, verify_routes, contact_routes, admin_routes, events_routes, explore_routes
 from app.config import Config
 
 def create_app():
@@ -15,8 +15,10 @@ def create_app():
 
     # Register blueprints
     app.register_blueprint(home_routes.bp)
-    app.register_blueprint(workshop_routes.bp)
+    app.register_blueprint(events_routes.bp)
+    app.register_blueprint(verify_routes.bp)
     app.register_blueprint(contact_routes.bp)
+    app.register_blueprint(explore_routes.bp)
     app.register_blueprint(admin_routes.bp)
 
     return app

@@ -1,7 +1,7 @@
 <!-- templates/contact.html -->
 {% extends 'base.html' %}
 
-{% block title %}Contact us{% endblock %}
+{% block title %}Explore{% endblock %}
 
 {% block page_style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/dark.css') }}">
@@ -9,5 +9,6 @@
 
 {% block content %}
 {% include 'components/header_padding.html' %}
-{% include 'partials/contact_form.html' %}
+{% include 'partials/gallery.html' %}
+{% include 'partials/team.html' %}
 {% endblock %}

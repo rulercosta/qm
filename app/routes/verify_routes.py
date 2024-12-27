@@ -5,13 +5,8 @@ from app.utils import format_date_with_ordinal
 
 bp = Blueprint('workshop_routes', __name__)
 
-@bp.route('/programmes/workshops')
-def workshops():
-    # Logic to display workshops
-    return render_template('error.html')
-
 # Route to verify the certificate by its ID
-@bp.route('/programmes/workshops/verify/<cid>')
+@bp.route('/events/workshops/verify/<cid>')
 def verify_certificate(cid):
     participant = Participant.query.filter_by(cid=cid).first()
     if participant:
@@ -38,7 +33,7 @@ def verify_certificate(cid):
     else:
         return render_template('verify.html', error="No record found")
 
-@bp.route('/programmes/workshops/verify/<cid>/download', methods=['POST'])
+@bp.route('/events/workshops/verify/<cid>/download', methods=['POST'])
 def download_certificate(cid):
     # Retrieve participant data from session
     participant_data = session.get('participant')
@@ -46,7 +41,7 @@ def download_certificate(cid):
     if not participant_data:
         return "Session expired or invalid. Please verify the certificate again.", 400
 
-    qr_data = f"https://quantummindsclub.onrender.com/programmes/workshops/verify/{cid}"
+    qr_data = f"https://quantummindsclub.onrender.com/events/workshops/verify/{cid}"
 
     # Use session data to generate the certificate
     certificate_image = generate_certificate_image(

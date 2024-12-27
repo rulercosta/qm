@@ -4,6 +4,9 @@
 {% block title %}Certificate Verification{% endblock %}
 
 {% block page_style %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dark.css') }}">
+
 <style>
 /*-- -------------------------- -->
 <---          Content           -->
@@ -21,7 +24,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 6rem;
+    padding-top: 0rem;
     /* 48px - 64px */
     gap: clamp(3rem, 6vw, 4rem);
   }
@@ -214,6 +217,8 @@
 {% endblock %}
 
 {% block content %}
+{% include 'components/header_padding.html' %}
+
 <!-- ============================================ -->
 <!--                  Content                     -->
 <!-- ============================================ -->
@@ -237,7 +242,7 @@
     function downloadCertificate() {
       const form = document.createElement('form');
       form.method = 'POST';
-      form.action = '/programmes/workshops/verify/{{ cid }}/download';  // Pass the cid in the URL
+      form.action = '/events/workshops/verify/{{ cid }}/download';  // Pass the cid in the URL
   
       // Add hidden input field for cid (if you want to pass it explicitly)
       const cidInput = document.createElement('input');
@@ -250,11 +255,6 @@
       form.submit();
     }
   </script>
-
-{% else %}
-<section id="reviews-306">
-    <br/><br/><br/><br/><br/>
-</section>
 
 {% endif %}
 
@@ -271,9 +271,7 @@
              alt="404 Error" width="842" height="548">
     </picture>
     <div class="cs-content">
-        <!-- <br/><br/><br/><br/><br/><br/><br/><br/> -->
             <p class="cs-review">We couldn't find any record matching the provided Credential Verification ID. Make sure that you have entered the correct ID. If the issue persists, contact our support team at <a href="mailto:quantummindsclubsocial@gmail.com">support@quantumminds</a>.</p>
-        <!-- <br/><br/><br/><br/><br/><br/><br/><br/> -->
     </div>
     {% else %}
     <picture class="cs-image">
@@ -287,7 +285,7 @@
         <img class="cs-quote" aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/top-quote.svg') }}" alt="quote" width="40" height="33">
         <span class="cs-review"><strong>{{ name }}</strong> successfully completed <strong>{{ course }} Workshop</strong> on <strong>{{ date }}</strong>.</span>
         <div class="cs-info">
-            <img class="cs-profile" aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/profile/' + profile) }}" 
+            <img class="cs-profile" aria-hidden="true" loading="lazy" decoding="async" src="{{ profile }}" 
             alt="{{ instructor }}" width="50" height="50">
             <div class="cs-flex">
                 <span class="cs-name">{{ instructor }}
