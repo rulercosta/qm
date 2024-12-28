@@ -5,21 +5,19 @@ from app.utils import format_date_with_ordinal
 
 bp = Blueprint('workshop_routes', __name__)
 
-# Route to verify the certificate by its ID
 @bp.route('/events/workshops/verify/<cid>')
 def verify_certificate(cid):
     participant = Participant.query.filter_by(cid=cid).first()
     if participant:
         instructor = Instructor.query.filter_by(courseid=participant.courseid).first()
 
-        # Store participant and cid in session
         session['participant'] = {
             'name': participant.name,
             'workshop': instructor.course,
             'instructor': instructor.name,
             'date': format_date_with_ordinal(participant.date)
         }
-        session['cid'] = cid  # Store Certificate ID in session
+        session['cid'] = cid  
 
         return render_template(
             'verify.jinja',
@@ -35,7 +33,6 @@ def verify_certificate(cid):
 
 @bp.route('/events/workshops/verify/<cid>/download', methods=['POST'])
 def download_certificate(cid):
-    # Retrieve participant data from session
     participant_data = session.get('participant')
 
     if not participant_data:
@@ -43,7 +40,6 @@ def download_certificate(cid):
 
     qr_data = f"https://quantummindsclub.onrender.com/events/workshops/verify/{cid}"
 
-    # Use session data to generate the certificate
     certificate_image = generate_certificate_image(
         participant_data['name'],
         qr_data,

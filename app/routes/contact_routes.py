@@ -16,7 +16,6 @@ def contact():
             flash('Please fill in all fields.', 'error')
             return redirect(url_for('contact'))
 
-        # Save to database
         try:
             submission = ContactForm(
                 name=name,
