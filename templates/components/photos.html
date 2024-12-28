@@ -1,0 +1,33 @@
+<!-- components/photos.html -->
+{% macro photos(title="",heading="",text="",images=[["img_url","img_name","img_description"]]) %}
+    {% block page_style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/photos.css') }}">
+    {% endblock %}
+
+    <section id="services-1628">
+        <div class="cs-container">
+            <div class="cs-content">
+                <div class="cs-flex">
+                    <span class="cs-topper">{{ title }}</span>
+                    <h2 class="cs-title">{{ heading }}</h2>
+                </div>
+                <p class="cs-text">{{ text }}</p>
+            </div>
+            <ul class="cs-card-group">
+                {% for image in images %}
+                    <li class="cs-item">
+                        <span class="cs-link">
+                            <picture class="cs-picture">
+                                <source media="(max-width: 600px)" srcset="{{ image[0] }}">
+                                <source media="(min-width: 601px)" srcset="{{ image[0] }}">
+                                <img loading="lazy" decoding="async" src="{{ image[0] }}" alt="image" width="413" height="420">
+                            </picture>
+                            <h3 class="cs-h3">{{ image[1] }}</h3>
+                            <p class="cs-item-text">{{ image[2] }}</p>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endmacro %}
