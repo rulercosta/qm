@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, session, send_file
 from app.models import Participant, Instructor
-from app.cert_gen import generate_certificate_image, generate_certificate_pdf
-from app.utils import format_date_with_ordinal
+from app.helpers.cert_gen import generate_certificate_image, generate_certificate_pdf
+from app.helpers.utils import format_date_with_ordinal
 
 bp = Blueprint('workshop_routes', __name__)
 
