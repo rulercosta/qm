@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-{% include 'components/header_padding.html' %}
+{% include 'partials/header_padding.html' %}
 {% import 'components/banner.html' as main_ui %}
 {% if error %}
     {{ main_ui.banner(img_url="https://i.postimg.cc/mDhCXr6f/404.png",

@@ -8,24 +8,15 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/dark.css') }}">
 
 <style>
-/*-- -------------------------- -->
-<---           Hero             -->
-<--- -------------------------- -*/
-
-/* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
     #hero-227 {
-        /* Centers button */
         text-align: center;
-        /* changes on tablet */
         padding: 0 1rem;
         position: relative;
         z-index: 1;
-        /* prevents overflow from the lines extending past the screen width */
         overflow: hidden;
     }
     #hero-227 .cs-picture {
-        /* Background Image */
         width: 100%;
         height: 100%;
         display: block;
@@ -35,7 +26,6 @@
         z-index: -2;
     }
     #hero-227 .cs-picture:before {
-        /* Black Color Overlay */
         content: "";
         width: 100%;
         height: 100%;
@@ -46,7 +36,6 @@
         top: 0;
         left: 0;
         z-index: 1;
-        /* prevents the cursor from interacting with it */
         pointer-events: none;
     }
     #hero-227 .cs-picture img {
@@ -55,23 +44,17 @@
         left: 0;
         height: 100%;
         width: 100%;
-        /* Makes image act like a background-image */
         object-fit: cover;
     }
     #hero-227 .cs-container {
         width: 100%;
         max-width: 80rem;
-        /* we put the padding top and bottom on the container instead of #Hero so the pseudo element lines go to the top and bottom of the section */
-        /* 144px - 300px - leaving extra space for the navigation */
-        /* changes on tablet */
         padding: clamp(9rem, 25.95vw, 18.75rem) 0 0;
-        /* 60px - 200px */
         padding-bottom: clamp(3.75rem, 12.5vw, 25rem);
         margin: auto;
         position: relative;
     }
     #hero-227 .cs-container:before {
-        /* Left Line */
         content: "";
         width: 1px;
         height: 100%;
@@ -80,13 +63,11 @@
             rgba(250, 251, 252, 0.5) 0%,
             rgba(250, 251, 252, 0) 100%
         );
-        /* FF3.6-15 */
         background: -webkit-linear-gradient(
             top,
             rgba(250, 251, 252, 0.5) 0%,
             rgba(250, 251, 252, 0) 100%
         );
-        /* Chrome10-25,Safari5.1-6 */
         opacity: 1;
         position: absolute;
         display: block;
@@ -94,12 +75,9 @@
         left: 0;
     }
     #hero-227 .cs-flex-group {
-        /* 60px - 220px */
         margin-bottom: clamp(3.75rem, 15.5vw, 13.75rem);
-        /* changes on tablet */
         margin-left: 1rem;
         width: 80vw;
-        /* 464px - 562px */
         max-width: clamp(29rem, 60vw, 35.125rem);
         display: flex;
         align-items: flex-start;
@@ -108,7 +86,6 @@
         box-sizing: border-box;
     }
     #hero-227 .cs-topper {
-        /* 13px - 16px */
         font-size: clamp(0.8125rem, 1.6vw, 1rem);
         line-height: 1.2em;
         text-transform: uppercase;
@@ -120,32 +97,26 @@
         display: block;
     }
     #hero-227 .cs-title {
-        /* 39px - 61px */
         font-size: clamp(2.4375rem, 6.4vw, 3.8125rem);
         font-weight: 900;
         line-height: 1.2em;
         text-align: left;
         width: 100%;
-        /* 32px - 40px */
         margin: 0 auto clamp(2rem, 4vw, 2.5rem) 0;
         color: var(--bodyTextColorWhite);
         position: relative;
     }
     #hero-227 .cs-text {
-        /* 16px - 20px */
         font-size: clamp(1rem, 1.95vw, 1.25rem);
         line-height: 1.5em;
         text-align: left;
         width: 100%;
-        /* 32px - 40px */
         margin: 0 auto clamp(2rem, 4vw, 2.5rem) 0;
-        /* 40px - 48px */
         margin-bottom: clamp(2.5rem, 4vw, 3rem);
         color: var(--bodyTextColorWhite);
     }
     #hero-227 .cs-button-solid {
         font-size: 1rem;
-        /* 46px - 56px */
         line-height: clamp(2.875rem, 5.5vw, 3.5rem);
         width: 11.25rem;
         text-decoration: none;
@@ -176,10 +147,8 @@
     }
     #hero-227 .cs-button-transparent {
         font-size: 1rem;
-        /* 46px - 56px */
         line-height: clamp(2.875rem, 5.5vw, 3.5rem);
         width: 11.25rem;
-        /* 46px - 56px */
         height: clamp(2.875rem, 5.5vw, 3.5rem);
         text-decoration: none;
         font-weight: 700;
@@ -201,14 +170,12 @@
         display: block;
         background: #000;
         opacity: 1;
-        /* so it sits on top of the border */
         top: -1px;
         left: -1px;
         right: -1px;
         bottom: -1px;
         z-index: -1;
         transform-origin: left;
-        /* this is what creates the grow affect on hover */
         transform: scaleX(0);
         transition: transform 0.3s;
     }
@@ -233,7 +200,6 @@
         box-sizing: border-box;
     }
     #hero-227 .cs-item:before {
-        /* Top Line */
         content: "";
         width: 100vw;
         height: 1px;
@@ -242,13 +208,11 @@
             rgba(250, 251, 252, 0.5) 0%,
             rgba(250, 251, 252, 0) 100%
         );
-        /* FF3.6-15 */
         background: -webkit-linear-gradient(
             left,
             rgba(250, 251, 252, 0.5) 0%,
             rgba(250, 251, 252, 0) 100%
         );
-        /* Chrome10-25,Safari5.1-6 */
         opacity: 1;
         position: absolute;
         display: block;
@@ -257,7 +221,6 @@
         transform: translateX(-50%);
     }
     #hero-227 .cs-item:last-of-type:after {
-        /* Bottom line on last card */
         content: "";
         width: 100vw;
         height: 1px;
@@ -266,13 +229,11 @@
             rgba(250, 251, 252, 0.5) 0%,
             rgba(250, 251, 252, 0) 100%
         );
-        /* FF3.6-15 */
         background: -webkit-linear-gradient(
             left,
             rgba(250, 251, 252, 0.5) 0%,
             rgba(250, 251, 252, 0) 100%
         );
-        /* Chrome10-25,Safari5.1-6 */
         opacity: 1;
         position: absolute;
         display: block;
@@ -283,7 +244,6 @@
     #hero-227 .cs-link {
         text-align: left;
         text-decoration: none;
-        /* changes on tablet */
         padding: 1.75rem 1rem;
         display: flex;
         flex-direction: column;
@@ -295,7 +255,6 @@
         opacity: 0.4;
     }
     #hero-227 .cs-link:before {
-        /* Hover Box */
         content: "";
         width: 100%;
         height: 100%;
@@ -309,17 +268,14 @@
         transition: opacity 0.3s;
     }
     #hero-227 .cs-number {
-        /* 20px - 25px */
         font-size: clamp(1.25rem, 2vw, 1.5625rem);
         line-height: 1.2em;
         font-weight: 900;
-        /* 24px - 32px */
         margin-bottom: clamp(1.5rem, 4vw, 2rem);
         color: var(--primaryLight);
         display: block;
     }
     #hero-227 .cs-h2 {
-        /* 16px - 20px */
         font-size: clamp(1rem, 2vw, 1.25rem);
         font-weight: 900;
         line-height: 1.2em;
@@ -331,7 +287,6 @@
         z-index: 10000;
     }
     #hero-227 .cs-item-text {
-        /* 14px - 16px */
         font-size: clamp(0.875rem, 3vw, 1rem);
         margin: 0;
         padding: 0;
@@ -339,17 +294,14 @@
         color: var(--bodyTextColorWhite);
     }
 }
-/* Tablet - 768px */
 @media only screen and (min-width: 48rem) {
     #hero-227 {
-        /* 32px - 40px */
         padding: 0 clamp(2rem, 5vw, 2.5rem);
     }
     #hero-227 .cs-container {
         padding-bottom: 4rem;
     }
     #hero-227 .cs-container:after {
-        /* Right Line */
         content: "";
         width: 1px;
         height: 100%;
@@ -358,13 +310,11 @@
             rgba(250, 251, 252, 0) 0%,
             rgba(250, 251, 252, 0.5) 100%
         );
-        /* FF3.6-15 */
         background: -webkit-linear-gradient(
             top,
             rgba(250, 251, 252, 0) 0%,
             rgba(250, 251, 252, 0.5) 100%
         );
-        /* Chrome10-25,Safari5.1-6 */
         opacity: 1;
         position: absolute;
         display: block;
@@ -372,7 +322,6 @@
         right: 0;
     }
     #hero-227 .cs-flex-group {
-        /* 44px - 88px */
         margin-left: clamp(2.75rem, 5.9vw, 5.5rem);
     }
     #hero-227 .cs-button-solid {
@@ -383,9 +332,7 @@
         position: relative;
     }
     #hero-227 .cs-card-group:before {
-        /* Top Line */
         content: "";
-        /* make it extend past the left and right of the screen */
         width: 150vw;
         height: 1px;
         background: -moz-linear-gradient(
@@ -393,18 +340,15 @@
             rgba(250, 251, 252, 0.5) 0%,
             rgba(250, 251, 252, 0) 100%
         );
-        /* FF3.6-15 */
         background: -webkit-linear-gradient(
             left,
             rgba(250, 251, 252, 0.5) 0%,
             rgba(250, 251, 252, 0) 100%
         );
-        /* Chrome10-25,Safari5.1-6 */
         opacity: 1;
         position: absolute;
         display: block;
         top: 0;
-        /* these two properties center the line horizontally */
         left: 50%;
         transform: translateX(-50%);
     }
@@ -416,13 +360,11 @@
             rgba(250, 251, 252, 0) 0%,
             rgba(250, 251, 252, 0.5) 100%
         );
-        /* FF3.6-15 */
         background: -webkit-linear-gradient(
             top,
             rgba(250, 251, 252, 0) 0%,
             rgba(250, 251, 252, 0.5) 100%
         );
-        /* Chrome10-25,Safari5.1-6 */
         top: auto;
         left: auto;
         right: 0;
@@ -439,26 +381,21 @@
         display: none;
     }
     #hero-227 .cs-link {
-        /* 44px - 64px top & bottom, 48px - 88px left & right */
         padding: clamp(2.75rem, 5.9vw, 5.5rem) clamp(3rem, 5.9vw, 5.5rem);
     }
 }
-/* Desktop Parallax Effect - 1300px */
 @media only screen and (min-width: 81.25rem) {
     #hero-227 {
         background: url("{{ url_for('static', filename='images/wormhole.png') }}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        /* creates parallax effect on background image */
         background-attachment: fixed;
-        /* remove img tag so we can make parallax work */
     }
     #hero-227 .cs-picture img {
         display: none;
     }
 }
-/* Dark Mode */
 @media only screen and (min-width: 0rem) {
     body.dark-mode #hero-227 .cs-background:before {
         opacity: 0.8;
@@ -468,11 +405,6 @@
 {% endblock %}
 
 {% block content %}
-<!-- partials/hero.html -->
-
-<!-- ============================================ -->
-<!--                    Hero                      -->
-<!-- ============================================ -->
 
 <section id="hero-227">
     <div class="cs-container">
@@ -488,7 +420,6 @@
                 Get in Touch
             </a>
         </div>
-        <!--Service Cards-->
         <ul class="cs-card-group">
             <li class="cs-item">
                 <span class="cs-link">
@@ -549,7 +480,6 @@
         </ul>
     </div>
 
-    <!-- Background Image -->
     <picture class="cs-picture">
         <source media="(max-width: 600px)" srcset="{{ url_for('static', filename='images/wormhole.png') }}">
         <source media="(min-width: 601px)" srcset="{{ url_for('static', filename='images/wormhole.png') }}">
