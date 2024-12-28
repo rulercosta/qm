@@ -1,0 +1,181 @@
+@media only screen and (min-width: 0rem) {
+  #meet-team-1765 {
+    padding: var(--sectionPadding);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    padding-top: 0%;
+  }
+  #meet-team-1765 .cs-container {
+    width: 100%;
+    max-width: 80rem;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(3rem, 6.5vw, 4rem);
+  }
+  #meet-team-1765 .cs-card-group {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    flex-direction: column;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+    position: relative;
+  }
+  #meet-team-1765 .cs-item {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    grid-column: span 12;
+    gap: clamp(1rem, 2vw, 1.25rem);
+    position: relative;
+  }
+  #meet-team-1765 .cs-item:hover .cs-picture img {
+    opacity: 0.4;
+    transform: scale(1.2);
+  }
+  #meet-team-1765 .cs-item:hover .cs-link {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  #meet-team-1765 .cs-item:hover .cs-link:hover {
+    transform: scale(1.15);
+    transition: transform 0.3s;
+    transition-delay: 0;
+  }
+  #meet-team-1765 .cs-item:hover .cs-job {
+    color: var(--primary);
+  }
+  #meet-team-1765 .cs-image-group {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    aspect-ratio: 0.91691395;
+    flex: 1 0 0;
+  }
+  #meet-team-1765 .cs-picture {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 328/260;
+    background-color: #000;
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+  #meet-team-1765 .cs-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.7s, opacity 0.3s;
+  }
+  #meet-team-1765 .cs-social {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1;
+  }
+  #meet-team-1765 .cs-link {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.5rem;
+    background-color: #F7F7F7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(-1rem);
+    transition: transform 0.6s, opacity 0.6s;
+  }
+  #meet-team-1765 .cs-link:nth-of-type(2) {
+    transition-delay: 0.08s;
+  }
+  #meet-team-1765 .cs-link:nth-of-type(3) {
+    transition-delay: 0.16s;
+  }
+  #meet-team-1765 .cs-icon {
+    width: 1.25rem;
+    height: auto;
+    display: block;
+  }
+  #meet-team-1765 .cs-info {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s;
+  }
+  #meet-team-1765 .cs-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.2em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--bodyTextColor);
+    display: block;
+    transition: color 0.3s;
+  }
+  #meet-team-1765 .cs-job {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2em;
+    margin: 0;
+    color: var(--bodyTextColor);
+    opacity: 0.8;
+    display: block;
+    transition: color 0.3s;
+  }
+}
+@media only screen and (min-width: 48rem) {
+  #meet-team-1765 .cs-container {
+    max-width: 107.5rem;
+    gap: clamp(3rem, 6vw, 4rem);
+  }
+  #meet-team-1765 .cs-card-group {
+    column-gap: clamp(1rem, 2vw, 1.25rem);
+    row-gap: 2.5rem;
+  }
+  #meet-team-1765 .cs-item {
+    grid-column: span 4;
+  }
+  #meet-team-1765 .cs-picture {
+    height: clamp(16.25rem, 33.2vw, 27.5rem);
+    aspect-ratio: initial;
+  }
+}
+@media only screen and (min-width: 81.25rem) {
+  #meet-team-1765 .cs-card-group {
+    grid-template-columns: repeat(10, 1fr);
+  }
+  #meet-team-1765 .cs-item {
+    grid-column: span 2;
+  }
+}
+@media only screen and (min-width: 0rem) {
+  body.dark-mode #meet-team-1765 {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  body.dark-mode #meet-team-1765 .cs-job {
+    color: var(--bodyTextColorWhite);
+  }
+  body.dark-mode #meet-team-1765 .cs-name {
+    color: var(--bodyTextColorWhite);
+  }
+}

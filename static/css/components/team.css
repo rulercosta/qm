@@ -1,0 +1,136 @@
+@media only screen and (min-width: 0rem) {
+    #meet-team-221 {
+        text-align: center;
+        padding: var(--sectionPadding);
+        padding-top: 0%;
+    }
+    #meet-team-221 .cs-container {
+        width: 100%;
+        max-width: 34.375rem;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: clamp(3rem, 6vw, 4rem);
+    }
+    #meet-team-221 .cs-picture {
+        width: clamp(10rem, 20vw, 13.75rem);
+        height: clamp(10rem, 20vw, 13.75rem);
+        margin-bottom: 1rem;
+        border-radius: 50%;
+        display: block;
+        position: relative;
+        overflow: hidden;
+    }
+    #meet-team-221 .cs-picture img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition: transform 0.7s;
+    }
+    #meet-team-221 .cs-card-group {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    #meet-team-221 .cs-item {
+        list-style: none;
+        width: 100%;
+        max-width: 21.25rem;
+        padding: clamp(1rem, 2vw, 1.25rem);
+        padding-bottom: 1.25rem;
+        background: var(--bodyTextColorWhite);
+        border-radius: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        box-sizing: border-box;
+    }
+    #meet-team-221 .cs-item:hover .cs-picture img {
+        transform: scale(1.1);
+    }
+    #meet-team-221 .cs-name {
+        font-size: 1.25rem;
+        line-height: 1.2em;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+        color: var(--headerColor);
+        display: block;
+    }
+    #meet-team-221 .cs-job-title {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+        color: var(--primary);
+        display: block;
+    }
+    #meet-team-221 .cs-item-text {
+        font-size: 1rem;
+        line-height: 1.5em;
+        text-align: center;
+        margin: 0;
+        margin-bottom: 0.75rem;
+        color: #7d799c;
+    }
+    #meet-team-221 .cs-social {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.25rem;
+    }
+    #meet-team-221 .cs-link {
+        width: clamp(1.75rem, 3vw, 2rem);
+        height: clamp(1.75rem, 3vw, 2rem);
+        border-radius: 0.25rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform-style: preserve-3d;
+        perspective: 700px;
+    }
+    #meet-team-221 .cs-link:hover .cs-icon {
+        transform: translateY(-0.3125rem) rotateY(360deg);
+    }
+    #meet-team-221 .cs-icon {
+        width: 0.875rem;
+        height: auto;
+        transition: transform 0.7s;
+    }
+}
+@media only screen and (min-width: 48rem) {
+    #meet-team-221 .cs-container {
+        max-width: 80em;
+    }
+    #meet-team-221 .cs-card-group {
+        flex-direction: row;
+    }
+    #meet-team-221 .cs-item {
+        width: 31%;
+    }
+}
+@media only screen and (min-width: 0rem) {
+    body.dark-mode #meet-team-221 {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+    body.dark-mode #meet-team-221 .cs-name,
+    body.dark-mode #meet-team-221 .cs-item-text,
+    body.dark-mode #meet-team-221 .cs-job-title {
+        color: var(--bodyTextColorWhite);
+    }
+    body.dark-mode #meet-team-221 .cs-item {
+        background-color: var(--dark);
+    }
+    body.dark-mode #meet-team-221 .cs-item-text {
+        opacity: 0.8;
+    }
+    body.dark-mode #meet-team-221 .cs-icon {
+        filter: grayscale(1) brightness(1000%);
+    }
+}

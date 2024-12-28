@@ -1,36 +1,26 @@
-/*-- -------------------------- -->
-<---         Services           -->
-<--- -------------------------- -*/
-
-/* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
     #services-282 {
         padding: var(--sectionPadding);
     }
     #services-282 .cs-container {
         width: 100%;
-        /* changes to 1280px on tabelt */
         max-width: 34.375rem;
         margin: auto;
     }
     #services-282 .cs-container {
         width: 100%;
-        /* changes to 1280px on tabelt */
         max-width: 34.375rem;
         margin: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
-        /* 48px - 64px */
         gap: clamp(3rem, 6vw, 4rem);
     }
     #services-282 .cs-content {
-        /* set text align to left if content needs to be left aligned */
         text-align: left;
         width: 100%;
         display: flex;
         flex-direction: column;
-        /* centers content horizontally, set to flex-start to left align */
         align-items: flex-start;
     }
 
@@ -47,9 +37,7 @@
     #services-282 .cs-item {
         list-style: none;
         width: 100%;
-        /* 32px - 40px */
         padding: clamp(2rem, 4vw, 2.5rem) 1.75rem;
-        /* prevents padding from affecting width and height */
         box-sizing: border-box;
         background-color: #f1f1f4;
         border-radius: 0.25rem;
@@ -72,7 +60,6 @@
         align-items: flex-start;
     }
     #services-282 .cs-h3 {
-        /* 20px - 25px */
         font-size: clamp(1.25rem, 1.95vw, 1.5625rem);
         margin: 0;
         margin-bottom: 1rem;
@@ -90,7 +77,6 @@
     #services-282 .cs-fake-link {
         font-size: 1rem;
         font-weight: 700;
-        /* pushes up against the .cs-item-text so it's always at the bottom of the card */
         margin-top: auto;
         color: var(--primary);
         display: inline-flex;
@@ -103,11 +89,9 @@
         width: 100%;
     }
     #services-282 .cs-fake-link:before {
-        /* animated text underline */
         content: "";
         width: 0%;
         height: 2px;
-        /* current color of parent */
         background: currentColor;
         opacity: 1;
         position: absolute;
@@ -120,11 +104,9 @@
         margin-left: 0.5rem;
     }
     #services-282 .cs-fake-link svg path {
-        /* current color of parent */
         fill: currentColor;
     }
 }
-/* In Between - 600px */
 @media only screen and (min-width: 37.5rem) {
     #services-282 .cs-card-group {
         display: flex;
@@ -138,7 +120,6 @@
         align-self: stretch;
     }
 }
-/* Small Desktop - 1024px */
 @media only screen and (min-width: 48rem) {
     #services-282 .cs-container {
         max-width: 80rem;
@@ -152,14 +133,11 @@
         margin-left: 0;
     }
     #services-282 .cs-item {
-        /* 224px - 413px */
         width: clamp(14rem, 30.4vw, 25.8125rem);
         min-height: 16.25rem;
-        /* prevents padding from adding to height and width */
         box-sizing: border-box;
     }
 }
-/* Dark Mode */
 @media only screen and (min-width: 0rem) {
     body.dark-mode #services-282 .cs-topper {
         color: var(--primaryLight);
@@ -178,5 +156,8 @@
     }
     body.dark-mode #services-282 .cs-fake-link {
         color: var(--primaryLight);
+    }
+    body.dark-mode #services-282 {
+        background-color: rgba(0,0,0,0.6);
     }
 }

@@ -1,4 +1,4 @@
-<!-- templates/contact.html -->
+<!-- templates/explore.jinja -->
 {% extends 'base.jinja' %}
 
 {% block title %}Explore{% endblock %}
@@ -9,6 +9,15 @@
 
 {% block content %}
 {% include 'components/header_padding.html' %}
+{% import 'components/ribbon.html' as ui %}
+{{ ui.ribbon(title="Meet The Team",
+heading="Team Behind Quantum Minds",
+text="Quantum Minds unites students from various disciplines to innovate and tackle real-world challenges, with each member contributing their expertise and creativity.") }}
+{% import 'components/members.html' as ui %}
+{{ ui.members(heads=[["https://i.postimg.cc/qMJrbrdX/user.png","Name","Position","#","#"],
+["https://i.postimg.cc/qMJrbrdX/user.png","Name","Position","#","#"],
+["https://i.postimg.cc/qMJrbrdX/user.png","Name","Position","#","#"],
+["https://i.postimg.cc/qMJrbrdX/user.png","Name","Position","#","#"],
+["https://i.postimg.cc/qMJrbrdX/user.png","Name","Position","#","#"]]) }}
 {% include 'partials/gallery.html' %}
-{% include 'partials/team.html' %}
 {% endblock %}

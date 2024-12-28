@@ -1,4 +1,4 @@
-<!-- templates/about.html -->
+<!-- templates/about.jinja -->
 {% extends 'base.jinja' %}
 
 {% block title %}About{% endblock %}
@@ -20,7 +20,16 @@ lists={"Mission Statement":"To foster a vibrant community of interdisciplinary t
 
 {% include 'partials/areas.html' %}
 {% include 'partials/objectives.html' %}
-{% include 'partials/team.html' %}
+
+{% import 'components/ribbon.html' as ui %}
+{{ ui.ribbon(title="Meet The Team",
+heading="Team Behind Quantum Minds",
+text="Quantum Minds unites students from various disciplines to innovate and tackle real-world challenges, with each member contributing their expertise and creativity.") }}
+
+{% import 'components/team.html' as ui %}
+{{ ui.team(heads=[["https://i.postimg.cc/qMJrbrdX/user.png","Name","Position","Description","#","#"],
+["https://i.postimg.cc/qMJrbrdX/user.png","Name","Position","Description","#","#"],
+["https://i.postimg.cc/qMJrbrdX/user.png","Name","Position","Description","#","#"]]) }}
 
 {% import 'components/external_section.html' as ui %}
 {{ ui.section(img_url="https://i.postimg.cc/zGQjxyTn/united-college-of-engineering-research-allahabad.webp",

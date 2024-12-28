@@ -1,31 +1,21 @@
-/*-- -------------------------- -->
-<---          Services          -->
-<--- -------------------------- -*/
-
-/* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
   #services-1628 {
     padding: var(--sectionPadding);
-    background-color: #f7f7f7;
   }
   #services-1628 .cs-container {
     width: 100%;
-    /* changes to 1280px at tablet */
     max-width: 34.375em;
     margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* 48px - 64px */
     gap: clamp(3rem, 6vw, 4rem);
   }
   #services-1628 .cs-content {
-    /* set text align to left if content needs to be left aligned */
     text-align: left;
     width: 100%;
     display: flex;
     flex-direction: column;
-    /* centers content horizontally, set to flex-start to left align */
     align-items: flex-start;
   }
   #services-1628 .cs-title {
@@ -37,7 +27,6 @@
     z-index: 1;
   }
   #services-1628 .cs-text:after {
-    /* divider line */
     content: "";
     width: 100%;
     height: 1px;
@@ -58,9 +47,7 @@
     padding: 0;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    /* 16px - 20px */
     column-gap: clamp(1rem, 2.5vw, 1.25rem);
-    /* 28px - 40px */
     row-gap: clamp(1.75rem, 2.5vw, 2.5rem);
   }
   #services-1628 .cs-item {
@@ -137,7 +124,6 @@
     transition: transform .3s;
   }
 }
-/* Tablet - 768px */
 @media only screen and (min-width: 48rem) {
   #services-1628 .cs-container {
     max-width: 80rem;
@@ -172,20 +158,17 @@
     grid-column: span 6;
   }
   #services-1628 .cs-picture {
-    /* 240px - 420px */
     height: clamp(15rem, 33vw, 26.25rem);
   }
 }
-/* Large Desktop - 1300px */
 @media only screen and (min-width: 81.25rem) {
   #services-1628 .cs-item {
     grid-column: span 3;
   }
 }
-/* Dark Mode */
 @media only screen and (min-width: 0rem) {
   body.dark-mode #services-1628 {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.6);
   }
   body.dark-mode #services-1628 .cs-title,
   body.dark-mode #services-1628 .cs-text,

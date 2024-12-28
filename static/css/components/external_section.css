@@ -1,21 +1,14 @@
-/*-- -------------------------- -->
-<---          Services          -->
-<--- -------------------------- -*/
-
-/* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
   #services-564 {
     padding: var(--sectionPadding);
   }
   #services-564 .cs-container {
     width: 100%;
-    /* changes to 1280px at tablet */
     max-width: 34.375rem;
     margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* 48px - 64px */
     gap: clamp(3rem, 6vw, 4rem);
   }
   #services-564 .cs-content {
@@ -37,12 +30,10 @@
     color: var(--primary);
   }
   #services-564 .cs-h3 {
-    /* 25px - 31px */
     font-size: clamp(1.5625rem, 3vw, 1.9375rem);
     line-height: 1.2em;
     font-weight: 700;
     text-align: inherit;
-    /* 16px - 20px */
     margin: 0 0 clamp(1rem, 1.9vw, 1.25rem) 0;
     color: var(--headerColor);
   }
@@ -53,11 +44,9 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    /* 16px - 24px */
     gap: clamp(1rem, 2.5vw, 1.5rem);
   }
   #services-564 .cs-li {
-    /* 16px - 20px */
     font-size: clamp(1rem, 2vw, 1.25rem);
     font-weight: 700;
     list-style: none;
@@ -65,17 +54,14 @@
     width: 100%;
     display: flex;
     justify-content: flex-start;
-    /* push icon top the top so if the list item goes to two lines the icon stays at the top */
     align-items: flex-start;
     gap: 1.25rem;
   }
   #services-564 .cs-icon {
-    /* adds extra space between the icon and top of parent so it's more centered */
     margin-top: clamp(0.125rem, 0.47vw, 0.4375rem);
   }
   #services-564 .cs-button-solid {
     font-size: 1rem;
-    /* 46px - 56px */
     line-height: clamp(2.875rem, 5.5vw, 3.5rem);
     text-decoration: none;
     font-weight: 700;
@@ -90,7 +76,6 @@
     overflow: hidden;
     position: relative;
     z-index: 1;
-    /* prevents padding from adding to the width */
     box-sizing: border-box;
     transition: color 0.3s;
   }
@@ -114,10 +99,8 @@
     width: 100%;
   }
   #services-564 .cs-picture {
-    /* changes at tablet */
     width: 100%;
     max-width: 39.375rem;
-    /* changes to a clamp at tablet */
     height: 24.75rem;
     display: block;
     position: relative;
@@ -131,7 +114,6 @@
     object-fit: cover;
   }
 }
-/* Tablet - 768px */
 @media only screen and (min-width: 48rem) {
   #services-564 .cs-container {
     max-width: 80rem;
@@ -141,7 +123,6 @@
   }
   #services-564 .cs-picture {
     width: 46vw;
-    /* 415px - 528px */
     height: clamp(25.9375rem, 50vw, 33rem);
   }
   #services-564 .cs-content {
@@ -149,7 +130,6 @@
     max-width: 32.5rem;
   }
 }
-/* Dark Mode */
 @media only screen and (min-width: 0rem) {
   body.dark-mode #services-564 .cs-topper {
     color: var(--bodyTextColorWhite);
@@ -168,5 +148,8 @@
   }
   body.dark-mode #services-564 .cs-icon {
     filter: brightness(150%);
+  }
+  body.dark-mode #services-564 {
+    background-color: rgba(0, 0, 0, 0.6);
   }
 }

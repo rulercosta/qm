@@ -1,0 +1,74 @@
+@media only screen and (min-width: 0rem) {
+    #meet-team-220 {
+        text-align: center;
+        padding: var(--sectionPadding);
+    }
+    #meet-team-220 .cs-container {
+        width: 100%;
+        max-width: 34.375rem;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: clamp(3rem, 6vw, 4rem);
+    }
+    #meet-team-220 .cs-content {
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #meet-team-220 .cs-topper {
+        font-size: var(--topperFontSize);
+        line-height: 1.2em;
+        text-transform: uppercase;
+        text-align: inherit;
+        letter-spacing: 0.1em;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 0.25rem;
+        display: block;
+    }
+    #meet-team-220 .cs-title {
+        font-size: var(--headerFontSize);
+        font-weight: 900;
+        line-height: 1.2em;
+        text-align: inherit;
+        max-width: 43.75rem;
+        margin: 0 0 1rem 0;
+        color: var(--headerColor);
+        position: relative;
+    }
+    #meet-team-220 .cs-text {
+        font-size: var(--bodyFontSize);
+        line-height: 1.5em;
+        text-align: inherit;
+        width: 100%;
+        max-width: 40.625rem;
+        margin: 0;
+        color: var(--bodyTextColor);
+    }
+    #meet-team-220 .cs-graphic {
+        width: 100%;
+        max-width: 26.82352941rem;
+        margin: 0 0 1rem 0;
+    }
+}
+@media only screen and (min-width: 48rem) {
+    #meet-team-220 .cs-container {
+        max-width: 80em;
+    }
+}
+@media only screen and (min-width: 0rem) {
+    body.dark-mode #meet-team-220 .cs-topper {
+        color: var(--primaryLight);
+    }
+    body.dark-mode #meet-team-220 .cs-title,
+    body.dark-mode #meet-team-220 .cs-text {
+        color: var(--bodyTextColorWhite);
+    }
+    body.dark-mode #meet-team-220 {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+}

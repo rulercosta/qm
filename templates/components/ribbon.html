@@ -1,0 +1,17 @@
+<!-- components/ribbon.html -->
+{% macro ribbon(title="",heading="",text="") %}
+    {% block page_style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/ribbon.css') }}">
+    {% endblock %}
+
+    <section id="meet-team-220">
+        <div class="cs-container">
+            <div class="cs-content">
+                <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/Ornament.svg') }}" alt="chef" width="456" height="31">
+                <span class="cs-topper">{{ title }}</span>
+                <h2 class="cs-title">{{ heading }}</h2>
+                <p class="cs-text">{{ text }}</p>
+            </div>
+        </div>
+    </section>
+{% endmacro %}
