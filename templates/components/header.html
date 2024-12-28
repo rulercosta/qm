@@ -1,10 +1,6 @@
 <!-- components/header.html -->
 
 <style>
-/*-- -------------------------- -->
-<---      Core Dark Styles      -->
-<--- -------------------------- -*/
-/* Mobile */
 @media only screen and (min-width: 0rem) {
   :root {
     --dark: #082032;
@@ -35,14 +31,9 @@
     display: block !important;
   }
   .dark {
-    /* class used to hide elements that only need to be seen when dark mode is enabled */
     display: none;
   }
 }
-/*-- -------------------------- -->
-<---      Dark Mode Toggle      -->
-<--- -------------------------- -*/
-/* Mobile */
 @media only screen and (min-width: 0rem) {
   body.dark-mode #dark-mode-toggle .cs-sun {
     transform: translate(-50%, -50%);
@@ -57,7 +48,6 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    /* right: 5rem; */
     width: 3rem;
     height: 3rem;
     background: transparent;
@@ -90,7 +80,6 @@
                 opacity 0.3s;
   }
 }
-/* Desktop */
 @media only screen and (min-width: 64rem) {
   #dark-mode-toggle {
     position: relative;
@@ -105,10 +94,6 @@
     /* fill: #fff; */
   }
 }
-/*-- -------------------------- -->
-<---     Mobile Navigation      -->
-<--- -------------------------- -*/
-/* Mobile - 1023px */
 @media only screen and (max-width: 63.9375rem) {
   body.cs-open {
     overflow: hidden;
@@ -128,11 +113,8 @@
   #cs-navigation {
     width: 94%;
     max-width: 80rem;
-    /* prevents padding from affecting height and width */
     box-sizing: border-box;
-    /* 12px - 24px */
     padding: clamp(0.75rem, 2vw, 1.5rem);
-    /* 12px - 24px */
     border-radius: clamp(0.75rem, 2vw, 1.5rem);
     position: fixed;
     top: 2rem;
@@ -142,14 +124,12 @@
     transition: top 0.3s, border-radius 0.3s, width 0.3s, max-width 0.3s;
   }
   #cs-navigation:before {
-    /* background color */
     content: "";
     width: 100%;
     height: 100%;
     background: #fff;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     opacity: 1;
-    /* 12px - 24px */
     border-radius: clamp(0.75rem, 2vw, 1.5rem);
     display: block;
     position: absolute;
@@ -184,7 +164,6 @@
     max-width: 12.5rem;
     height: 100%;
     margin: 0 auto 0 0;
-    /* prevents padding from affecting height and width */
     box-sizing: border-box;
     padding: 0;
     display: flex;
@@ -195,7 +174,6 @@
   #cs-navigation .cs-logo img {
     width: 100%;
     height: 100%;
-    /* ensures the image never overflows the container. It stays contained within it's width and height and expands to fill it then stops once it reaches an edge */
     object-fit: contain;
   }
   #cs-navigation .cs-toggle {
@@ -213,7 +191,6 @@
     transition: transform 0.6s;
   }
   #cs-navigation .cs-nav {
-    /* sends it to the right in the 3rd position */
     order: -3;
   }
   #cs-navigation .cs-active .cs-line1 {
@@ -230,7 +207,6 @@
     bottom: 100%;
   }
   #cs-navigation .cs-box {
-    /* 24px - 28px */
     width: clamp(1.5rem, 2vw, 1.75rem);
     height: 1rem;
     position: relative;
@@ -288,7 +264,6 @@
     min-width: 40%;
     height: auto;
     margin: 0;
-    /* 32px - 40px */
     padding: 4rem clamp(2rem, 3vw, 2.5rem) 4rem 2rem;
     display: flex;
     flex-direction: column;
@@ -303,7 +278,6 @@
     width: 100%;
     margin-right: 0;
     opacity: 0;
-    /* transition from these values */
     transform: translateX(-2.5rem);
     transition: transform 0.6s, opacity 0.9s;
   }
@@ -344,7 +318,6 @@
     position: relative;
   }
   #cs-navigation .cs-li-link:before {
-    /* active state underline */
     content: "";
     width: 100%;
     height: 1px;
@@ -359,7 +332,6 @@
     display: block;
   }
 }
-/* Dark Mode */
 @media only screen and (max-width: 63.9375rem) {
   body.dark-mode #cs-navigation:before {
     background-color: var(--dark);
@@ -377,10 +349,6 @@
     color: var(--bodyTextColorWhite);
   }
 }
-/*-- -------------------------- -->
-<---     Navigation Dropdown    -->
-<--- -------------------------- -*/
-/* Mobile - 1023px */
 @media only screen and (max-width: 63.9375rem) {
   #cs-navigation .cs-dropdown {
     color: var(--bodyTextColorWhite);
@@ -435,12 +403,10 @@
     list-style: none;
   }
   #cs-navigation .cs-li-link.cs-drop-link {
-    /* 14px - 16px */
     font-size: clamp(0.875rem, 2vw, 1.25rem);
     color: #fff;
   }
 }
-/* Desktop - 1024px */
 @media only screen and (min-width: 64rem) {
   #cs-navigation .cs-dropdown {
     position: relative;
@@ -472,7 +438,6 @@
     border-bottom: 5px solid var(--primary);
     border-radius: 0 0 1.5rem 1.5rem;
     visibility: hidden;
-    /* if you have 8 or more links in your dropdown nav, uncomment the columns property to make the list into 2 even columns. Change it to 3 or 4 if you need extra columns. Then remove the transition delays on the cs-drop-li so they don't have weird scattered animations */
     position: absolute;
     top: 100%;
     z-index: -100;
@@ -526,7 +491,6 @@
     text-decoration: none;
     white-space: nowrap;
     width: 100%;
-    /* prevents padding from affecting height and width */
     box-sizing: border-box;
     padding: 0.75rem;
     color: var(--headerColor);
@@ -541,7 +505,6 @@
     display: none;
   }
 }
-/* Dark Mode - Desktop */
 @media only screen and (min-width: 64rem) {
   body.dark-mode #cs-navigation .cs-drop-ul {
     background-color: var(--dark);
@@ -550,10 +513,6 @@
     color: var(--bodyTextColorWhite);
   }
 }
-/*-- -------------------------- -->
-<---     Desktop Navigation     -->
-<--- -------------------------- -*/
-/* Small Desktop - 1024px */
 @media only screen and (min-width: 64rem) {
   body.scroll #cs-navigation {
     width: 100%;
@@ -565,13 +524,10 @@
     width: 94%;
     max-width: 90rem;
     height: 6rem;
-    /* prevents padding from affecting height and width */
     box-sizing: border-box;
-    /* 12px - 24px */
     padding: clamp(0.75rem, 2vw, 1.5rem) 0;
     background-color: #fff;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    /* 12px - 24px */
     border-radius: clamp(0.75rem, 2vw, 1.5rem);
     display: flex;
     align-items: center;
@@ -586,7 +542,6 @@
     width: 100%;
     max-width: 90rem;
     margin: auto;
-    /* prevents padding from affecting height and width */
     box-sizing: border-box;
     padding: 0 1.5rem;
     display: flex;
@@ -601,7 +556,6 @@
     width: 18.4%;
     max-width: 21.875rem;
     height: 2rem;
-    /* margin-right auto pushes everything away from it to the right */
     margin: 0 auto 0 0;
     padding: 0;
     display: flex;
@@ -612,14 +566,12 @@
   #cs-navigation .cs-logo img {
     width: auto;
     height: 100%;
-    /* ensures the image never overflows the container. It stays contained within it's width and height and expands to fill it then stops once it reaches an edge */
     object-fit: contain;
   }
   #cs-navigation .cs-ul-wrapper {
     height: 100%;
     display: flex;
     align-items: center;
-    /* absolutely positioned to be dead center */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -633,7 +585,6 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    /* 20px - 36px */
     gap: clamp(1.25rem, 2.6vw, 2.25rem);
   }
   #cs-navigation .cs-li {
@@ -642,7 +593,6 @@
     padding: 0;
     display: flex;
     align-items: center;
-    /* prevent flexbox from squishing it */
     flex: none;
   }
   #cs-navigation .cs-li-link {
@@ -662,7 +612,6 @@
     color: var(--primary);
   }
 }
-/* Dark Mode */
 @media only screen and (min-width: 64rem) {
   body.dark-mode #cs-navigation {
     background-color: var(--dark);
@@ -679,20 +628,13 @@
 }
 </style>
 
-<!-- ============================================ -->
-<!--                 Navigation                   -->
-<!-- ============================================ -->
-
 <header id="cs-navigation">
     <div class="cs-container">
-        <!--Nav Logo-->
         <a href="{{ url_for('home_routes.home') }}" class="cs-logo" aria-label="back to home">
             <img class="light" src="{{ url_for('static', filename='images/logo-light.svg') }}" alt="logo" width="210" height="41" aria-hidden="true" decoding="async">
             <img class="dark" src="{{ url_for('static', filename='images/logo-dark.svg') }}" alt="logo" width="210" height="41" aria-hidden="true" decoding="async">
         </a>
-        <!--Navigation List-->
         <nav class="cs-nav" role="navigation">
-            <!--Mobile Nav Toggle-->
             <button class="cs-toggle" aria-label="mobile menu toggle">
                 <div class="cs-box" aria-hidden="true">
                     <span class="cs-line cs-line1" aria-hidden="true"></span>
@@ -700,7 +642,6 @@
                     <span class="cs-line cs-line3" aria-hidden="true"></span>
                 </div>
             </button>
-            <!-- We need a wrapper div so we can set a fixed height on the cs-ul in case the nav list gets too long from too many dropdowns being opened and needs to have an overflow scroll. This wrapper acts as the background so it can go the full height of the screen and not cut off any overflowing nav items while the cs-ul stops short of the bottom of the screen, which keeps all nav items in view no matter how mnay there are-->
             <div class="cs-ul-wrapper">
                 <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
                     <li class="cs-li">
@@ -737,11 +678,7 @@
                 </ul>
             </div>
         </nav>
-        <!--Dark Mode toggle-->
-        <!-- Place at the bottom of your container that wraps around your <nav> navigation list -->
-        <!-- If there is no container wrapping your <nav>, add one.  This should NOT be placed inside the navigation list -->
         <button id="dark-mode-toggle">
-            <!--Moon is an inline SVG so you can edit the color if needed-->
             <svg class="cs-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" style="enable-background:new 0 0 480 480" xml:space="preserve"><path d="M459.782 347.328c-4.288-5.28-11.488-7.232-17.824-4.96-17.76 6.368-37.024 9.632-57.312 9.632-97.056 0-176-78.976-176-176 0-58.4 28.832-112.768 77.12-145.472 5.472-3.712 8.096-10.4 6.624-16.832S285.638 2.4 279.078 1.44C271.59.352 264.134 0 256.646 0c-132.352 0-240 107.648-240 240s107.648 240 240 240c84 0 160.416-42.688 204.352-114.176 3.552-5.792 3.04-13.184-1.216-18.496z"/></svg>
             <img class="cs-sun" aria-hidden="true" src="https://csimg.nyc3.digitaloceanspaces.com/Contact-Page/sun.svg" decoding="async" alt="sun" width="15" height="15">
         </button>
@@ -749,7 +686,6 @@
 </header>
 
 <script>
-// add classes for mobile navigation toggling
 var CSbody = document.querySelector("body");
 const CSnavbarMenu = document.querySelector("#cs-navigation");
 const CShamburgerMenu = document.querySelector("#cs-navigation .cs-toggle");
@@ -757,10 +693,8 @@ CShamburgerMenu.addEventListener('click', function() {
     CShamburgerMenu.classList.toggle("cs-active");
     CSnavbarMenu.classList.toggle("cs-active");
     CSbody.classList.toggle("cs-open");
-    // run the function to check the aria-expanded value
     ariaExpanded();
 });
-// checks the value of aria expanded on the cs-ul and changes it accordingly whether it is expanded or not 
 function ariaExpanded() {
     const csUL = document.querySelector('#cs-expanded');
     const csExpanded = csUL.getAttribute('aria-expanded');
@@ -770,9 +704,6 @@ function ariaExpanded() {
         csUL.setAttribute('aria-expanded', 'false');
     }
 }
-// This script adds a class to the body after scrolling 100px
-// and we used these body.scroll styles to create some on scroll 
-// animations with the navbar
 
 document.addEventListener('scroll', (e) => { 
     const scroll = document.documentElement.scrollTop;
@@ -782,7 +713,6 @@ document.querySelector('body').classList.add('scroll')
     document.querySelector('body').classList.remove('scroll')
     }
 });
-// mobile nav toggle code
 const dropDowns = Array.from(document.querySelectorAll('#cs-navigation .cs-dropdown'));
     for (const item of dropDowns) {
         const onClick = () => {
@@ -791,10 +721,6 @@ const dropDowns = Array.from(document.querySelectorAll('#cs-navigation .cs-dropd
     item.addEventListener('click', onClick)
     }
 
-//
-//    The Dark Mode System
-//
-// helper functions to toggle dark mode
 function enableDarkMode() {
 	document.body.classList.add('dark-mode');
 	localStorage.setItem('theme', 'dark');
@@ -803,40 +729,26 @@ function disableDarkMode() {
 	document.body.classList.remove('dark-mode');
 	localStorage.setItem('theme', 'light');
 }
-// determines a new users dark mode preferences
 function detectColorScheme() {
-	// default to the light theme
 	let theme = 'light';
-	// check localStorage for a saved 'theme' variable. if it's there, the user has visited before, so apply the necessary theme choices
 	if (localStorage.getItem('theme')) {
 		theme = localStorage.getItem('theme');
 	}
-	// if it's not there, check to see if the user has applied dark mode preferences themselves in the browser
 	else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
 		theme = 'dark';
 	}
-	// if there is no preference set, the default of light will be used. apply accordingly
 	theme === 'dark' ? enableDarkMode() : disableDarkMode();
 }
-// run on page load
 detectColorScheme();
-// add event listener to the dark mode button toggle
 document.getElementById('dark-mode-toggle').addEventListener('click', () => {
-	// on click, check localStorage for the dark mode value, use to apply the opposite of what's saved
 	localStorage.getItem('theme') === 'light' ? enableDarkMode() : disableDarkMode();
 });
-// Function to highlight the active navbar link based on the current page URL
 document.addEventListener('DOMContentLoaded', function () {
-  // Get the current URL's pathname
   const currentUrl = window.location.pathname;
-  // Select all navbar links within the cs-nav class
   const navLinks = document.querySelectorAll('.cs-nav a');
-  // Remove cs-active from all navbar links
   navLinks.forEach(link => link.classList.remove('cs-active'));
 
-  // Add cs-active to the link that matches the current URL
   navLinks.forEach(link => {
-    // Check if the href of the link matches the current URL (relative path)
     if (link.href.includes(currentUrl)) {
       link.classList.add('cs-active');
     }
