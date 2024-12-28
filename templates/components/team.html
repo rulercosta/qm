@@ -1,5 +1,5 @@
 <!-- components/team.html -->
-{% macro team(heads=[["img_url","name","position","description","social1","social2"]]) %}
+{% macro team(heads=[]) %}
     {% block page_style %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components/team.css') }}">
     {% endblock %}
@@ -10,16 +10,16 @@
                 {% for head in heads %}
                     <li class="cs-item">
                         <picture class="cs-picture">
-                            <img aria-hidden="true" loading="lazy" decoding="async" src="{{ head[0] }}" alt="portrait" width="275" height="132">
+                            <img aria-hidden="true" loading="lazy" decoding="async" src="{{ head.image }}" alt="portrait" width="275" height="132">
                         </picture>
-                        <span class="cs-name">{{ head[1] }}</span>
-                        <span class="cs-job-title">{{ head[2] }}</span>
-                        <p class="cs-item-text">{{ head[3] }}</p>
+                        <span class="cs-name">{{ head.name }}</span>
+                        <span class="cs-job-title">{{ head.position }}</span>
+                        <p class="cs-item-text">{{ head.description }}</p>
                         <div class="cs-social">
-                            <a href="{{ head[4] }}" class="cs-link" aria-label="Instagram" target="_blank" rel="noopener">
+                            <a href="{{ head.instagram }}" class="cs-link" aria-label="Instagram" target="_blank" rel="noopener">
                                 <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="https://i.postimg.cc/NFBtNmws/instagram-167-svgrepo-com-2.png" alt="instagram" width="15" height="13">
                             </a>
-                            <a href="{{ head[5] }}" class="cs-link" aria-label="Linked in" target="_blank" rel="noopener">
+                            <a href="{{ head.linkedin }}" class="cs-link" aria-label="Linked in" target="_blank" rel="noopener">
                                 <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.digitaloceanspaces.com/Meet-Team/linkedin-grey.svg" alt="linkedin" width="17" height="16">
                             </a>
                         </div>
