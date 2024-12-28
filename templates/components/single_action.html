@@ -1,38 +1,8 @@
 <!-- components/single_action.html -->
 {% macro action(title="",heading="",content='',button_label="",button_img_url="",button_script="",button_alt_text="",button_text="") %}
-    <style>
-    @media only screen and (min-width: 0rem) {
-      #content-1450 {
-        padding: var(--sectionPadding);
-      }
-      #content-1450 .cs-container {
-        width: 100%;
-        max-width: 80rem;
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-top: 0rem;
-        gap: clamp(3rem, 6vw, 4rem);
-      }
-      #content-1450 .cs-content {
-        text-align: center;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      #content-1450 .cs-title,
-      #content-1450 .cs-text {
-        max-width: 100%;
-      }
-      #content-1450 .cs-text {
-        font-size: clamp(1.25rem, 1vw, 2rem);
-        text-align: center;
-        margin: 1.5rem 0 2rem 0;
-      }
-    }
-    </style>
+  {% block page_style %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/components/single_action.css') }}">
+  {% endblock %}
 
     <section id="content-1450">
         <div class="cs-container">
