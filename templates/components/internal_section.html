@@ -1,5 +1,5 @@
 <!-- components/internal_section.html -->
-{% macro section(img_alts=[],img_urls=[],topper="",title="",text="",lists={"list_heading":"list_text"}) %}
+{% macro section(images=[],topper="",title="",text="",lists=[]) %}
     {% block page_style %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components/internal_section.css') }}">
     {% endblock %}
@@ -8,14 +8,14 @@
         <div class="cs-container">
             <div class="cs-image-group">
                 <picture class="cs-picture cs-picture1">
-                    <source media="(max-width: 600px)" srcset="{{ img_urls[0] }}">
-                    <source media="(min-width: 601px)" srcset="{{ img_urls[0] }}">
-                    <img loading="lazy" decoding="async" src="{{ img_urls[0] }}" alt="{{ img_alts[0] }}" width="720" height="1024">
+                    <source media="(max-width: 600px)" srcset="{{ images[0].url }}">
+                    <source media="(min-width: 601px)" srcset="{{ images[0].url }}">
+                    <img loading="lazy" decoding="async" src="{{ images[0].url }}" alt="{{ images[0].alt }}" width="720" height="1024">
                 </picture>
                 <picture class="cs-picture cs-picture2">
-                    <source media="(max-width: 600px)" srcset="{{ img_urls[1] }}">
-                    <source media="(min-width: 601px)" srcset="{{ img_urls[1] }}">
-                    <img loading="lazy" decoding="async" src="{{ img_urls[1] }}" alt="{{ img_alts[1] }}" width="720" height="1024">
+                    <source media="(max-width: 600px)" srcset="{{ images[1].url }}">
+                    <source media="(min-width: 601px)" srcset="{{ images[1].url }}">
+                    <img loading="lazy" decoding="async" src="{{ images[1].url }}" alt="{{ images[1].alt }}" width="720" height="1024">
                 </picture>
                 <img class="cs-stripes" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/stripes-short.svg" alt="stripes" width="548" height="487" aria-hidden="true">
             </div>
@@ -24,10 +24,10 @@
                 <h2 class="cs-title">{{ title }}</h2>
                 <p class="cs-text">{{ text }}</p>
                 <ul class="cs-ul">
-                    {% for list_heading,list_text in lists.items() %}
+                    {% for list in lists %}
                         <li class="cs-li">
-                            <h3 class="cs-h3">{{ list_heading }}</h3>
-                            <p class="cs-li-text">{{ list_text }}</p>
+                            <h3 class="cs-h3">{{ list.heading }}</h3>
+                            <p class="cs-li-text">{{ list.text }}</p>
                         </li>
                     {% endfor %}
                 </ul>

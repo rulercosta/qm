@@ -11,12 +11,12 @@
 {% include 'partials/header_padding.html' %}
 
 {% import 'components/internal_section.html' as ui %}
-{{ ui.section(img_alts=["reading","search"],
-img_urls=["https://i.postimg.cc/N0wnLx1F/reading.webp","https://i.postimg.cc/YCN3DBW2/search.webp"],
+{{ ui.section(img_alts=[{"alt":"reading","url":"https://i.postimg.cc/N0wnLx1F/reading.webp"},
+{"alt":"search","url":"https://i.postimg.cc/YCN3DBW2/search.webp"}],
 topper="Mission & Vision",
 title="About Quantum Minds",
 text="Quantum Minds is a vibrant, student-driven community at the United College of Engineering and Research, dedicated to pushing the boundaries of technology through innovation and collaboration. Our club brings together students from diverse disciplines to work on projects that span across cutting-edge fields such as space technology, defense, artificial intelligence, cybersecurity, and more.",
-lists={"Mission Statement":"To foster a vibrant community of interdisciplinary talents, driving breakthroughs in areas such as space technology, defense, AI, and cybersecurity. Through hands-on projects, research, and collaboration, we aim to develop solutions that address real-world challenges and contribute to the advancement of society.","Our Vision":"Empowering minds to innovate, collaborate, and create a future where technology bridges the gap between imagination and reality."}) }}
+lists=[{"heading":"Mission Statement","text":"To foster a vibrant community of interdisciplinary talents, driving breakthroughs in areas such as space technology, defense, AI, and cybersecurity. Through hands-on projects, research, and collaboration, we aim to develop solutions that address real-world challenges and contribute to the advancement of society."},{"heading":"Our Vision","text":"Empowering minds to innovate, collaborate, and create a future where technology bridges the gap between imagination and reality."}]) }}
 
 {% import 'components/photos.html' as ui %}
 {{ ui.photos(title="Our Focus Areas",
