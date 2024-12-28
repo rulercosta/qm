@@ -62,7 +62,7 @@
   }
   #services-1628 .cs-picture {
     width: 100%;
-    height: 15rem;
+    height: clamp(25rem, 40vw, 30rem);
     margin-bottom: 1.5rem;
     background-color: #000;
     overflow: hidden;
