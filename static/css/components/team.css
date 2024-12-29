@@ -71,14 +71,6 @@
         color: var(--primary);
         display: block;
     }
-    #meet-team-221 .cs-item-text {
-        font-size: 1rem;
-        line-height: 1.5em;
-        text-align: center;
-        margin: 0;
-        margin-bottom: 0.75rem;
-        color: #7d799c;
-    }
     #meet-team-221 .cs-social {
         display: flex;
         justify-content: center;
@@ -120,15 +112,11 @@
         background-color: rgba(0, 0, 0, 0.6);
     }
     body.dark-mode #meet-team-221 .cs-name,
-    body.dark-mode #meet-team-221 .cs-item-text,
     body.dark-mode #meet-team-221 .cs-job-title {
         color: var(--bodyTextColorWhite);
     }
     body.dark-mode #meet-team-221 .cs-item {
         background-color: var(--dark);
-    }
-    body.dark-mode #meet-team-221 .cs-item-text {
-        opacity: 0.8;
     }
     body.dark-mode #meet-team-221 .cs-icon {
         filter: grayscale(1) brightness(1000%);
