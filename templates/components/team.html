@@ -1,5 +1,5 @@
 <!-- components/team.html -->
-{% macro team(heads=[]) %}
+{% macro team(heads=[],view_more=False) %}
     {% block page_style %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components/team.css') }}">
     {% endblock %}
@@ -25,12 +25,14 @@
                     </li>
                 {% endfor %}
             </ul>
-            {% import 'components/button.html' as ui %}
-            {{ ui.button(url=url_for('explore_routes.explore'),
-            label="view more",
-            img_url="https://i.postimg.cc/XJC4ZrHc/person-svgrepo-com.png",
-            alt_text="members",
-            text="View More") }}
+            {% if view_more %}
+                {% import 'components/button.html' as ui %}
+                {{ ui.button(url=url_for('explore_routes.explore'),
+                label="view more",
+                img_url="https://i.postimg.cc/XJC4ZrHc/person-svgrepo-com.png",
+                alt_text="members",
+                text="View More") }}
+            {% endif %}
         </div>
     </section>
 {% endmacro %}
