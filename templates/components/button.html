@@ -1,10 +1,10 @@
 <!-- components/button.html -->
-{% macro button(url="#",label="",alt_text="",script="#",img_url="",text="Button Text") %}
+{% macro button(button={}) %}
     {% block page_style %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components/button.css') }}">
     {% endblock %}
-    <a href="{{ url }}" class="cs-button-4" aria-label="{{ label }}" onclick="{{ script }}">
-        <img src="{{ img_url }}" alt="{{ alt_text }}" style="vertical-align: middle; margin-right: 8px; width: 20px; height: auto;" />
-        {{ text }}
+    <a href="{{ button.url }}" class="cs-button-4" aria-label="{{ button.label }}" onclick="{{ button.script }}">
+        <img src="{{ button.image }}" alt="{{ button.alt }}" style="vertical-align: middle; margin-right: 8px; width: 20px; height: auto;" />
+        {{ button.text }}
     </a>
 {% endmacro %}

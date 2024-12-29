@@ -1,5 +1,5 @@
 <!-- components/external_section.html -->
- {% macro section(image={},topper="",title="",para=[],text="",link={},button=[]) %}
+ {% macro section(image={},topper="",title="",para=[],text="",link={},button={}) %}
     {% block page_style %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components/section.css') }}">
     {% endblock %}
@@ -31,11 +31,12 @@
                 {% endif %}
                 {% if button %}
                     {% import 'components/button.html' as ui %}
-                    {{ ui.button(label=button[0].label,
-                    img_url=button[0].img_url,
-                    script=button[0].script,
-                    alt_text=button[0].alt_text,
-                    text=button[0].text) }}    
+                    {{ ui.button(button={"url":button.url,
+                    "label":button.label,
+                    "image":button.image,
+                    "script":button.script,
+                    "alt":button.alt,
+                    "text":button.text}) }}    
                 {% endif %}
             </div>
         </div>

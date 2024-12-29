@@ -1,0 +1,30 @@
+<!-- components/quote.html -->
+{% macro quote(image=[],text='',person=[]) %}
+    {% block page_style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/quote.css') }}">
+    {% endblock %}
+    <section id="reviews-306">
+        <picture class="cs-image">
+            <source media="(max-width: 600px)" srcset="{{ image[0].url }}">
+            <source media="(min-width: 601px)" srcset="{{ image[0].url }}">
+            <img aria-hidden="true" loading="lazy" decoding="async" src="{{ image[0].url }}" alt="{{ image[0].alt }}" width="842" height="548">
+        </picture>
+        <div class="cs-content">
+            <img class="cs-quote" aria-hidden="true" loading="lazy" decoding="async" src="https://i.postimg.cc/9MBVq97P/top-quote.png" alt="quote" width="40" height="33">
+            <span class="cs-review">
+                {{ text | safe }}
+            </span>
+            <div class="cs-info">
+                <img class="cs-profile" aria-hidden="true" loading="lazy" decoding="async" src="{{ person[0].image }}" 
+                alt="{{ master_img_alt }}" width="50" height="50">
+                <div class="cs-flex">
+                    <span class="cs-name">
+                        {{ person[0].name }}
+                    </span>
+                    <span class="cs-job">{{ person[0].description }}</span>
+                </div>
+            </div>
+            <img class="cs-watermark" aria-hidden="true" loading="lazy" decoding="async" src="https://i.postimg.cc/9MBVq97P/top-quote.png" alt="quote" width="136" height="120">
+        </div>
+    </section>
+{% endmacro %}
