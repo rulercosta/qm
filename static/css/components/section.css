@@ -60,44 +60,6 @@
   #services-564 .cs-icon {
     margin-top: clamp(0.125rem, 0.47vw, 0.4375rem);
   }
-  #services-564 .cs-button-solid {
-    font-size: 1rem;
-    line-height: clamp(2.875rem, 5.5vw, 3.5rem);
-    text-decoration: none;
-    font-weight: 700;
-    text-align: center;
-    margin: 0;
-    color: #ffffff;
-    min-width: 9.375rem;
-    padding: 0 1.5rem;
-    background-color: var(--secondary);
-    border-radius: 0.25rem;
-    display: inline-block;
-    overflow: hidden;
-    position: relative;
-    z-index: 1;
-    box-sizing: border-box;
-    transition: color 0.3s;
-  }
-  #services-564 .cs-button-solid:before {
-    content: "";
-    position: absolute;
-    height: 100%;
-    width: 0%;
-    background: #000;
-    opacity: 1;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    border-radius: 0.25rem;
-    transition: width 0.3s;
-  }
-  #services-564 .cs-button-solid:hover {
-    color: #fff;
-  }
-  #services-564 .cs-button-solid:hover:before {
-    width: 100%;
-  }
   #services-564 .cs-picture {
     width: 100%;
     max-width: 39.375rem;
@@ -111,7 +73,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 }
 @media only screen and (min-width: 48rem) {
