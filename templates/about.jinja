@@ -10,13 +10,16 @@
 {% block content %}
 {% include 'partials/header_padding.html' %}
 
-{% import 'components/internal_section.html' as ui %}
-{{ ui.section(images=[{"alt":"reading","url":"https://i.postimg.cc/N0wnLx1F/reading.webp"},
-{"alt":"search","url":"https://i.postimg.cc/YCN3DBW2/search.webp"}],
+{% import 'components/section.html' as ui %}
+{{ ui.section(image={"url":"https://i.postimg.cc/pL2kKk4k/research.png",
+"alt":"Quantum Minds"},
 topper="Mission & Vision",
 title="About Quantum Minds",
 text="Quantum Minds is a vibrant, student-driven community at the United College of Engineering and Research, dedicated to pushing the boundaries of technology through innovation and collaboration. Our club brings together students from diverse disciplines to work on projects that span across cutting-edge fields such as space technology, defense, artificial intelligence, cybersecurity, and more.",
-lists=[{"heading":"Mission Statement","text":"To foster a vibrant community of interdisciplinary talents, driving breakthroughs in areas such as space technology, defense, AI, and cybersecurity. Through hands-on projects, research, and collaboration, we aim to develop solutions that address real-world challenges and contribute to the advancement of society."},{"heading":"Our Vision","text":"Empowering minds to innovate, collaborate, and create a future where technology bridges the gap between imagination and reality."}]) }}
+para=[{"heading":"Mission Statement",
+"text":"To foster a vibrant community of interdisciplinary talents, driving breakthroughs in areas such as space technology, defense, AI, and cybersecurity. Through hands-on projects, research, and collaboration, we aim to develop solutions that address real-world challenges and contribute to the advancement of society."},
+{"heading":"Our Vision",
+"text":"Empowering minds to innovate, collaborate, and create a future where technology bridges the gap between imagination and reality."}]) }}
 
 {% import 'components/photos.html' as ui %}
 {{ ui.photos(title="Our Focus Areas",
@@ -59,13 +62,14 @@ text="Quantum Minds unites students from various disciplines to innovate and tac
 {"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","description":"Description","instagram":"#","linkedin":"#"},
 {"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","description":"Description","instagram":"#","linkedin":"#"}]) }}
 
-{% import 'components/external_section.html' as ui %}
+{% import 'components/section.html' as ui %}
 {{ ui.section(image={"url":"https://i.postimg.cc/zGQjxyTn/united-college-of-engineering-research-allahabad.webp",
 "alt":"United College of Engineering and Research"},
-topper="About UCER",
-title="Shaping the Future of Technology",
-heading='A Hub for <span class="cs-color">Innovation</span> and <span class="cs-color">Technological Excellence</span>',
-text="United College of Engineering and Research (UCER) is a premier institution dedicated to delivering high-quality education and fostering innovation in the field of engineering and technology. With a strong focus on research and development, UCER provides an environment where students can explore, experiment, and excel in diverse domains. The college is equipped with state-of-the-art facilities, expert faculty, and an ethos that encourages entrepreneurship, creativity, and problem-solving. UCER is home to students who are not only passionate about learning but are also driven to make a real-world impact through their innovative ideas. As a member of UCER, Quantum Minds Club represents the spirit of innovation and excellence that defines the college, providing students with the opportunity to engage in cutting-edge projects, industry collaborations, and hands-on learning.",
-link={"url":"http://www.united.ac.in","text":"Visit UCER Website"}) }}
+topper="Shaping the Future of Technology",
+title="About UCER",
+text="United College of Engineering and Research (UCER) is a premier institution dedicated to delivering high-quality education and fostering innovation in the field of engineering and technology. With a strong focus on research and development, UCER provides an environment where students can explore, experiment, and excel in diverse domains. The college is equipped with state-of-the-art facilities, expert faculty, and an ethos that encourages entrepreneurship, creativity, and problem-solving. UCER is home to students who are not only passionate about learning but are also driven to make a real-world impact through their innovative ideas.",
+para=[{"heading":"A Hub for Innovation and Technological Excellence",
+"text":"As a part of UCER, Quantum Minds represents the spirit of innovation and excellence that defines the college, providing students with the opportunity to engage in cutting-edge projects, industry collaborations, and hands-on learning."}],
+link={"url":"http://www.united.ac.in","text":"Read More"}) }}
 
 {% endblock %}
