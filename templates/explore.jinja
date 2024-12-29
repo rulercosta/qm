@@ -15,12 +15,12 @@
 heading="Team Behind Quantum Minds",
 text="Quantum Minds unites students from various disciplines to innovate and tackle real-world challenges, with each member contributing their expertise and creativity.") }}
 
-{% import 'components/members.html' as ui %}
-{{ ui.members(heads=[["https://i.postimg.cc/qMJrbrdX/user.png","Name","Position","#","#"],
-["https://i.postimg.cc/qMJrbrdX/user.png","Name","Position","#","#"],
-["https://i.postimg.cc/qMJrbrdX/user.png","Name","Position","#","#"],
-["https://i.postimg.cc/qMJrbrdX/user.png","Name","Position","#","#"],
-["https://i.postimg.cc/qMJrbrdX/user.png","Name","Position","#","#"]]) }}
+{% import 'components/team.html' as ui %}
+{{ ui.team(heads=[{"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","instagram":"#","linkedin":"#"},
+{"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","instagram":"#","linkedin":"#"},
+{"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","instagram":"#","linkedin":"#"},
+{"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","instagram":"#","linkedin":"#"},
+{"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","instagram":"#","linkedin":"#"}]) }}
 
 {% import 'components/photos.html' as ui %}
 {{ ui.photos(title="Explore Our Visual Journey",
