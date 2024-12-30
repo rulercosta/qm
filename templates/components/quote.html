@@ -1,8 +1,5 @@
 <!-- components/quote.html -->
 {% macro quote(image=[],text='',person=[]) %}
-    {% block page_style %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/quote.css') }}">
-    {% endblock %}
     <section id="reviews-306">
         <picture class="cs-image">
             <source media="(max-width: 600px)" srcset="{{ image[0].url }}">
