@@ -1,14 +1,20 @@
-from flask import Blueprint, render_template, session, send_file, url_for
+from flask import Blueprint, render_template, session, send_file, url_for, request
 from app.models import Participant, Instructor
 from app.helpers.certgen import generate_certificate_image
 from app.helpers.utils import format_date_with_ordinal, resize_image
 from io import BytesIO
 import base64
 
-bp = Blueprint('workshop_routes', __name__)
+bp = Blueprint('verify_routes', __name__)
 
-@bp.route('/events/workshops/verify/<cid>')
-def verify_certificate(cid):
+@bp.route('/events/workshops/verify', methods=['GET'])
+def verify_certificate():
+    cid = request.args.get('cid')  
+    download = request.args.get('download')  
+
+    if not cid:
+        return "Certificate ID (cid) is required.", 400
+
     participant = Participant.query.filter_by(cid=cid).first()
     if not participant:
         return render_template('verify.jinja', error="No record found")
@@ -26,7 +32,7 @@ def verify_certificate(cid):
     session['cid'] = cid
 
     participant_data = session['participant']
-    qr_data = url_for('workshop_routes.verify_certificate', cid=cid, _external=True)
+    qr_data = url_for('verify_routes.verify_certificate', cid=cid, _external=True)
 
     try:
         certificate_image = generate_certificate_image(
@@ -39,6 +45,18 @@ def verify_certificate(cid):
         )
 
         session['participant']['certificate'] = certificate_image
+
+        if download:
+            img_buffer = BytesIO()
+            certificate_image.save(img_buffer, format="PNG")
+            img_buffer.seek(0)
+
+            return send_file(
+                img_buffer,
+                as_attachment=True,
+                download_name=f"{participant_data['name']}_certificate.png",
+                mimetype='image/png'
+            )
 
         thumbnail = resize_image(certificate_image, 600)
 
@@ -59,28 +77,3 @@ def verify_certificate(cid):
 
     except Exception as e:
         return f"Error generating certificate: {str(e)}", 500
-
-@bp.route('/events/workshops/verify/<cid>/download', methods=['POST'])
-def download_certificate(cid):
-    participant_data = session.get('participant')
-    if not participant_data:
-        return "Session expired or invalid. Please try again.", 400
-
-    certificate_image = participant_data.get('certificate')
-    if not certificate_image:
-        return "Certificate not found in session.", 400
-
-    try:        
-        img_buffer = BytesIO()
-        certificate_image.save(img_buffer, format="PNG")
-        img_buffer.seek(0)
-
-        return send_file(
-            img_buffer,
-            as_attachment=True,
-            download_name=f"{participant_data['name']}_certificate.png",
-            mimetype='image/png'
-        )
-
-    except Exception as e:
-        return f"Error downloading certificate: {str(e)}", 500

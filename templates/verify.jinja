@@ -36,7 +36,7 @@
                 <span class="cs-topper cs-color">Quantum Minds Workshop Certificate</span>
                 <h2 class="cs-title">Congratulations on Your Achievement!</h2>
                 <p class="cs-text">Well done on successfully completing workshop on <strong>{{ course }}</strong> hosted by <strong>Quantum Minds</strong>! This certificate is a testament to your dedication, passion for learning, and ability to embrace innovative ideas. Your participation marks a significant step in your journey of innovation and learning and makes you ready to showcase your skills to the world. Keep pushing boundaries and making strides in your journey of knowledge!</p>
-                <a href="#" class="cs-button-4" aria-label="button" onclick="downloadCertificate()">
+                <a href="{{ url_for('verify_routes.verify_certificate') }}?cid={{ cid }}&download=true" class="cs-button-4" aria-label="button">
                     <img src="https://i.postimg.cc/Z5Z88B07/share-button.png" alt="button" style="vertical-align: middle; margin-right: 8px; width: 20px; height: auto;" />
                     Share Your Achievement
                 </a>
@@ -52,7 +52,6 @@
     "name":instructor,
     "description":"Workshop Instructor"}]) }}
 
-    <script src="{{ url_for('static', filename='js/downloadCertificate.js') }}"></script>
 {% endif %}
 
 {% endblock %}
