@@ -40,3 +40,39 @@ class ContactForm(db.Model):
 
     def __repr__(self):
         return f"<ContactFormSubmission {self.name} - {self.email}>"
+
+
+from app.extensions import db, bcrypt
+from flask_login import UserMixin
+
+class AdminUser(db.Model, UserMixin):
+    __tablename__ = "admin_user"
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password_hash = db.Column(db.String(128), nullable=False)
+
+    def set_password(self, password):
+        """Hash the password using bcrypt and store it."""
+        self.password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
+
+    def check_password(self, password):
+        """Verify the provided password against the stored hash."""
+        return bcrypt.check_password_hash(self.password_hash, password)
+
+    # Flask-Login methods
+    @property
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_active(self):
+        return True
+
+    @property
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        """Return the unique identifier of the user (must be a string)."""
+        return str(self.id)

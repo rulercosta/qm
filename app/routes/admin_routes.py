@@ -8,6 +8,18 @@ bp = Blueprint('admin_routes', __name__)
 from app.extensions import db
 from app.extensions import admin
 
-admin.add_view(ModelView(ContactForm, db.session))
-admin.add_view(ModelView(Instructor, db.session))
-admin.add_view(ModelView(Participant, db.session))
+
+from flask_login import current_user
+from flask import redirect, url_for
+
+class AuthenticatedModelView(ModelView):
+    def is_accessible(self):
+        return current_user.is_authenticated
+
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('auth.login'))
+
+
+admin.add_view(AuthenticatedModelView(ContactForm, db.session))
+admin.add_view(AuthenticatedModelView(Instructor, db.session))
+admin.add_view(AuthenticatedModelView(Participant, db.session))
