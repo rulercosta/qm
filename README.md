@@ -7,17 +7,38 @@
 - [pyenv](https://github.com/pyenv/pyenv) for managing Python versions
 - [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) for managing virtual environments
 - [Redis](https://redis.io/) for session storage
+- [Flask-Admin](https://flask-admin.readthedocs.io/) for creating administrative interfaces
 
 ### Installation
 
-1. **Clone the Repository**:
+1. **Install pyenv and pyenv-virtualenv on Arch Linux**:
+    ```sh
+    # Install dependencies
+    sudo pacman -S --needed base-devel openssl zlib
+
+    # Install pyenv
+    curl https://pyenv.run | bash
+
+    # Add pyenv to bashrc
+    echo -e '\n# Pyenv Configuration' >> ~/.bashrc
+    echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> ~/.bashrc
+    echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
+    echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+    echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+    source ~/.bashrc
+
+    # Install pyenv-virtualenv
+    git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+    ```
+
+2. **Clone the Repository**:
     ```sh
     git clone https://github.com/neuronnerd/qm.git
     cd qm
     ```
 
-2. **Recreate the [.gitignore](http://_vscodecontentref_/2) File**:
-    If the [.gitignore](http://_vscodecontentref_/3) file is missing, recreate it with the following content:
+3. **Recreate the [.gitignore](http://_vscodecontentref_/1) File**:
+    If the [.gitignore](http://_vscodecontentref_/2) file is missing, recreate it with the following content:
     ```sh
     echo ".env" > .gitignore
     echo "flask_session/" >> .gitignore
@@ -25,8 +46,8 @@
     echo ".gitignore" >> .gitignore
     ```
 
-3. **Install Python Version**:
-    Ensure you have the correct Python version specified in the [.python-version](http://_vscodecontentref_/4) file:
+4. **Install Python Version**:
+    Ensure you have the correct Python version specified in the [.python-version](http://_vscodecontentref_/3) file:
     ```sh
     pyenv install $(cat .python-version)
     pyenv local $(cat .python-version)
@@ -34,13 +55,13 @@
     pyenv activate qm-env
     ```
 
-4. **Install Requirements**:
+5. **Install Requirements**:
     ```sh
     pip install -r requirements.txt
     ```
 
-5. **Set Up Environment Variables**:
-    Create a [.env](http://_vscodecontentref_/5) file in the project root directory and add your environment variables. For example:
+6. **Set Up Environment Variables**:
+    Create a [.env](http://_vscodecontentref_/4) file in the project root directory and add your environment variables. For example:
     ```env
     FLASK_ENV=development
     SECRET_KEY=your_secret_key
@@ -49,7 +70,7 @@
     REDIS_PORT=6379
     ```
 
-6. **Run the Application**:
+7. **Run the Application**:
     ```sh
     flask run
     ```
