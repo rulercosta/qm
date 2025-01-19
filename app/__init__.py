@@ -11,7 +11,7 @@ def create_app():
     app.config.from_object(Config)
     
     # Add custom admin static files configuration
-    app.config['FLASK_ADMIN_SWATCH'] = 'slate'  # AdminLTE theme
+    app.config['FLASK_ADMIN_SWATCH'] = 'slate'
     app.config['FLASK_ADMIN_FLUID_LAYOUT'] = True
     app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 
