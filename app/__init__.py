@@ -9,6 +9,11 @@ from app.routes.admin_routes import SecureAdminIndexView
 def create_app():
     app = Flask(__name__, template_folder=os.path.join(os.getcwd(), 'templates'), static_folder=os.path.join(os.getcwd(), 'static'))
     app.config.from_object(Config)
+    
+    # Add custom admin static files configuration
+    app.config['FLASK_ADMIN_SWATCH'] = 'slate'  # AdminLTE theme
+    app.config['FLASK_ADMIN_FLUID_LAYOUT'] = True
+    app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 
     # Initialize extensions
     db.init_app(app)
@@ -17,15 +22,10 @@ def create_app():
     login_manager.init_app(app)
     
     # Initialize admin with secure view
-    admin.init_app(
-        app,
-        index_view=SecureAdminIndexView(url='/admin')
-    )
-    
-    # Configure admin
+    admin.init_app(app)
     admin.name = 'QM Admin'
-    admin.template_mode = 'bootstrap3'
-    admin.base_template = 'admin/base.html'
+    admin.index_view = SecureAdminIndexView()
+    # Remove custom template settings to use default Flask-Admin templates
 
     # Initialize admin views
     from app.routes.admin_routes import init_admin_views

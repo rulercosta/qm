@@ -3,25 +3,120 @@
 {% block head_css %}
 {{ super() }}
 <style>
-    .content-wrapper {
-        background: #f4f6f9;
+    :root {
+        --sidebar-width: 280px;
+        --primary-color: #4154f1;
+        --sidebar-bg: #111827;
+    }
+    
+    body {
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    
+    .wrapper {
+        display: flex;
         min-height: 100vh;
     }
-    .brand-link {
-        border-bottom: 1px solid #4b545c;
-    }
-    .sidebar-dark-primary {
+    .sidebar {
+        width: 250px;
         background: #343a40;
+        color: #fff;
+        flex-shrink: 0;
+        position: fixed;
+        left: 0;
+        height: 100vh;
+        z-index: 1000;
+        transition: transform 0.3s ease-in-out;
+    }
+    .sidebar-collapsed {
+        transform: translateX(-250px);
+    }
+    .main-content {
+        flex-grow: 1;
+        margin-left: 250px;
+        transition: margin 0.3s ease-in-out;
+        background: #f4f6f9;
+    }
+    .main-content-expanded {
+        margin-left: 0;
+    }
+    .toggle-sidebar {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 1001;
+        background: transparent;
+        border: none;
+        color: #333;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        transition: left 0.3s ease-in-out;
+    }
+    .toggle-sidebar.shifted {
+        left: 260px;
+    }
+    .brand-link {
+        display: flex;
+        align-items: center;
+        padding: 1.25rem 1rem;
+        color: #fff;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .brand-link:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+    .brand-link i {
+        margin-right: .75rem;
+    }
+    .nav-item {
+        margin: 0 .5rem;
+    }
+    .nav-link {
+        color: rgba(255,255,255,.7);
+        padding: .75rem 1rem;
+        border-radius: .25rem;
+    }
+    .nav-link:hover {
+        color: #fff;
+        background: rgba(255,255,255,.1);
+    }
+    .nav-link.active {
+        background: #007bff;
+        color: #fff;
+    }
+    .nav-link i {
+        margin-right: .75rem;
+        width: 1.25rem;
+        text-align: center;
+    }
+    .content-header {
+        padding: 1rem;
+        background: #fff;
+        box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+        margin-bottom: 1rem;
+    }
+    .content {
+        padding: 1rem;
+    }
+    .card {
+        box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+        margin-bottom: 1rem;
     }
 </style>
 {% endblock %}
 
 {% block page_body %}
-<nav class="main-header navbar navbar-expand navbar-dark">
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
         <li class="nav-item">
             <a href="{{ url_for('auth.logout') }}" class="nav-link">
                 <i class="fas fa-sign-out-alt"></i> Logout
@@ -30,22 +125,18 @@
     </ul>
 </nav>
 
+<!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="{{ url_for('admin.index') }}" class="brand-link">
+        <i class="fas fa-chart-line fa-lg"></i>
         <span class="brand-text font-weight-light">{{ admin_view.admin.name }}</span>
     </a>
     <div class="sidebar">
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column">
-                <li class="nav-item">
-                    <a href="{{ url_for('admin.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-home"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
                 {% for item in admin_view.admin.menu() %}
                 <li class="nav-item">
-                    <a href="{{ item.url }}" class="nav-link">
+                    <a href="{{ item.url }}" class="nav-link{% if item.url == request.path %} active{% endif %}">
                         <i class="nav-icon fas fa-{{ item.icon_type|default('circle') }}"></i>
                         <p>{{ item.name }}</p>
                     </a>
@@ -56,16 +147,93 @@
     </div>
 </aside>
 
+<!-- Content Wrapper -->
 <div class="content-wrapper">
-    <div class="content-header">
+    <section class="content-header">
         <div class="container-fluid">
-            <h1 class="m-0">{% block page_title %}{% endblock %}</h1>
+            <h1 class="h4">{{ admin_view.name }}</h1>
         </div>
-    </div>
+    </section>
+
     <section class="content">
         <div class="container-fluid">
+            {% if admin_view.endpoint == 'admin' %}
+            <div class="row">
+                <div class="col-lg-4 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>Contact Forms</h3>
+                            <p>Total Inquiries</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <a href="{{ url_for('inquiries.index_view') }}" class="small-box-footer">
+                            More info <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>Instructors</h3>
+                            <p>Active Instructors</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <a href="{{ url_for('instructors.index_view') }}" class="small-box-footer">
+                            More info <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-6">
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>Participants</h3>
+                            <p>Total Participants</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <a href="{{ url_for('participants.index_view') }}" class="small-box-footer">
+                            More info <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
             {% block body %}{% endblock %}
         </div>
     </section>
 </div>
+{% endblock %}
+
+{% block tail_js %}
+{{ super() }}
+<script>
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('main-content');
+    const toggleBtn = document.querySelector('.toggle-sidebar');
+    
+    sidebar.classList.toggle('sidebar-collapsed');
+    mainContent.classList.toggle('main-content-expanded');
+    toggleBtn.classList.toggle('shifted');
+    
+    // Store the state in localStorage
+    const isCollapsed = sidebar.classList.contains('sidebar-collapsed');
+    localStorage.setItem('sidebarCollapsed', isCollapsed);
+}
+
+// Restore sidebar state on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+    if (isCollapsed) {
+        document.getElementById('sidebar').classList.add('sidebar-collapsed');
+        document.getElementById('main-content').classList.add('main-content-expanded');
+        document.querySelector('.toggle-sidebar').classList.remove('shifted');
+    }
+});
+</script>
 {% endblock %}

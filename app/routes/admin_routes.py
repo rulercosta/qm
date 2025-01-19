@@ -27,6 +27,11 @@ class ContactFormView(BaseModelView):
     column_list = ['name', 'email', 'phone', 'referral', 'message', 'timestamp']
     column_searchable_list = ['email', 'name']
     column_filters = ['timestamp']
+    column_default_sort = ('timestamp', True)
+    page_size = 25
+    column_labels = {
+        'timestamp': 'Submitted At'
+    }
 
 class InstructorView(BaseModelView):
     column_list = ['courseid', 'course', 'name', 'profile']
@@ -43,22 +48,22 @@ def init_admin_views():
     """Initialize admin views after app context is created"""
     admin.add_view(ContactFormView(
         ContactForm, 
-        db.session, 
-        name='Contact Forms',
-        category='Communications',
+        db.session,
+        name='Inquiries',
+        endpoint='inquiries',
         menu_icon_type='envelope'
     ))
     admin.add_view(InstructorView(
         Instructor, 
         db.session, 
         name='Instructors',
-        category='Management',
+        endpoint='instructors',
         menu_icon_type='chalkboard-teacher'
     ))
     admin.add_view(ParticipantView(
         Participant, 
         db.session, 
         name='Participants',
-        category='Management',
+        endpoint='participants',
         menu_icon_type='users'
     ))

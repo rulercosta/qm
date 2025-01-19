@@ -10,8 +10,11 @@ login_manager = LoginManager()
 login_manager.login_view = "auth.login"  
 bcrypt = Bcrypt()
 
-# Admin will be initialized in create_app
-admin = Admin()
+# Simplify admin configuration
+admin = Admin(
+    name='QM Admin',
+    template_mode='bootstrap3'
+)
 
 @login_manager.user_loader
 def load_user(user_id):
