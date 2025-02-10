@@ -8,6 +8,7 @@
     
     <!-- Global CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
     
     <!-- Page-Specific CSS -->
     {% block page_style %}
@@ -15,6 +16,9 @@
     {% endblock %}
 </head>
 <body>
+    <!-- Loader Overlay -->
+    <div id="loader-overlay" class="loader-overlay"></div>
+
     <!-- Include Header -->
     {% include 'partials/header.html' %}
 
@@ -26,6 +30,9 @@
 
     <!-- Include Footer -->
     {% include 'partials/footer.html' %}
+
+    <!-- Router JS -->
+    <script src="{{ url_for('static', filename='js/router.js') }}"></script>
 
     {% block page_script %}
     <!-- Page-specific scripts go here -->
