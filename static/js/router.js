@@ -2,7 +2,7 @@ class Router {
     constructor() {
         this.init();
         this.loader = document.getElementById('loader-overlay');
-        this.minLoadTime = 500;
+        this.minLoadTime = 800;
         window.ScriptManager.updateActiveNavLink();
     }
 
@@ -20,13 +20,10 @@ class Router {
     }
 
     async loadPage(url, pushState = true) {
+        const startTime = Date.now();
         try {
             this.showLoader();
             
-            const minLoadTimePromise = new Promise(resolve => 
-                setTimeout(resolve, this.minLoadTime)
-            );
-
             const fetchPromise = fetch(url).then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -36,32 +33,19 @@ class Router {
 
             const [html] = await Promise.all([
                 fetchPromise,
-                minLoadTimePromise
+                new Promise(resolve => setTimeout(resolve, this.minLoadTime))
             ]);
             
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
             
-            await new Promise((resolve) => {
-                const mainContent = doc.querySelector('main');
-                if (!mainContent) {
-                    throw new Error('Main content not found in loaded page');
-                }
+            const mainContent = doc.querySelector('main');
+            if (!mainContent) {
+                throw new Error('Main content not found in loaded page');
+            }
 
-                document.title = doc.title;
-                document.querySelector('main').innerHTML = mainContent.innerHTML;
-
-                const images = Array.from(document.querySelector('main').getElementsByTagName('img'));
-                const imagePromises = images.map(img => {
-                    if (img.complete) return Promise.resolve();
-                    return new Promise(resolve => {
-                        img.onload = resolve;
-                        img.onerror = resolve; 
-                    });
-                });
-
-                Promise.all(imagePromises).then(resolve);
-            });
+            document.title = doc.title;
+            document.querySelector('main').innerHTML = mainContent.innerHTML;
 
             this.updateActiveState(url);
             
@@ -78,6 +62,10 @@ class Router {
         } catch (error) {
             console.error('Error loading page:', error);
         } finally {
+            const loadTime = Date.now() - startTime;
+            if (loadTime < this.minLoadTime) {
+                await new Promise(resolve => setTimeout(resolve, this.minLoadTime - loadTime));
+            }
             this.hideLoader();
         }
     }
@@ -87,9 +75,9 @@ class Router {
     }
 
     async reinitializeScripts() {
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
             window.ScriptManager.initAll();
-            setTimeout(resolve, 100);
+            resolve();
         });
     }
 
