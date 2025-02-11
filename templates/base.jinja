@@ -31,7 +31,9 @@
     <!-- Include Footer -->
     {% include 'partials/footer.html' %}
 
-    <!-- Router JS -->
+    <!-- Essential Scripts -->
+    <script src="{{ url_for('static', filename='js/header.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scriptManager.js') }}"></script>
     <script src="{{ url_for('static', filename='js/router.js') }}"></script>
 
     {% block page_script %}

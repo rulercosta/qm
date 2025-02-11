@@ -64,12 +64,7 @@ class Router {
     }
 
     reinitializeScripts() {
-        if (window.initFaqs) {
-            window.initFaqs();
-        }
-        if (window.initSkipSection) {
-            window.initSkipSection();
-        }
+        window.ScriptManager.initAll();
     }
 
     onPopState(e) {
