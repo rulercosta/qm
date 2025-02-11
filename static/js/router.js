@@ -27,7 +27,12 @@ class Router {
                 setTimeout(resolve, this.minLoadTime)
             );
 
-            const fetchPromise = fetch(url).then(response => response.text());
+            const fetchPromise = fetch(url).then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            });
 
             const [html] = await Promise.all([
                 fetchPromise,
@@ -37,8 +42,26 @@ class Router {
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
             
-            document.title = doc.title;
-            document.querySelector('main').innerHTML = doc.querySelector('main').innerHTML;
+            await new Promise((resolve) => {
+                const mainContent = doc.querySelector('main');
+                if (!mainContent) {
+                    throw new Error('Main content not found in loaded page');
+                }
+
+                document.title = doc.title;
+                document.querySelector('main').innerHTML = mainContent.innerHTML;
+
+                const images = Array.from(document.querySelector('main').getElementsByTagName('img'));
+                const imagePromises = images.map(img => {
+                    if (img.complete) return Promise.resolve();
+                    return new Promise(resolve => {
+                        img.onload = resolve;
+                        img.onerror = resolve; 
+                    });
+                });
+
+                Promise.all(imagePromises).then(resolve);
+            });
 
             this.updateActiveState(url);
             
@@ -51,7 +74,7 @@ class Router {
                 behavior: 'instant'
             });
 
-            this.reinitializeScripts();
+            await this.reinitializeScripts();
         } catch (error) {
             console.error('Error loading page:', error);
         } finally {
@@ -63,8 +86,11 @@ class Router {
         window.ScriptManager.updateActiveNavLink();
     }
 
-    reinitializeScripts() {
-        window.ScriptManager.initAll();
+    async reinitializeScripts() {
+        return new Promise((resolve) => {
+            window.ScriptManager.initAll();
+            setTimeout(resolve, 100);
+        });
     }
 
     onPopState(e) {
