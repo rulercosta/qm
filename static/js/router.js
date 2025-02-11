@@ -2,7 +2,8 @@ class Router {
     constructor() {
         this.init();
         this.loader = document.getElementById('loader-overlay');
-        this.minLoadTime = 300; 
+        this.minLoadTime = 300;
+        window.ScriptManager.updateActiveNavLink();
     }
 
     init() {
@@ -54,13 +55,7 @@ class Router {
     }
 
     updateActiveState(url) {
-        const currentPath = new URL(url).pathname;
-        document.querySelectorAll('.cs-nav a').forEach(link => {
-            link.classList.remove('cs-active');
-            if (link.getAttribute('href') === currentPath) {
-                link.classList.add('cs-active');
-            }
-        });
+        window.ScriptManager.updateActiveNavLink();
     }
 
     reinitializeScripts() {

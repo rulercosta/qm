@@ -1,7 +1,6 @@
 <!-- partials/header.html -->
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
-<script defer src="{{ url_for('static', filename='js/header.js') }}"></script>
 
 <header id="cs-navigation">
     <div class="cs-container">
@@ -18,7 +17,7 @@
                 </div>
             </button>
             <div class="cs-ul-wrapper">
-                <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+                <ul class="cs-ul" aria-expanded="false">
                     <li class="cs-li">
                         <a href="{{ url_for('home_routes.home') }}" class="cs-li-link">
                             Home
@@ -29,6 +28,7 @@
                             About
                         </a>
                     </li>
+                    <!-- Commenting out Events dropdown
                     <li class="cs-li cs-dropdown" tabindex="0">
                         <span class="cs-li-link">
                             Events
@@ -40,6 +40,7 @@
                             </li>
                         </ul>
                     </li>
+                    -->
                     <li class="cs-li">
                         <a href="{{ url_for('explore_routes.explore') }}" class="cs-li-link">
                             Explore
