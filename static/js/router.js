@@ -2,7 +2,7 @@ class Router {
     constructor() {
         this.init();
         this.loader = document.getElementById('loader-overlay');
-        this.minLoadTime = 300;
+        this.minLoadTime = 500;
         window.ScriptManager.updateActiveNavLink();
     }
 
@@ -45,6 +45,11 @@ class Router {
             if (pushState) {
                 history.pushState({}, '', url);
             }
+
+            window.scrollTo({
+                top: 0,
+                behavior: 'instant'
+            });
 
             this.reinitializeScripts();
         } catch (error) {
