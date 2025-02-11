@@ -3,6 +3,7 @@ class Router {
         this.init();
         this.loader = document.getElementById('loader-overlay');
         this.minLoadTime = 800;
+        this.styleCache = new Map();
         window.ScriptManager.updateActiveNavLink();
     }
 
@@ -17,6 +18,34 @@ class Router {
 
     hideLoader() {
         this.loader.classList.remove('active');
+    }
+
+    async loadStylesheets(doc) {
+        const styles = Array.from(doc.getElementsByTagName('link')).filter(link => 
+            link.rel === 'stylesheet' && !document.querySelector(`link[href="${link.href}"]`)
+        );
+
+        const stylePromises = styles.map(async (style) => {
+            if (this.styleCache.has(style.href)) {
+                return this.styleCache.get(style.href);
+            }
+
+            return new Promise((resolve, reject) => {
+                const newStyle = document.createElement('link');
+                newStyle.rel = 'stylesheet';
+                newStyle.href = style.href;
+                
+                newStyle.onload = () => {
+                    this.styleCache.set(style.href, newStyle);
+                    resolve(newStyle);
+                };
+                
+                newStyle.onerror = reject;
+                document.head.appendChild(newStyle);
+            });
+        });
+
+        await Promise.all(stylePromises);
     }
 
     async loadPage(url, pushState = true) {
@@ -39,12 +68,15 @@ class Router {
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
             
+            await this.loadStylesheets(doc);
+            
             const mainContent = doc.querySelector('main');
             if (!mainContent) {
                 throw new Error('Main content not found in loaded page');
             }
 
             document.title = doc.title;
+            
             document.querySelector('main').innerHTML = mainContent.innerHTML;
 
             this.updateActiveState(url);
