@@ -360,9 +360,7 @@
         right: 0;
         bottom: -4rem;
     }
-    #hero-227 .cs-item:nth-of-type(1) {
-        /* makes the first line under the buttons shorter */
-    }
+    /* #hero-227 .cs-item:nth-of-type(1) {} */
     #hero-227 .cs-item:nth-of-type(1):before {
         height: 39.375rem;
     }
