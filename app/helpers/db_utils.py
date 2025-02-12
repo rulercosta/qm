@@ -1,7 +1,13 @@
 from contextlib import contextmanager
-from flask import current_app
 from time import sleep
 from functools import wraps
+import logging
+
+logger = logging.getLogger(__name__)
+
+class DatabaseError(Exception):
+    """Base class for database related errors"""
+    pass
 
 @contextmanager
 def session_scope():
@@ -11,14 +17,15 @@ def session_scope():
     try:
         yield session
         session.commit()
-    except Exception:
+    except Exception as e:
         session.rollback()
-        raise
+        logger.error(f"Database error: {str(e)}", exc_info=True)
+        raise DatabaseError(f"Database operation failed: {str(e)}")
     finally:
         session.close()
 
-def retry_on_error(retries=3, delay=0.5):
-    """Decorator to retry functions on error with exponential backoff."""
+def retry_on_error(retries=3, delay=0.5, exceptions=(DatabaseError,)):
+    """Enhanced retry decorator with specific exception handling"""
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -26,13 +33,14 @@ def retry_on_error(retries=3, delay=0.5):
             for attempt in range(retries):
                 try:
                     return func(*args, **kwargs)
-                except Exception as e:
+                except exceptions as e:
                     last_error = e
                     if attempt == retries - 1:
-                        current_app.logger.error(f"Final retry attempt failed: {str(e)}")
+                        logger.error(f"All retry attempts failed for {func.__name__}: {str(e)}")
                         raise
-                    sleep(delay * (2 ** attempt))
-                    current_app.logger.warning(f"Retrying operation, attempt {attempt + 1}")
+                    wait_time = delay * (2 ** attempt)
+                    logger.warning(f"Retrying {func.__name__}, attempt {attempt + 1} after {wait_time}s")
+                    sleep(wait_time)
             raise last_error
         return wrapper
     return decorator

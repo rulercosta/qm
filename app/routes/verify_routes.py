@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, session, send_file, url_for, request, current_app
 from werkzeug.exceptions import InternalServerError
 from app.models import Participant, Instructor
-from app.helpers.certgen import generate_certificate_image
+from app.helpers.certgen import CertificateGenerator
 from app.helpers.utils import format_date_with_ordinal, resize_image
 from app.helpers.db_utils import retry_on_error, session_scope
 from io import BytesIO
@@ -50,7 +50,7 @@ def verify_certificate():
         session['cid'] = cid
 
         qr_data = url_for('verify_routes.verify_certificate', cid=cid, _external=True)
-        template_path = os.path.join(os.path.dirname(current_app.root_path), 'static', 'images', 'certificate_template.png')
+        template_path = os.path.join('static', 'images', 'certificate_template.png')
         
         if not os.path.exists(template_path):
             current_app.logger.error(f"Template file missing at {template_path}")
@@ -58,34 +58,43 @@ def verify_certificate():
 
         @retry_on_error()
         def generate_and_process_certificate():
-            certificate_image = generate_certificate_image(
+            cert_gen = CertificateGenerator(current_app)
+            certificate_image = cert_gen.generate_certificate(
                 participant_data['name'],
                 qr_data,
-                template_path,
                 participant_data['workshop'],
                 participant_data['instructor'],
                 participant_data['date']
             )
 
-            if download:
-                img_buffer = BytesIO()
-                try:
+            try:
+                if download:
+                    img_buffer = BytesIO()
                     certificate_image.save(img_buffer, format="PNG")
                     img_buffer.seek(0)
-                    return send_file(
+                    # Create a copy of the buffer's contents
+                    response = send_file(
                         img_buffer,
                         as_attachment=True,
                         download_name=f"{participant_data['name']}_certificate.png",
                         mimetype='image/png'
                     )
-                finally:
-                    img_buffer.close()
+                    # Add cleanup callback
+                    @response.call_on_close
+                    def cleanup():
+                        img_buffer.close()
+                        certificate_image.close()
+                    return response
 
-            try:
+                # Handle non-download case
                 thumbnail = resize_image(certificate_image, 600)
                 buffer = BytesIO()
                 thumbnail.save(buffer, format="PNG")
                 base64_image = base64.b64encode(buffer.getvalue()).decode('utf-8')
+                buffer.close()
+                thumbnail.close()
+                certificate_image.close()
+                
                 return render_template(
                     'verify.jinja',
                     cid=cid,
@@ -96,10 +105,10 @@ def verify_certificate():
                     date=participant_data['date'],
                     certificate=base64_image
                 )
-            finally:
-                buffer.close()
-                certificate_image.close()
-                thumbnail.close()
+            except Exception as e:
+                if 'certificate_image' in locals():
+                    certificate_image.close()
+                raise e
 
         return generate_and_process_certificate()
 

@@ -84,3 +84,14 @@
 - Close resources in finally blocks
 - Handle session data carefully
 - Use retry mechanisms for unstable operations
+
+## Recent Fixes
+
+1. **File Download Error**
+   - Issue: I/O operation on closed file during certificate downloads
+   - Cause: BytesIO buffer being closed before file transfer completion
+   - Fix: 
+     - Added response cleanup callback
+     - Improved resource management
+     - Restructured file handling logic
+   - File: verify_routes.py
