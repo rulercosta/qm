@@ -11,3 +11,10 @@ class Config:
     SESSION_FILE_DIR = os.path.join(os.getcwd(), 'flask_session')
     SESSION_PERMANENT = False
     SESSION_USE_SIGNER = True
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        'pool_size': 5,
+        'pool_recycle': 1800,
+        'pool_timeout': 30,
+        'max_overflow': 10
+    }
+    SQLALCHEMY_POOL_PRE_PING = True

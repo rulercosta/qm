@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from app.extensions import db, session
+from app.extensions import db, session, init_db_events
 from app.routes import home_routes, verify_routes, contact_routes, events_routes, explore_routes, static_routes
 from app.config import Config
 
@@ -11,6 +11,9 @@ def create_app():
     # Initialize extensions
     db.init_app(app)
     session.init_app(app)
+    
+    with app.app_context():
+        init_db_events()
 
     # Register blueprints
     app.register_blueprint(home_routes.bp)
