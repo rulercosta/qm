@@ -3,12 +3,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{% block title %}Quantum Minds{% endblock %}</title>
     
     <!-- Global CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/initial-loader.css') }}">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Space+Grotesk:wght@300;400&display=swap" rel="stylesheet">
     
     <!-- Page-Specific CSS -->
     {% block page_style %}
@@ -16,6 +21,21 @@
     {% endblock %}
 </head>
 <body>
+    <!-- Initial Loader -->
+    <div id="initial-loader" class="initial-loader">
+        <div class="loader-content">
+            <div id="brand-text" class="brand-text">
+                <span class="brand-text-content">
+                    <span class="brand-text-word">Quantum</span>
+                    <span class="brand-text-word">Minds</span>
+                </span>
+            </div>
+            <div id="hero-text" class="hero-text">
+                <div class="typing-text">Empowering Minds to Shape the Future of Technology</div>
+            </div>
+        </div>
+    </div>
+    
     <!-- Loader Overlay -->
     <div id="loader-overlay" class="loader-overlay">
         <span></span>
@@ -38,6 +58,7 @@
     <!-- Essential Scripts -->
     <script src="{{ url_for('static', filename='js/scriptManager.js') }}"></script>
     <script src="{{ url_for('static', filename='js/router.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/initial-loader.js') }}"></script>
 
     {% block page_script %}
     <!-- Page-specific scripts go here -->
