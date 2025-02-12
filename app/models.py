@@ -2,13 +2,12 @@ from app.extensions import db
 
 class Participant(db.Model):
     __tablename__ = 'participants'
-    cid = db.Column(db.String, unique=True, primary_key=True)  # Certificate ID
+    cid = db.Column(db.String, unique=True, primary_key=True)  
     courseid = db.Column(db.String, db.ForeignKey('instructors.courseid'), nullable=False)
-    date = db.Column(db.Date, nullable=False)  # Workshop date
-    sid = db.Column(db.String, nullable=False)  # Student ID
-    name = db.Column(db.String, nullable=False)  # Student name
+    date = db.Column(db.Date, nullable=False)  
+    sid = db.Column(db.String, nullable=False) 
+    name = db.Column(db.String, nullable=False)  
 
-    # Relationship to link participants to their course
     course = db.relationship('Instructor', back_populates='participants')
 
     def __repr__(self):
@@ -16,12 +15,11 @@ class Participant(db.Model):
 
 class Instructor(db.Model):
     __tablename__ = 'instructors'
-    courseid = db.Column(db.String, unique=True, primary_key=True)  # Course ID
-    course = db.Column(db.String, nullable=False)  # Course name
-    name = db.Column(db.String, nullable=False)  # Instructor name
-    profile = db.Column(db.String, nullable=False)  # Profile image filename
+    courseid = db.Column(db.String, unique=True, primary_key=True)  
+    course = db.Column(db.String, nullable=False)  
+    name = db.Column(db.String, nullable=False)  
+    profile = db.Column(db.String, nullable=False)  
 
-    # Relationship to link instructors to their participants
     participants = db.relationship('Participant', back_populates='course')
 
     def __repr__(self):

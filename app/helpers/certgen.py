@@ -34,19 +34,14 @@ class CertificateGenerator:
                 fonts = self._load_fonts()
                 draw = ImageDraw.Draw(template)
                 
-                # Draw name
                 self._draw_text(draw, name, fonts['name'], y=500, color="#DDAC00")
                 
-                # Draw workshop
                 self._draw_text(draw, workshop, fonts['text'], y=655)
                 
-                # Draw instructor
                 self._draw_text(draw, instructor, fonts['text'], y=820)
                 
-                # Draw date
                 draw.text((1722, 1384), date, fill="black", font=fonts['date'])
                 
-                # Generate QR code
                 qr_image = self._generate_qr(qr_data)
                 template.paste(qr_image, (947, 1248))
                 
@@ -59,7 +54,6 @@ class CertificateGenerator:
     def _draw_text(self, draw, text, font, y, color="black"):
         text_bbox = draw.textbbox((0, 0), text, font=font)
         text_width = text_bbox[2] - text_bbox[0]
-        # Get width from the image associated with the draw object
         image_width = draw._image.width
         x = (image_width - text_width) // 2
         draw.text((x, y), text, fill=color, font=font)

@@ -17,8 +17,8 @@ class BaseConfig:
         'max_overflow': 10
     }
     SQLALCHEMY_POOL_PRE_PING = True
-    MAX_CONTENT_LENGTH = 10 * 1024 * 1024  # 10MB max file size
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')  # Use single Supabase URL
+    MAX_CONTENT_LENGTH = 10 * 1024 * 1024 
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') 
 
 class DevelopmentConfig(BaseConfig):
     DEBUG = True

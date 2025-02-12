@@ -1,9 +1,10 @@
+from PIL import Image
+
 def format_date_with_ordinal(date):
     day = date.day
     month = date.strftime('%B')
     year = date.strftime('%Y')
 
-    # Determine the ordinal suffix
     if 10 <= day % 100 <= 20:
         suffix = 'th'
     else:
@@ -11,7 +12,6 @@ def format_date_with_ordinal(date):
 
     return f"{day}{suffix} {month}, {year}"
 
-from PIL import Image
 
 def resize_image(image, target_width):
     """
