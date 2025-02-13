@@ -1,5 +1,7 @@
 class ScriptManager {
     static #menuInitialized = false;
+    static #carouselInstances = [];
+    static #photoCarousel = null;
 
     static initFaqs() {
         const faqItems = Array.from(document.querySelectorAll('.cs-faq-item'));
@@ -136,6 +138,18 @@ class ScriptManager {
         });
 
         this.#menuInitialized = false;
+
+        this.#carouselInstances.forEach(instance => {
+            if (instance && instance.destroy) {
+                instance.destroy(true, true);
+            }
+        });
+        this.#carouselInstances = [];
+
+        if (this.#photoCarousel) {
+            this.#photoCarousel.cleanup();
+        }
+        this.#menuInitialized = false;
     }
 
     static updateActiveNavLink() {
@@ -150,16 +164,26 @@ class ScriptManager {
         });
     }
 
+    static initPhotoCarousels() {
+        if (document.querySelector('.photo-carousel')) {
+            if (!this.#photoCarousel) {
+                this.#photoCarousel = new PhotoCarousel();
+            }
+            this.#photoCarousel.init();
+        }
+    }
+
     static initAll() {
         this.initHeader();
         this.initFaqs();
         this.initSkipSection();
         this.updateActiveNavLink();
+        this.initPhotoCarousels();
     }
 }
+
+window.ScriptManager = ScriptManager;
 
 document.addEventListener('DOMContentLoaded', () => {
     ScriptManager.initAll();
 });
-
-window.ScriptManager = ScriptManager;

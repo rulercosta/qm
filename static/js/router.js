@@ -4,7 +4,9 @@ class Router {
         this.loader = document.getElementById('loader-overlay');
         this.minLoadTime = 800;
         this.styleCache = new Map();
-        window.ScriptManager.updateActiveNavLink();
+        if (window.ScriptManager) {
+            window.ScriptManager.updateActiveNavLink();
+        }
     }
 
     init() {

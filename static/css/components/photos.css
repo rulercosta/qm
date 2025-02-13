@@ -1,6 +1,8 @@
 @media only screen and (min-width: 0rem) {
   #services-1628 {
     padding: var(--sectionPadding);
+    width: 100%;
+    overflow: hidden; 
   }
   #services-1628 .cs-container {
     width: 100%;
@@ -10,6 +12,7 @@
     flex-direction: column;
     align-items: center;
     gap: clamp(3rem, 6vw, 4rem);
+    overflow: hidden;  
   }
   #services-1628 .cs-content {
     text-align: left;
@@ -36,18 +39,20 @@
     display: block;
     position: relative;
   }
-  #services-1628 .cs-card-group {
+  #services-1628 .photo-carousel {
     width: 100%;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    column-gap: clamp(1rem, 2.5vw, 1.25rem);
-    row-gap: clamp(1.75rem, 2.5vw, 2.5rem);
+    padding-bottom: 3rem;
+    overflow: hidden; 
+    position: relative;
+  }
+  #services-1628 .swiper-slide {
+    display: flex;
+    justify-content: center;
   }
   #services-1628 .cs-item {
     list-style: none;
     width: 100%;
+    max-width: 413px;
     display: flex;
     grid-column: span 12;
     flex-direction: column;
@@ -68,7 +73,9 @@
     overflow: hidden;
     display: block;
     position: relative;
+    border-radius: 1.5rem;
   }
+
   #services-1628 .cs-picture img {
     position: absolute;
     top: 0;
@@ -76,8 +83,11 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
-    transition: transform .6s, opacity .3s;
+    transition: transform .6s;
+    cursor: pointer;
+    border-radius: 1.5rem;
   }
+
   #services-1628 .cs-h3 {
     font-size: 1.25rem;
     line-height: 1.2em;
@@ -92,6 +102,16 @@
     text-align: left;
     margin: 0 0 1.5rem 0;
     color: var(--bodyTextColor);
+  }
+  #services-1628 .swiper-button-next,
+  #services-1628 .swiper-button-prev {
+    display: none;
+  }
+  #services-1628 .swiper-pagination-bullet {
+    background: var(--primary);
+  }
+  #services-1628 .swiper-pagination-bullet-active {
+    background: var(--primary);
   }
 }
 @media only screen and (min-width: 48rem) {
@@ -126,6 +146,8 @@
   }
   #services-1628 .cs-item {
     grid-column: span 6;
+    width: 100%;
+    max-width: none;
   }
   #services-1628 .cs-picture {
     height: clamp(15rem, 33vw, 26.25rem);
@@ -150,4 +172,134 @@
   body.dark-mode #services-1628 .cs-item-text {
     opacity: .8;
   }
+}
+@media only screen and (min-width: 1300px) {
+  #services-1628 .cs-container {
+    perspective: 2000px; 
+  }
+
+  #services-1628 .photo-carousel {
+    transform-style: preserve-3d;
+    padding: 6rem 0; 
+    overflow: visible;
+    position: relative;
+    width: 100%;
+  }
+
+  #services-1628 .swiper-slide {
+    transition: all 0.5s ease;
+    transform: scale(0.75) translateZ(-200px) rotateY(25deg);
+    opacity: 0.6; 
+    filter: brightness(0.6); 
+    transform-style: preserve-3d;
+  }
+
+  #services-1628 .swiper-slide-active {
+    transform: scale(1.1) translateZ(100px) rotateY(0deg);
+    z-index: 2;
+    opacity: 1;
+    filter: brightness(1);
+  }
+
+  #services-1628 .swiper-slide-prev {
+    transform-origin: right center;
+    transform: scale(0.75) translateZ(-200px) translateX(50px) rotateY(25deg); 
+  }
+
+  #services-1628 .swiper-slide-next {
+    transform-origin: left center;
+    transform: scale(0.75) translateZ(-200px) translateX(-50px) rotateY(-25deg); 
+  }
+
+  #services-1628 .cs-picture {
+    transition: box-shadow 0.5s ease;
+    box-shadow: 
+      0 0 5px rgba(255, 255, 255, 0.2),
+      0 0 10px rgba(255, 255, 255, 0.1);
+  }
+
+  #services-1628 .swiper-slide-active .cs-picture {
+    box-shadow: 
+      0 0 25px rgba(255, 255, 255, 0.6),
+      0 0 50px rgba(255, 255, 255, 0.5),
+      0 0 75px rgba(var(--primary-rgb), 0.5),
+      0 0 100px rgba(var(--primary-rgb), 0.4),
+      0 0 125px rgba(var(--primary-rgb), 0.3);
+  }
+
+  #services-1628 .swiper-slide-prev .cs-picture,
+  #services-1628 .swiper-slide-next .cs-picture {
+    box-shadow: 
+      0 0 15px rgba(255, 255, 255, 0.3),
+      0 0 30px rgba(255, 255, 255, 0.2),
+      0 0 45px rgba(var(--primary-rgb), 0.2);
+  }
+
+  #services-1628 .cs-container {
+    overflow: hidden;  
+    position: relative;
+  }
+
+  #services-1628 .swiper-wrapper {
+    align-items: center;
+    width: 100%;
+  }
+}
+
+.photo-modal {
+    display: none;
+    position: fixed;
+    z-index: 99999; 
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.95); 
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px); 
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.photo-modal.active {
+    opacity: 1;
+}
+
+.modal-content {
+    max-width: 95vw;
+    max-height: 95vh; 
+    object-fit: contain;
+    z-index: 100000; 
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.modal-content.active {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal-close {
+    position: fixed; 
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 100001; 
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease-out 0.2s, transform 0.3s ease-out 0.2s;
+}
+
+.modal-close.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+body.dark-mode .photo-modal {
+    background-color: rgba(0, 0, 0, 0.95);
 }

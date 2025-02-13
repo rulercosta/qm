@@ -4,6 +4,7 @@
     --primaryLight: #48CAE4;     /* Softer Cyan Blue - perfect for highlights */
     --secondary: #0077B6;        /* Deep Ocean Blue - excellent contrast for accents */
     --secondaryLight: #90E0EF;   /* Light Cyan Blue - clean and soft on dark themes */
+    --primary-rgb: 32, 198, 216; /* Primary color in RGB format */
     --headerColor: #1a1a1a;
     --bodyTextColor: #4e4b66;
     --bodyTextColorWhite: #fafbfc;
