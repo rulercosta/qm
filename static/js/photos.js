@@ -21,23 +21,11 @@ class PhotoCarousel {
                     pauseOnMouseEnter: true,
                     waitForTransition: true  
                 },
-                breakpoints: {
-                    1300: {
-                        slidesPerView: 3,
-                        centeredSlides: true,
-                        roundLengths: true,
-                        effect: 'slide',
-                    }
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
                 },
                 on: {
-                    slideChangeTransitionStart: function() {
-                        const slides = this.slides;
-                        slides.forEach(slide => {
-                            if (slide.classList.contains('swiper-slide-active')) {
-                                slide.querySelector('.cs-picture').style.transition = 'box-shadow 0.5s ease';
-                            }
-                        });
-                    },
                     slideChangeTransitionEnd: function() {
                         this.autoplay.start();
                     }

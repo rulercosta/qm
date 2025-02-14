@@ -67,13 +67,25 @@
   }
   #services-1628 .cs-picture {
     width: 100%;
-    height: clamp(25rem, 40vw, 30rem);
+    height: clamp(35rem, 50vw, 40rem);  
     margin-bottom: 1.5rem;
     background-color: #000;
     overflow: hidden;
     display: block;
     position: relative;
-    border-radius: 1.5rem;
+  }
+
+  /* Add inner shadow overlay */
+  #services-1628 .cs-picture::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
+    z-index: 1;
   }
 
   #services-1628 .cs-picture img {
@@ -85,23 +97,24 @@
     object-fit: cover;
     transition: transform .6s;
     cursor: pointer;
-    border-radius: 1.5rem;
   }
 
   #services-1628 .cs-h3 {
-    font-size: 1.25rem;
-    line-height: 1.2em;
+    font-size: 1.5rem;  
+    line-height: 1.3em;  
     font-weight: 700;
-    text-align: left;
-    margin: 0 0 0.75rem 0;
+    text-align: center;
+    margin: 0 0 0.875rem 0;  
     color: var(--headerColor);
+    width: 100%;
   }
   #services-1628 .cs-item-text {
-    font-size: 1rem;
+    font-size: 1.125rem;  
     line-height: 1.5em;
-    text-align: left;
+    text-align: center;
     margin: 0 0 1.5rem 0;
     color: var(--bodyTextColor);
+    width: 100%;
   }
   #services-1628 .swiper-button-next,
   #services-1628 .swiper-button-prev {
@@ -150,7 +163,13 @@
     max-width: none;
   }
   #services-1628 .cs-picture {
-    height: clamp(15rem, 33vw, 26.25rem);
+    height: clamp(25rem, 45vw, 38rem);  
+  }
+  #services-1628 .cs-h3 {
+    font-size: 1.75rem;  
+  }
+  #services-1628 .cs-item-text {
+    font-size: 1.25rem;  
   }
 }
 @media only screen and (min-width: 81.25rem) {
@@ -175,75 +194,37 @@
 }
 @media only screen and (min-width: 1300px) {
   #services-1628 .cs-container {
-    perspective: 2000px; 
+    perspective: none;
   }
 
   #services-1628 .photo-carousel {
-    transform-style: preserve-3d;
-    padding: 6rem 0; 
-    overflow: visible;
+    transform-style: flat;
+    padding: 2rem 0;
+    overflow: hidden;
     position: relative;
     width: 100%;
+    max-width: 1200px;  
+    margin: 0 auto;
   }
 
   #services-1628 .swiper-slide {
-    transition: all 0.5s ease;
-    transform: scale(0.75) translateZ(-200px) rotateY(25deg);
-    opacity: 0.6; 
-    filter: brightness(0.6); 
-    transform-style: preserve-3d;
+    transform: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
   }
 
   #services-1628 .swiper-slide-active {
-    transform: scale(1.1) translateZ(100px) rotateY(0deg);
-    z-index: 2;
+    transform: none;
     opacity: 1;
-    filter: brightness(1);
-  }
-
-  #services-1628 .swiper-slide-prev {
-    transform-origin: right center;
-    transform: scale(0.75) translateZ(-200px) translateX(50px) rotateY(25deg); 
-  }
-
-  #services-1628 .swiper-slide-next {
-    transform-origin: left center;
-    transform: scale(0.75) translateZ(-200px) translateX(-50px) rotateY(-25deg); 
+    z-index: 2;
   }
 
   #services-1628 .cs-picture {
-    transition: box-shadow 0.5s ease;
-    box-shadow: 
-      0 0 5px rgba(255, 255, 255, 0.2),
-      0 0 10px rgba(255, 255, 255, 0.1);
+    transition: none;
   }
 
-  #services-1628 .swiper-slide-active .cs-picture {
-    box-shadow: 
-      0 0 25px rgba(255, 255, 255, 0.6),
-      0 0 50px rgba(255, 255, 255, 0.5),
-      0 0 75px rgba(var(--primary-rgb), 0.5),
-      0 0 100px rgba(var(--primary-rgb), 0.4),
-      0 0 125px rgba(var(--primary-rgb), 0.3);
-  }
-
-  #services-1628 .swiper-slide-prev .cs-picture,
-  #services-1628 .swiper-slide-next .cs-picture {
-    box-shadow: 
-      0 0 15px rgba(255, 255, 255, 0.3),
-      0 0 30px rgba(255, 255, 255, 0.2),
-      0 0 45px rgba(var(--primary-rgb), 0.2);
-  }
-
-  #services-1628 .cs-container {
-    overflow: hidden;  
-    position: relative;
-  }
-
-  #services-1628 .swiper-wrapper {
-    align-items: center;
-    width: 100%;
-  }
+  /* #services-1628 .swiper-slide-active .cs-picture {
+  } */
 }
 
 .photo-modal {
