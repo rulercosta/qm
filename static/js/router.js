@@ -23,8 +23,12 @@ class Router {
     }
 
     async #handleNavigation(url, pushState = true) {
+        const photoModal = document.getElementById('photo-modal');
+        if (photoModal?.dataset.isOpen === 'true') {
+            window.ScriptManager?.closePhotoModal();
+        }
+
         if (this.#config.isNavigating) return;
-        this.#config.isNavigating = true;
         
         const startTime = Date.now();
         const mainContent = document.querySelector('main');
@@ -61,11 +65,22 @@ class Router {
     }
 
     async #loadContent(url) {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        
-        const html = await response.text();
-        return new DOMParser().parseFromString(html, 'text/html');
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            
+            const html = await response.text();
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            
+            if (!doc.querySelector('main')) {
+                throw new Error('Invalid page content: missing main element');
+            }
+            
+            return doc;
+        } catch (error) {
+            console.error('Content loading failed:', error);
+            throw error;
+        }
     }
 
     async #updatePage(doc, url, pushState) {

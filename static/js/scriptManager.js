@@ -67,12 +67,10 @@ class ScriptManager {
             });
         }
 
-        // Initialize dropdowns
         document.querySelectorAll('.cs-dropdown').forEach(item => {
             this.registerHandler(item, 'click', () => item.classList.toggle('cs-active'));
         });
 
-        // Initialize scroll handler
         const scrollHandler = () => {
             elements.body.classList.toggle('scroll', document.documentElement.scrollTop >= 100);
         };
@@ -101,7 +99,6 @@ class ScriptManager {
     }
 
     static cleanup() {
-        // Clean up all registered event handlers
         this.#instances.eventHandlers.forEach((handlers, element) => {
             handlers.forEach(({ event, handler }) => {
                 element.removeEventListener(event, handler);
@@ -109,17 +106,14 @@ class ScriptManager {
         });
         this.#instances.eventHandlers.clear();
 
-        // Clean up carousels
         this.#instances.carouselInstances.forEach(instance => {
             instance?.destroy?.(true, true);
         });
         this.#instances.carouselInstances = [];
 
-        // Clean up photo carousel
         this.#instances.photoCarousel?.cleanup();
         this.#instances.photoCarousel = null;
 
-        // Reset initialization flags
         this.#instances.menuInitialized = false;
     }
 
@@ -139,13 +133,24 @@ class ScriptManager {
         this.#instances.photoCarousel.init();
     }
 
+    static closePhotoModal() {
+        if (this.#instances.photoCarousel) {
+            this.#instances.photoCarousel.cleanup();
+        }
+    }
+
     static initAll() {
-        this.cleanup();
-        this.initHeader();
-        this.initFaqs();
-        this.initSkipSection();
-        this.updateActiveNavLink();
-        this.initPhotoCarousels();
+        try {
+            this.cleanup();
+            this.initHeader();
+            this.initFaqs();
+            this.initSkipSection();
+            this.updateActiveNavLink();
+            this.initPhotoCarousels();
+        } catch (error) {
+            console.error('ScriptManager initialization failed:', error);
+            this.cleanup();
+        }
     }
 }
 

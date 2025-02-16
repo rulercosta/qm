@@ -88,29 +88,57 @@ class PhotoCarousel {
     #initModal() {
         if (!this.#modal || !this.#modalImg) return;
         
-        this.#modal.addEventListener('click', () => {
+        this.#modal.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            e.stopPropagation();
             this.#hideModal();
             this.#instances.forEach(instance => instance.autoplay.start());
         });
         
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.#modal?.dataset.isOpen === 'true') {
+                e.preventDefault();
+                this.#hideModal();
+                this.#instances.forEach(instance => instance.autoplay.start());
+            }
+        });
+        
         this.#modalImg.addEventListener('click', (e) => {
+            e.preventDefault();
             e.stopPropagation();
         });
+
+        const closeBtn = this.#modal.querySelector('.modal-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.#hideModal();
+                this.#instances.forEach(instance => instance.autoplay.start());
+            });
+        }
     }
 
     #showModal(imgSrc) {
+        if (!this.#modal || !this.#modalImg) return;
+        
+        document.body.style.overflow = 'hidden';
+        
         this.#modalImg.src = imgSrc;
         this.#modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
         
         void this.#modal.offsetWidth;
         
         this.#modal.classList.add('active');
         this.#modalImg.classList.add('active');
         this.#modal.querySelector('.modal-close').classList.add('active');
+
+        this.#modal.dataset.isOpen = 'true';
     }
 
     #hideModal() {
+        if (!this.#modal) return;
+
         this.#modal.classList.remove('active');
         this.#modalImg.classList.remove('active');
         this.#modal.querySelector('.modal-close').classList.remove('active');
@@ -121,7 +149,9 @@ class PhotoCarousel {
             this.#instances.forEach(instance => {
                 instance.autoplay.start();
             });
-        }, 300); 
+            
+            delete this.#modal.dataset.isOpen;
+        }, 300);
     }
 
     cleanup() {
