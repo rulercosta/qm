@@ -1,11 +1,15 @@
 class InitialLoader {
     constructor() {
         this.loader = document.getElementById('initial-loader');
+        if (!this.loader) return;  
+
         this.brandText = document.getElementById('brand-text');
+        this.heroText = document.getElementById('hero-text');
+        
+        this.brandTextContent = this.brandText ? this.brandText.querySelector('.brand-text-content') : null;
+        
         this.starCount = 10;
         this.stars = [];
-        this.heroText = document.getElementById('hero-text');
-        this.brandTextContent = this.brandText.querySelector('.brand-text-content');
     }
 
     createStars() {
@@ -75,6 +79,14 @@ class InitialLoader {
     }
 
     async startAnimation() {
+        if (!this.loader || !this.brandText || !this.brandTextContent || !this.heroText) {
+            console.warn('Required elements for initial loader animation not found');
+            if (this.loader) {
+                this.loader.remove();
+            }
+            return;
+        }
+
         this.createStars();
         await new Promise(resolve => setTimeout(resolve, 500));
 
@@ -106,5 +118,7 @@ class InitialLoader {
 
 document.addEventListener('DOMContentLoaded', () => {
     const loader = new InitialLoader();
-    loader.startAnimation();
+    if (loader.loader) {
+        loader.startAnimation();
+    }
 });
