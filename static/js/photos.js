@@ -4,6 +4,10 @@ class PhotoCarousel {
     #modalImg;
     
     init() {
+        if (!document.querySelector('.photo-carousel')) {
+            return false;
+        }
+
         this.cleanup();
         this.#createModal();
         this.#initModal();
@@ -52,6 +56,8 @@ class PhotoCarousel {
             
             this.#instances.push(instance);
         });
+        
+        return true;
     }
 
     #createModal() {

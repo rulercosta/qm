@@ -13,6 +13,9 @@
     {% from 'includes/global.css.jinja' import load_global_css %}
     {{ load_global_css() }}
 
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    
     {% block page_style %}
         <!-- Page-Specific CSS -->
     {% endblock %}
@@ -33,6 +36,9 @@
     <!-- Include Footer -->
     {% include 'partials/_footer.html' %}
 
+    <!-- Core Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
     {% block page_script %}
         <!-- Page-Specific Scripts -->
     {% endblock %}
