@@ -2,8 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    {% from 'includes/global.meta.jinja' import load_global_meta %}
+    {{ load_global_meta() }}
+    
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <title>{% block title %}Quantum Minds{% endblock %}</title>
     
@@ -11,10 +12,6 @@
     {{ load_global_css() }}
     
     <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
-    <meta name="theme-color" content="#4f46e5">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="QM">
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/icon-192.png') }}">
 
     <!-- Page-Specific CSS -->
