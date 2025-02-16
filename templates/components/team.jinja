@@ -1,4 +1,4 @@
-<!-- components/team.html -->
+<!-- components/team.jinja -->
 {% macro team(heads=[],view_more=False) %}
     {% block page_style %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components/team.css') }}">
@@ -26,7 +26,7 @@
                 {% endfor %}
             </ul>
             {% if view_more %}
-                {% import 'components/button.html' as ui %}
+                {% import 'components/button.jinja' as ui %}
                 {{ ui.button(button={"url":url_for('explore_routes.explore'),
                 "label":"view more",
                 "image":"https://i.postimg.cc/XJC4ZrHc/person-svgrepo-com.png",

@@ -14,7 +14,7 @@
 {% include 'partials/header_padding.html' %}
 
 {% if error %}
-    {% import 'components/section.html' as ui %}
+    {% import 'components/section.jinja' as ui %}
     {{ ui.section(image={"url":"https://i.postimg.cc/mDhCXr6f/404.png",
     "alt":"404 error"},
     text='We could not find any record matching the provided information. If the issue persists, contact our support team at <a href="mailto:quantummindsclubsocial@gmail.com">support@quantumminds</a>.',

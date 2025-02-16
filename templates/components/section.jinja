@@ -1,4 +1,4 @@
-<!-- components/section.html -->
+<!-- components/section.jinja -->
  {% macro section(image={},topper="",title="",para=[],text="",link={},button={}) %}
     {% block page_style %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components/section.css') }}">
@@ -30,7 +30,7 @@
                     </ul>
                 {% endif %}
                 {% if button %}
-                    {% import 'components/button.html' as ui %}
+                    {% import 'components/button.jinja' as ui %}
                     {{ ui.button(button={"url":button.url,
                     "label":button.label,
                     "image":button.image,

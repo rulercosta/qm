@@ -10,12 +10,12 @@
 {% block content %}
 {% include 'partials/header_padding.html' %}
 
-{% import 'components/ribbon.html' as ui %}
+{% import 'components/ribbon.jinja' as ui %}
 {{ ui.ribbon(title="Meet The Team",
 heading="Team Behind Quantum Minds",
 text="Quantum Minds unites students from various disciplines to innovate and tackle real-world challenges, with each member contributing their expertise and creativity.") }}
 
-{% import 'components/team.html' as ui %}
+{% import 'components/team.jinja' as ui %}
 {{ ui.team(heads=[{"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","instagram":"#","linkedin":"#"},
 {"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","instagram":"#","linkedin":"#"},
 {"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","instagram":"#","linkedin":"#"},
@@ -25,7 +25,7 @@ text="Quantum Minds unites students from various disciplines to innovate and tac
 {"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","instagram":"#","linkedin":"#"},
 {"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","instagram":"#","linkedin":"#"}]) }}
 
-{% import 'components/photos.html' as ui %}
+{% import 'components/photos.jinja' as ui %}
 {{ ui.photos(title="Explore Our Visual Journey",
 heading="Capturing Moments of Innovation",
 text="Discover how Quantum Minds Club is shaping the future through hands-on projects, research, and community events.",

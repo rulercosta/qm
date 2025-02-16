@@ -10,7 +10,7 @@
 {% block content %}
 {% include 'partials/header_padding.html' %}
 
-{% import 'components/section.html' as ui %}
+{% import 'components/section.jinja' as ui %}
 {{ ui.section(image={"url":"https://i.postimg.cc/pL2kKk4k/research.png",
 "alt":"Quantum Minds"},
 topper="Mission & Vision",
@@ -21,7 +21,7 @@ para=[{"heading":"Mission Statement",
 {"heading":"Our Vision",
 "text":"Empowering minds to innovate, collaborate, and create a future where technology bridges the gap between imagination and reality."}]) }}
 
-{% import 'components/photos.html' as ui %}
+{% import 'components/photos.jinja' as ui %}
 {{ ui.photos(title="Our Focus Areas",
 heading="Innovating Across Diverse Technological Domains",
 text="At Quantum Minds, we are dedicated to exploring and pioneering advancements across a range of critical technological fields. From the mysteries of space to the digital realm of cybersecurity, we bring together expertise from various disciplines to solve real-world challenges. Our focus areas include:",
@@ -52,18 +52,18 @@ images=[{"url":"https://i.postimg.cc/HxRPv1Gp/ai.webp",
 
 {% include 'partials/objectives.html' %}
 
-{% import 'components/ribbon.html' as ui %}
+{% import 'components/ribbon.jinja' as ui %}
 {{ ui.ribbon(title="Meet The Team",
 heading="Team Behind Quantum Minds",
 text="Quantum Minds unites students from various disciplines to innovate and tackle real-world challenges, with each member contributing their expertise and creativity.") }}
 
-{% import 'components/team.html' as ui %}
+{% import 'components/team.jinja' as ui %}
 {{ ui.team(heads=[{"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","instagram":"#","linkedin":"#"},
 {"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","instagram":"#","linkedin":"#"},
 {"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","instagram":"#","linkedin":"#"}],
 view_more=True) }}
 
-{% import 'components/section.html' as ui %}
+{% import 'components/section.jinja' as ui %}
 {{ ui.section(image={"url":"https://i.postimg.cc/zGQjxyTn/united-college-of-engineering-research-allahabad.webp",
 "alt":"United College of Engineering and Research"},
 topper="Shaping the Future of Technology",
