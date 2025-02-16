@@ -1,148 +1,159 @@
 class Router {
+    #config = {
+        minLoadTime: 800,
+        styleCache: new Map(),
+        loader: null,
+        loaderAnimation: null,
+        isNavigating: false
+    };
+
     constructor() {
-        this.init();
-        this.loader = document.getElementById('loader-overlay');
-        this.minLoadTime = 800;
-        this.styleCache = new Map();
-        if (window.ScriptManager) {
-            window.ScriptManager.updateActiveNavLink();
+        this.#config.loader = document.getElementById('loader-overlay');
+        if (this.#config.loader) {
+            this.#config.loaderAnimation = new LoaderAnimation(this.#config.loader);
+            this.#config.loaderAnimation.initialize();
+        }
+        this.#initEventListeners();
+        window.ScriptManager?.updateActiveNavLink();
+    }
+
+    #initEventListeners() {
+        window.addEventListener('popstate', () => this.#handleNavigation(window.location.href, false));
+        document.addEventListener('click', (e) => this.#handleClick(e));
+    }
+
+    async #handleNavigation(url, pushState = true) {
+        if (this.#config.isNavigating) return;
+        this.#config.isNavigating = true;
+        
+        const startTime = Date.now();
+        const mainContent = document.querySelector('main');
+        
+        try {
+            mainContent.style.opacity = '0';
+            await this.#showLoader();
+            
+            const content = await this.#loadContent(url);
+            await this.#updatePage(content, url, pushState);
+        } catch (error) {
+            console.error('Navigation error:', error);
+            mainContent.style.opacity = '1';
+        } finally {
+            await this.#ensureMinLoadTime(startTime);
+            mainContent.style.opacity = '1';
+            await this.#hideLoader();
+            this.#config.isNavigating = false;
         }
     }
 
-    init() {
-        window.addEventListener('popstate', (e) => this.onPopState(e));
-        document.addEventListener('click', (e) => this.onClick(e));
+    async #showLoader() {
+        if (!this.#config.loaderAnimation) return;
+        
+        this.#config.loaderAnimation.show();
+        await new Promise(resolve => setTimeout(resolve, 300));
     }
 
-    showLoader() {
-        this.loader.classList.add('active');
+    async #hideLoader() {
+        if (this.#config.loaderAnimation) {
+            this.#config.loaderAnimation.hide();
+            await new Promise(resolve => setTimeout(resolve, 300));
+        }
     }
 
-    hideLoader() {
-        this.loader.classList.remove('active');
+    async #loadContent(url) {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        
+        const html = await response.text();
+        return new DOMParser().parseFromString(html, 'text/html');
     }
 
-    async loadStylesheets(doc) {
-        const styles = Array.from(doc.getElementsByTagName('link')).filter(link => 
-            link.rel === 'stylesheet' && !document.querySelector(`link[href="${link.href}"]`)
-        );
+    async #updatePage(doc, url, pushState) {
+        await this.#loadStylesheets(doc);
+        
+        const mainContent = doc.querySelector('main');
+        if (!mainContent) throw new Error('Main content not found');
+        
+        if (pushState) history.pushState({}, '', url);
+        document.title = doc.title;
+        
+        document.querySelector('main').innerHTML = mainContent.innerHTML;
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        await window.ScriptManager?.initAll();
+    }
 
-        const stylePromises = styles.map(async (style) => {
-            if (this.styleCache.has(style.href)) {
-                return this.styleCache.get(style.href);
+    async #loadStylesheets(doc) {
+        const newStyles = Array.from(doc.getElementsByTagName('link'))
+            .filter(link => 
+                link.rel === 'stylesheet' && 
+                !document.querySelector(`link[href="${link.href}"]`)
+            );
+
+        const stylePromises = newStyles.map(async (style) => {
+            if (this.#config.styleCache.has(style.href)) {
+                return this.#config.styleCache.get(style.href);
             }
 
-            return new Promise((resolve, reject) => {
-                const newStyle = document.createElement('link');
-                newStyle.rel = 'stylesheet';
-                newStyle.href = style.href;
-                
-                newStyle.onload = () => {
-                    this.styleCache.set(style.href, newStyle);
-                    resolve(newStyle);
-                };
-                
+            const newStyle = document.createElement('link');
+            newStyle.rel = 'stylesheet';
+            newStyle.href = style.href;
+
+            const stylePromise = new Promise((resolve, reject) => {
+                newStyle.onload = () => resolve(newStyle);
                 newStyle.onerror = reject;
-                document.head.appendChild(newStyle);
             });
+
+            document.head.appendChild(newStyle);
+            this.#config.styleCache.set(style.href, newStyle);
+            
+            return stylePromise;
         });
 
         await Promise.all(stylePromises);
     }
 
-    async loadPage(url, pushState = true) {
-        const startTime = Date.now();
-        try {
-            this.showLoader();
-            
-            const fetchPromise = fetch(url).then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.text();
-            });
-
-            const [html] = await Promise.all([
-                fetchPromise,
-                new Promise(resolve => setTimeout(resolve, this.minLoadTime))
-            ]);
-            
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            
-            await this.loadStylesheets(doc);
-            
-            const mainContent = doc.querySelector('main');
-            if (!mainContent) {
-                throw new Error('Main content not found in loaded page');
-            }
-
-            document.title = doc.title;
-            
-            document.querySelector('main').innerHTML = mainContent.innerHTML;
-
-            this.updateActiveState(url);
-            
-            if (pushState) {
-                history.pushState({}, '', url);
-            }
-
-            window.scrollTo({
-                top: 0,
-                behavior: 'instant'
-            });
-
-            await this.reinitializeScripts();
-        } catch (error) {
-            console.error('Error loading page:', error);
-        } finally {
-            const loadTime = Date.now() - startTime;
-            if (loadTime < this.minLoadTime) {
-                await new Promise(resolve => setTimeout(resolve, this.minLoadTime - loadTime));
-            }
-            this.hideLoader();
+    async #ensureMinLoadTime(startTime) {
+        const elapsed = Date.now() - startTime;
+        if (elapsed < this.#config.minLoadTime) {
+            await new Promise(resolve => 
+                setTimeout(resolve, this.#config.minLoadTime - elapsed)
+            );
         }
     }
 
-    updateActiveState(url) {
-        window.ScriptManager.updateActiveNavLink();
-    }
-
-    async reinitializeScripts() {
-        return new Promise(resolve => {
-            window.ScriptManager.initAll();
-            resolve();
-        });
-    }
-
-    onPopState(e) {
-        this.loadPage(window.location.href, false);
-    }
-
-    onClick(e) {
+    #handleClick(e) {
         const link = e.target.closest('a');
+        if (!this.#isValidNavigationLink(link) || this.#config.isNavigating) return;
         
-        if (!link || link.hasAttribute('data-no-router')) return;
+        e.preventDefault();
+        if (window.location.href === link.href) return;
+        
+        this.#closeMenu();
+        this.#handleNavigation(link.href);
+    }
 
-        if (link && link.href && link.href.startsWith(window.location.origin) && 
-            !link.hasAttribute('download') && 
-            !link.getAttribute('target')) {
-            e.preventDefault();
+    #isValidNavigationLink(link) {
+        return link && 
+               link.href && 
+               link.href.startsWith(window.location.origin) && 
+               !link.hasAttribute('data-no-router') &&
+               !link.hasAttribute('download') && 
+               !link.getAttribute('target');
+    }
 
-            const CShamburgerMenu = document.querySelector("#cs-navigation .cs-toggle");
-            const CSnavbarMenu = document.querySelector("#cs-navigation");
-            const CSbody = document.querySelector("body");
-            if (CSnavbarMenu.classList.contains("cs-active")) {
-                CShamburgerMenu.classList.remove("cs-active");
-                CSnavbarMenu.classList.remove("cs-active");
-                CSbody.classList.remove("cs-open");
-                const csUL = document.querySelector('#cs-expanded');
-                csUL.setAttribute('aria-expanded', 'false');
-            }
+    #closeMenu() {
+        const elements = {
+            toggle: document.querySelector("#cs-navigation .cs-toggle"),
+            nav: document.querySelector("#cs-navigation"),
+            body: document.querySelector("body"),
+            menu: document.querySelector('#cs-expanded')
+        };
 
-            if (window.location.href !== link.href) {
-                this.loadPage(link.href);
-            }
+        if (elements.nav?.classList.contains("cs-active")) {
+            elements.toggle?.classList.remove("cs-active");
+            elements.nav?.classList.remove("cs-active");
+            elements.body?.classList.remove("cs-open");
+            elements.menu?.setAttribute('aria-expanded', 'false');
         }
     }
 }

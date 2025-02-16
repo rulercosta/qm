@@ -1,179 +1,146 @@
 class ScriptManager {
-    static #menuInitialized = false;
-    static #carouselInstances = [];
-    static #photoCarousel = null;
+    static #instances = {
+        menuInitialized: false,
+        carouselInstances: [],
+        photoCarousel: null,
+        eventHandlers: new Map()
+    };
+
+    static registerHandler(element, event, handler) {
+        if (!element) return;
+        
+        element.addEventListener(event, handler);
+        if (!this.#instances.eventHandlers.has(element)) {
+            this.#instances.eventHandlers.set(element, []);
+        }
+        this.#instances.eventHandlers.get(element).push({ event, handler });
+    }
 
     static initFaqs() {
-        const faqItems = Array.from(document.querySelectorAll('.cs-faq-item'));
-        for (const item of faqItems) {
-            const onClick = () => {
-                item.classList.toggle('active')
-            }
-            item.addEventListener('click', onClick)
-        }
+        const faqItems = document.querySelectorAll('.cs-faq-item');
+        faqItems.forEach(item => {
+            const handler = () => item.classList.toggle('active');
+            this.registerHandler(item, 'click', handler);
+        });
     }
 
     static initSkipSection() {
         const viewAllLink = document.getElementById('view-all-btn');
-        if (viewAllLink) {
-            viewAllLink.addEventListener('click', (event) => {
-                event.preventDefault();
-                const nextSection = document.getElementById('cs-contact-549');
-                nextSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+        const handler = (event) => {
+            event.preventDefault();
+            document.getElementById('cs-contact-549')?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
             });
-        }
+        };
+        this.registerHandler(viewAllLink, 'click', handler);
     }
 
     static initHeader() {
-        this.cleanupHeader();
-        
-        const body = document.querySelector("body");
-        const nav = document.querySelector("#cs-navigation");
-        const toggle = document.querySelector(".cs-toggle");
-        const menu = document.querySelector(".cs-ul-wrapper");
-        
-        if (toggle && menu && !this.#menuInitialized) {
+        const elements = {
+            body: document.querySelector("body"),
+            nav: document.querySelector("#cs-navigation"),
+            toggle: document.querySelector(".cs-toggle"),
+            menu: document.querySelector(".cs-ul-wrapper")
+        };
+
+        if (elements.toggle && elements.menu && !this.#instances.menuInitialized) {
             const toggleMenu = () => {
-                toggle.classList.toggle("cs-active");
-                nav.classList.toggle("cs-active");
-                body.classList.toggle("cs-open");
-                const isExpanded = nav.classList.contains("cs-active");
-                menu.querySelector('.cs-ul').setAttribute("aria-expanded", isExpanded.toString());
+                elements.toggle.classList.toggle("cs-active");
+                elements.nav.classList.toggle("cs-active");
+                elements.body.classList.toggle("cs-open");
+                elements.menu.querySelector('.cs-ul')
+                    .setAttribute("aria-expanded", elements.nav.classList.contains("cs-active"));
             };
 
             const closeMenu = () => {
-                toggle.classList.remove("cs-active");
-                nav.classList.remove("cs-active");
-                body.classList.remove("cs-open");
-                menu.querySelector('.cs-ul').setAttribute("aria-expanded", "false");
+                elements.toggle.classList.remove("cs-active");
+                elements.nav.classList.remove("cs-active");
+                elements.body.classList.remove("cs-open");
+                elements.menu.querySelector('.cs-ul').setAttribute("aria-expanded", "false");
             };
 
-            const menuLinks = menu.querySelectorAll('a.cs-li-link');
-            menuLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    closeMenu();
-                });
-                link._closeHandler = closeMenu;
+            this.registerHandler(elements.toggle, 'click', toggleMenu);
+            
+            elements.menu.querySelectorAll('a.cs-li-link').forEach(link => {
+                this.registerHandler(link, 'click', closeMenu);
             });
-
-            toggle.addEventListener('click', toggleMenu);
-            toggle._toggleHandler = toggleMenu;
-            toggle._closeHandler = closeMenu;
         }
 
-        const dropDowns = document.querySelectorAll('.cs-dropdown');
-        dropDowns.forEach(item => {
-            const toggleDropdown = () => item.classList.toggle('cs-active');
-            item.addEventListener('click', toggleDropdown);
-            item._dropdownHandler = toggleDropdown;
+        // Initialize dropdowns
+        document.querySelectorAll('.cs-dropdown').forEach(item => {
+            this.registerHandler(item, 'click', () => item.classList.toggle('cs-active'));
         });
 
-        const handleScroll = () => {
-            const scroll = document.documentElement.scrollTop;
-            body.classList.toggle('scroll', scroll >= 100);
+        // Initialize scroll handler
+        const scrollHandler = () => {
+            elements.body.classList.toggle('scroll', document.documentElement.scrollTop >= 100);
         };
-        document.addEventListener('scroll', handleScroll);
-        this._scrollHandler = handleScroll;
+        this.registerHandler(document, 'scroll', scrollHandler);
 
         this.initDarkMode();
-
-        this.#menuInitialized = true;
+        this.#instances.menuInitialized = true;
     }
 
     static initDarkMode() {
         const toggle = document.getElementById('dark-mode-toggle');
         if (!toggle) return;
 
-        const enableDarkMode = () => {
-            document.body.classList.add('dark-mode');
-            localStorage.setItem('theme', 'dark');
-        };
-
-        const disableDarkMode = () => {
-            document.body.classList.remove('dark-mode');
-            localStorage.setItem('theme', 'light');
+        const setTheme = (theme) => {
+            document.body.classList.toggle('dark-mode', theme === 'dark');
+            localStorage.setItem('theme', theme);
         };
 
         const theme = localStorage.getItem('theme') || 
                      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        theme === 'dark' ? enableDarkMode() : disableDarkMode();
+        setTheme(theme);
 
-        const toggleDarkMode = () => {
-            localStorage.getItem('theme') === 'light' ? enableDarkMode() : disableDarkMode();
-        };
-        toggle.addEventListener('click', toggleDarkMode);
-        toggle._darkModeHandler = toggleDarkMode;
+        this.registerHandler(toggle, 'click', () => 
+            setTheme(localStorage.getItem('theme') === 'light' ? 'dark' : 'light')
+        );
     }
 
-    static cleanupHeader() {
-        const toggle = document.querySelector(".cs-toggle");
-        if (toggle && toggle._toggleHandler) {
-            toggle.removeEventListener('click', toggle._toggleHandler);
-        }
-
-        const dropDowns = document.querySelectorAll('.cs-dropdown');
-        dropDowns.forEach(item => {
-            if (item._dropdownHandler) {
-                item.removeEventListener('click', item._dropdownHandler);
-            }
+    static cleanup() {
+        // Clean up all registered event handlers
+        this.#instances.eventHandlers.forEach((handlers, element) => {
+            handlers.forEach(({ event, handler }) => {
+                element.removeEventListener(event, handler);
+            });
         });
+        this.#instances.eventHandlers.clear();
 
-        if (this._scrollHandler) {
-            document.removeEventListener('scroll', this._scrollHandler);
-        }
-
-        const darkModeToggle = document.getElementById('dark-mode-toggle');
-        if (darkModeToggle && darkModeToggle._darkModeHandler) {
-            darkModeToggle.removeEventListener('click', darkModeToggle._darkModeHandler);
-        }
-
-        const menuLinks = document.querySelectorAll('.cs-ul-wrapper a.cs-li-link');
-        menuLinks.forEach(link => {
-            if (link._closeHandler) {
-                link.removeEventListener('click', link._closeHandler);
-            }
+        // Clean up carousels
+        this.#instances.carouselInstances.forEach(instance => {
+            instance?.destroy?.(true, true);
         });
+        this.#instances.carouselInstances = [];
 
-        this.#menuInitialized = false;
+        // Clean up photo carousel
+        this.#instances.photoCarousel?.cleanup();
+        this.#instances.photoCarousel = null;
 
-        this.#carouselInstances.forEach(instance => {
-            if (instance && instance.destroy) {
-                instance.destroy(true, true);
-            }
-        });
-        this.#carouselInstances = [];
-
-        if (this.#photoCarousel) {
-            this.#photoCarousel.cleanup();
-        }
-        this.#menuInitialized = false;
+        // Reset initialization flags
+        this.#instances.menuInitialized = false;
     }
 
     static updateActiveNavLink() {
         const currentPath = window.location.pathname;
-        const navLinks = document.querySelectorAll('.cs-nav .cs-li-link');
-        
-        navLinks.forEach(link => {
-            link.classList.remove('cs-active');
-            if (link.getAttribute('href') === currentPath) {
-                link.classList.add('cs-active');
-            }
+        document.querySelectorAll('.cs-nav .cs-li-link').forEach(link => {
+            link.classList.toggle('cs-active', link.getAttribute('href') === currentPath);
         });
     }
 
     static initPhotoCarousels() {
-        if (document.querySelector('.photo-carousel')) {
-            if (!this.#photoCarousel) {
-                this.#photoCarousel = new PhotoCarousel();
-            }
-            this.#photoCarousel.init();
+        if (!document.querySelector('.photo-carousel')) return;
+        
+        if (!this.#instances.photoCarousel) {
+            this.#instances.photoCarousel = new PhotoCarousel();
         }
+        this.#instances.photoCarousel.init();
     }
 
     static initAll() {
+        this.cleanup();
         this.initHeader();
         this.initFaqs();
         this.initSkipSection();

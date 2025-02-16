@@ -1,5 +1,6 @@
 {% macro load_global_js() %}
     <!-- Essential Scripts -->
+    <script src="{{ url_for('static', filename='js/loader-animation.js') }}"></script>
     <script src="{{ url_for('static', filename='js/scriptManager.js') }}"></script>
     <script src="{{ url_for('static', filename='js/router.js') }}"></script>
     <script src="{{ url_for('static', filename='js/initial-loader.js') }}"></script>
