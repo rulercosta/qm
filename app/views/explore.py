@@ -1,6 +1,5 @@
-from flask import Blueprint, render_template
-
-bp = Blueprint('explore', __name__)
+from flask import render_template
+from . import explore_bp as bp
 
 @bp.route('/explore')
 def explore():

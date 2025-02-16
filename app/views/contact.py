@@ -1,7 +1,6 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import render_template, request, flash, redirect, url_for
 from app.models.models import db, ContactForm
-
-bp = Blueprint('contact', __name__)
+from . import contact_bp as bp
 
 @bp.route('/contact', methods=['GET', 'POST'])
 def contact():

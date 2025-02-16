@@ -1,7 +1,6 @@
-from flask import Blueprint, send_from_directory, current_app
+from flask import send_from_directory, current_app
 import os
-
-bp = Blueprint('static', __name__)
+from . import static_bp as bp
 
 @bp.route('/service-worker.js')
 def service_worker():

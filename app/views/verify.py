@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, send_file, url_for, request, current_app
+from flask import render_template, session, send_file, url_for, request, current_app
 from werkzeug.exceptions import InternalServerError
 from app.models.models import Participant, Instructor
 from app.utils.certgen import CertificateGenerator
@@ -8,8 +8,7 @@ from io import BytesIO
 import base64
 import os
 import os.path
-
-bp = Blueprint('verify', __name__)
+from . import verify_bp as bp
 
 @bp.route('/events/workshops/verify', methods=['GET'])
 def verify_certificate():

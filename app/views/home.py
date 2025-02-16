@@ -1,6 +1,5 @@
-from flask import Blueprint, render_template, redirect, url_for
-
-bp = Blueprint('home', __name__)
+from flask import render_template, redirect, url_for
+from . import home_bp as bp
 
 @bp.route('/')
 def root():

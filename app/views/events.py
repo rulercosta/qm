@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import render_template, redirect, url_for
+from . import events_bp as bp
 
-bp = Blueprint('events', __name__)
 
 @bp.route('/events/workshops')
 def workshops():
