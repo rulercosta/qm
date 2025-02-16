@@ -8,4 +8,4 @@ def workshops():
 
 @bp.route('/events')
 def events():
-    return render_template('events.jinja')
+    return render_template('pages/events.jinja')

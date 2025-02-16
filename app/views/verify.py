@@ -27,11 +27,11 @@ def verify_certificate():
         with session_scope() as db_session:
             participant = db_session.query(Participant).filter_by(cid=cid).first()
             if not participant:
-                return render_template('verify.jinja', error="No record found")
+                return render_template('pages/verify.jinja', error="No record found")
             
             instructor = db_session.query(Instructor).filter_by(courseid=participant.courseid).first()
             if not instructor:
-                return render_template('verify.jinja', error="Instructor not found")
+                return render_template('pages/verify.jinja', error="Instructor not found")
 
             # Store all needed data while in session
             participant_data = {
@@ -54,7 +54,7 @@ def verify_certificate():
         
         if not os.path.exists(template_path):
             current_app.logger.error(f"Template file missing at {template_path}")
-            return render_template('verify.jinja', error="Certificate template is not configured")
+            return render_template('pages/verify.jinja', error="Certificate template is not configured")
 
         @retry_on_error()
         def generate_and_process_certificate():
@@ -96,7 +96,7 @@ def verify_certificate():
                 certificate_image.close()
                 
                 return render_template(
-                    'verify.jinja',
+                    'pages/verify.jinja',
                     cid=cid,
                     name=participant_data['name'],
                     instructor=instructor_data['name'],

@@ -34,4 +34,4 @@ def contact():
 
         return redirect(url_for('contact.contact'))
 
-    return render_template('contact.jinja')
+    return render_template('pages/contact.jinja')

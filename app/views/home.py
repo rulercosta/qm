@@ -8,8 +8,8 @@ def root():
 
 @bp.route('/home')
 def home():
-    return render_template('home.jinja')
+    return render_template('pages/home.jinja')
 
 @bp.route('/about')
 def about():
-    return render_template('about.jinja')
+    return render_template('pages/about.jinja')

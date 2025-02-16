@@ -4,15 +4,11 @@
 {% block title %}Home{% endblock %}
 
 {% block page_style %}
-
 <link rel="stylesheet" href="{{ url_for('static', filename='css/dark.css') }}">
-
 <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
-
 {% endblock %}
 
 {% block content %}
-
 <section id="hero-227">
     <div class="cs-container">
         <div class="cs-flex-group">
@@ -108,6 +104,6 @@ images=[{"url":"https://i.postimg.cc/HxRPv1Gp/ai.webp"},
 {"url":"https://i.postimg.cc/65ymZhPr/drone.webp"}]) }}
 
 {% set skip_section = True %}
-{% include 'partials/faqs.html' %}
-{% include 'partials/contact_form.html' %}
+{% include 'partials/_faqs.html' %}
+{% include 'partials/_contact_form.html' %}
 {% endblock %}

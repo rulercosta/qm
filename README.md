@@ -85,3 +85,64 @@ gunicorn -w 4 -b 0.0.0.0:8000 run:app
 ## License
 
 This project is licensed under a Proprietary License. See the [LICENSE.md](LICENSE.md) file for details.
+
+# Flask Project Structure
+
+```
+qm/
+├── app/
+│   ├── __init__.py          # Flask application factory
+│   ├── models/              # Database models
+│   │   └── __init__.py
+│   ├── views/              # Route handlers/views
+│   │   └── __init__.py
+│   ├── templates/          # Jinja2 templates
+│   │   ├── base.html
+│   │   └── partials/
+│   ├── static/            # Static files (CSS, JS, images)
+│   │   ├── css/
+│   │   ├── js/
+│   │   └── img/
+│   ├── utils/            # Utility functions and classes
+│   │   └── __init__.py
+│   └── config.py        # Configuration settings
+├── tests/              # Test suite
+│   ├── __init__.py
+│   ├── test_models.py
+│   └── test_views.py
+├── migrations/        # Database migrations (if using Flask-Migrate)
+├── venv/             # Virtual environment (not in version control)
+├── .gitignore       # Git ignore file
+├── requirements.txt  # Project dependencies
+├── run.py          # Application entry point
+└── README.md       # Project documentation
+```
+
+## Directory Structure Explanation
+
+- **app/**: Main application package
+  - `__init__.py`: Contains the application factory
+  - `models/`: Database models and related logic
+  - `views/`: Route handlers and view functions
+  - `templates/`: Jinja2 HTML templates
+  - `static/`: Static files (CSS, JavaScript, images)
+  - `utils/`: Helper functions and utility classes
+  - `config.py`: Configuration classes
+
+- **tests/**: All test files
+  - Unit tests, integration tests, etc.
+  
+- **migrations/**: Database migration files
+  - Generated when using Flask-Migrate
+
+- **venv/**: Virtual environment
+  - Contains project-specific dependencies
+  - Should not be version controlled
+
+- **requirements.txt**: Project dependencies
+  - Generated using `pip freeze > requirements.txt`
+
+- **run.py**: Application entry point
+  - Used to start the development server
+
+This structure follows the principle of separation of concerns and makes the project easy to maintain and scale.

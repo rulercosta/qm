@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-{% include 'partials/header_padding.html' %}
+{% include 'partials/_header_padding.html' %}
 
 {% import 'components/section.jinja' as ui %}
 {{ ui.section(image={"url":"https://i.postimg.cc/pL2kKk4k/research.png",
@@ -50,7 +50,7 @@ images=[{"url":"https://i.postimg.cc/HxRPv1Gp/ai.webp",
 "title":"Drone Technology",
 "description":"Leveraging drones for diverse applications, from surveillance to precision agriculture."}]) }}
 
-{% include 'partials/objectives.html' %}
+{% include 'partials/_objectives.html' %}
 
 {% import 'components/ribbon.jinja' as ui %}
 {{ ui.ribbon(title="Meet The Team",
