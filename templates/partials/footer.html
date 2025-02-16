@@ -5,26 +5,26 @@
 <footer id="footer-1390">        
     <div class="cs-container">
         <div class="cs-top">
-            <a aria-label="go back to home" class="cs-logo" href="{{ url_for('home_routes.home') }}">
+            <a aria-label="go back to home" class="cs-logo" href="{{ url_for('home.home') }}">
                 <img class="cs-logo-img" loading="lazy" decoding="async" src="{{ url_for('static', filename='images/logo-dark.svg') }}" alt="logo" width="25">
             </a>
             <ul class="cs-ul">
                 <li class="cs-li">
-                    <a href="{{ url_for('home_routes.home') }}" class="cs-link">Home</a>
+                    <a href="{{ url_for('home.home') }}" class="cs-link">Home</a>
                 </li>
                 <li class="cs-li">
-                    <a href="{{ url_for('home_routes.about') }}" class="cs-link">About</a>
+                    <a href="{{ url_for('home.about') }}" class="cs-link">About</a>
                 </li>
                 <!-- Commenting out Events link
                 <li class="cs-li">
-                    <a href="{{ url_for('events_routes.events') }}" class="cs-link">Events</a>
+                    <a href="{{ url_for('events.events') }}" class="cs-link">Events</a>
                 </li>
                 -->
                 <li class="cs-li">
-                    <a href="{{ url_for('explore_routes.explore') }}" class="cs-link">Explore</a>
+                    <a href="{{ url_for('explore.explore') }}" class="cs-link">Explore</a>
                 </li>
                 <li class="cs-li">
-                    <a href="{{ url_for('contact_routes.contact') }}" class="cs-link">Contact</a>
+                    <a href="{{ url_for('contact.contact') }}" class="cs-link">Contact</a>
                 </li>
             </ul>
         </div>

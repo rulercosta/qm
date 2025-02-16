@@ -1,15 +1,15 @@
 from flask import Blueprint, render_template, session, send_file, url_for, request, current_app
 from werkzeug.exceptions import InternalServerError
-from app.models import Participant, Instructor
-from app.helpers.certgen import CertificateGenerator
-from app.helpers.utils import format_date_with_ordinal, resize_image
-from app.helpers.db_utils import retry_on_error, session_scope
+from app.models.models import Participant, Instructor
+from app.utils.certgen import CertificateGenerator
+from app.utils.utils import format_date_with_ordinal, resize_image
+from app.utils.db_utils import retry_on_error, session_scope
 from io import BytesIO
 import base64
 import os
 import os.path
 
-bp = Blueprint('verify_routes', __name__)
+bp = Blueprint('verify', __name__)
 
 @bp.route('/events/workshops/verify', methods=['GET'])
 def verify_certificate():
@@ -49,7 +49,7 @@ def verify_certificate():
         session['participant'] = participant_data
         session['cid'] = cid
 
-        qr_data = url_for('verify_routes.verify_certificate', cid=cid, _external=True)
+        qr_data = url_for('verify.verify_certificate', cid=cid, _external=True)
         template_path = os.path.join('static', 'images', 'certificate_template.png')
         
         if not os.path.exists(template_path):

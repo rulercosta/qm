@@ -1,4 +1,4 @@
-from app.extensions import db
+from app.extensions.extensions import db
 
 class Participant(db.Model):
     __tablename__ = 'participants'

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from app.models import db, ContactForm
+from app.models.models import db, ContactForm
 
-bp = Blueprint('contact_routes', __name__)
+bp = Blueprint('contact', __name__)
 
 @bp.route('/contact', methods=['GET', 'POST'])
 def contact():
@@ -32,6 +32,6 @@ def contact():
             flash('An error occurred while saving your message. Please try again later.', 'error')
             print(f"Error: {e}")
 
-        return redirect(url_for('contact_routes.contact'))
+        return redirect(url_for('contact.contact'))
 
     return render_template('contact.jinja')

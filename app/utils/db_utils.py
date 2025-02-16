@@ -12,7 +12,7 @@ class DatabaseError(Exception):
 @contextmanager
 def session_scope():
     """Provide a transactional scope around a series of operations."""
-    from app.extensions import db
+    from app.extensions.extensions import db
     session = db.session
     try:
         yield session

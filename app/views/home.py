@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, redirect, url_for
 
-bp = Blueprint('home_routes', __name__)
+bp = Blueprint('home', __name__)
 
 @bp.route('/')
 def root():
-    return redirect(url_for('home_routes.home'))
+    return redirect(url_for('home.home'))
 
 @bp.route('/home')
 def home():

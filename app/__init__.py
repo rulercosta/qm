@@ -2,11 +2,11 @@ import os
 import logging
 from logging.handlers import RotatingFileHandler
 from flask import Flask
-from app.extensions import db, session, init_db_events
-from app.config import config
-from app.routes import (
-    home_routes, verify_routes, contact_routes,
-    events_routes, explore_routes, static_routes
+from app.extensions.extensions import db, session, init_db_events
+from app.configs.config import config
+from app.views import (
+    home, verify, contact,
+    events, explore, static
 )
 
 def create_app(config_name='default'):
@@ -38,12 +38,12 @@ def create_app(config_name='default'):
         init_db_events()
         
         # Register blueprints
-        app.register_blueprint(home_routes.bp)
-        app.register_blueprint(events_routes.bp)
-        app.register_blueprint(verify_routes.bp)
-        app.register_blueprint(contact_routes.bp)
-        app.register_blueprint(explore_routes.bp)
-        app.register_blueprint(static_routes.bp)
+        app.register_blueprint(home.bp)
+        app.register_blueprint(events.bp)
+        app.register_blueprint(verify.bp)
+        app.register_blueprint(contact.bp)
+        app.register_blueprint(explore.bp)
+        app.register_blueprint(static.bp)
 
     return app
 
