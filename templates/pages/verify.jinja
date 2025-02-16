@@ -47,7 +47,7 @@
         </div>
     </section>
 
-    {% import 'components/quote.html' as ui %}
+    {% import 'components/quote.jinja' as ui %}
     {{ ui.quote(image=[{"url":"https://i.postimg.cc/fbzCPj6S/bg.webp",
     "alt":"Certificate"}],
     text='<strong>' ~ name ~ '</strong> successfully completed <strong>' ~ course ~ ' Workshop</strong> on <strong>' ~ date ~ '</strong>.',
