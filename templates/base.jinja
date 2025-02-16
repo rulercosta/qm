@@ -12,13 +12,9 @@
     
     {% from 'includes/global.css.jinja' import load_global_css %}
     {{ load_global_css() }}
-    
-    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
-    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/icon-192.png') }}">
 
-    <!-- Page-Specific CSS -->
     {% block page_style %}
-    <!-- Page-specific styles go here -->
+        <!-- Page-Specific CSS -->
     {% endblock %}
 </head>
 <body>
@@ -30,23 +26,18 @@
 
     <main>
         {% block content %}
-        <!-- Content specific to each page -->
+            <!-- Content specific to each page -->
         {% endblock %}
     </main>
 
     <!-- Include Footer -->
     {% include 'partials/footer.html' %}
 
-    <!-- Essential Scripts -->
-    <script src="{{ url_for('static', filename='js/scriptManager.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/router.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/initial-loader.js') }}"></script>
-
     {% block page_script %}
-    <!-- Page-specific scripts go here -->
+        <!-- Page-Specific Scripts -->
     {% endblock %}
-    
-    <!-- Service Worker Registration -->
-    <script src="{{ url_for('static', filename='js/register-sw.js') }}"></script>
+
+    {% from 'includes/global.js.jinja' import load_global_js %}
+    {{ load_global_js() }}
 </body>
 </html>
