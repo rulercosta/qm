@@ -10,6 +10,19 @@
 {% block content %}
 {% include 'partials/_header_padding.html' %}
 
+{% import 'components/photos.jinja' as ui %}
+{{ ui.photos(title="Explore Our Visual Journey",
+heading="Capturing Moments of Innovation",
+text="Discover how Quantum Minds Club is shaping the future through hands-on projects, research, and community events.",
+images=[{"url":"https://i.postimg.cc/HxRPv1Gp/ai.webp"},
+{"url":"https://i.postimg.cc/vZ4xMJCR/field.webp"},
+{"url":"https://i.postimg.cc/rwXVDzp9/jet.webp"},
+{"url":"https://i.postimg.cc/VvwyY0gS/network.webp"},
+{"url":"https://i.postimg.cc/q7mXJPG2/analysis.webp"},
+{"url":"https://i.postimg.cc/gcKRGFkj/world.webp"},
+{"url":"https://i.postimg.cc/7hpbmVnC/robot.webp"},
+{"url":"https://i.postimg.cc/65ymZhPr/drone.webp"}]) }}
+
 {% import 'components/ribbon.jinja' as ui %}
 {{ ui.ribbon(title="Meet The Team",
 heading="Team Behind Quantum Minds",
@@ -24,18 +37,5 @@ text="Quantum Minds unites students from various disciplines to innovate and tac
 {"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","instagram":"#","linkedin":"#"},
 {"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","instagram":"#","linkedin":"#"},
 {"image":"https://i.postimg.cc/qMJrbrdX/user.png","name":"Name","position":"Position","instagram":"#","linkedin":"#"}]) }}
-
-{% import 'components/photos.jinja' as ui %}
-{{ ui.photos(title="Explore Our Visual Journey",
-heading="Capturing Moments of Innovation",
-text="Discover how Quantum Minds Club is shaping the future through hands-on projects, research, and community events.",
-images=[{"url":"https://i.postimg.cc/HxRPv1Gp/ai.webp"},
-{"url":"https://i.postimg.cc/vZ4xMJCR/field.webp"},
-{"url":"https://i.postimg.cc/rwXVDzp9/jet.webp"},
-{"url":"https://i.postimg.cc/VvwyY0gS/network.webp"},
-{"url":"https://i.postimg.cc/q7mXJPG2/analysis.webp"},
-{"url":"https://i.postimg.cc/gcKRGFkj/world.webp"},
-{"url":"https://i.postimg.cc/7hpbmVnC/robot.webp"},
-{"url":"https://i.postimg.cc/65ymZhPr/drone.webp"}]) }}
 
 {% endblock %}
