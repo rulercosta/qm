@@ -1,0 +1,24 @@
+<!-- partials/loader.html -->
+ 
+{% if request.endpoint != 'verify_routes.verify_certificate' %}
+<div id="initial-loader" class="initial-loader">
+    <div class="loader-content">
+        <div id="brand-text" class="brand-text">
+            <span class="brand-text-content">
+                <span class="brand-text-word">Quantum</span>
+                <span class="brand-text-word">Minds</span>
+            </span>
+        </div>
+        <div id="hero-text" class="hero-text">
+            <div class="typing-text">Empowering Minds to Shape the Future of Technology</div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Loader Overlay -->
+<div id="loader-overlay" class="loader-overlay">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
