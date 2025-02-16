@@ -5,7 +5,9 @@
     {% from 'includes/global.meta.jinja' import load_global_meta %}
     {{ load_global_meta() }}
     
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    {% from 'includes/global.link.jinja' import load_global_links %}
+    {{ load_global_links() }}
+    
     <title>{% block title %}Quantum Minds{% endblock %}</title>
     
     {% from 'includes/global.css.jinja' import load_global_css %}
