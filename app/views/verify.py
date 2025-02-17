@@ -4,10 +4,9 @@ from app.models.models import Participant, Instructor
 from app.utils.certgen import CertificateGenerator
 from app.utils.utils import format_date_with_ordinal, resize_image
 from app.utils.db_utils import retry_on_error, session_scope
+from app.utils.paths import paths
 from io import BytesIO
 import base64
-import os
-import os.path
 from . import verify_bp as bp
 
 @bp.route('/events/workshops/verify', methods=['GET'])
@@ -49,10 +48,12 @@ def verify_certificate():
         session['cid'] = cid
 
         qr_data = url_for('verify.verify_certificate', cid=cid, _external=True)
-        template_path = os.path.join('static', 'images', 'certificate_template.png')
         
-        if not os.path.exists(template_path):
-            current_app.logger.error(f"Template file missing at {template_path}")
+        # Update template path resolution
+        try:
+            template_path = paths.get_static_path('images', 'certificate_template.png')
+        except FileNotFoundError:
+            current_app.logger.error("Certificate template is not configured")
             return render_template('pages/verify.jinja', error="Certificate template is not configured")
 
         @retry_on_error()
@@ -63,7 +64,8 @@ def verify_certificate():
                 qr_data,
                 participant_data['workshop'],
                 participant_data['instructor'],
-                participant_data['date']
+                participant_data['date'],
+                template_path
             )
 
             try:
