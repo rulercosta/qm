@@ -495,6 +495,19 @@ class InitialLoader {
                 `0 0 ${125 * shadowIntensity}px rgba(255,255,255,${0.45 * shadowIntensity})`
             ].join(', ');
 
+            const textShadows = [
+                `0 0 ${2 * shadowIntensity}px rgba(255,255,255,${0.7 * shadowIntensity})`,
+                `0 0 ${4 * shadowIntensity}px rgba(255,255,255,${0.5 * shadowIntensity})`,
+                `0 0 ${6 * shadowIntensity}px rgba(255,255,255,${0.3 * shadowIntensity})`,
+                `0 0 ${8 * shadowIntensity}px rgba(255,255,255,${0.2 * shadowIntensity})`
+            ].join(', ');
+
+            const words = this.brandTextContent.querySelectorAll('.brand-text-word');
+            words.forEach(word => {
+                word.style.textShadow = textShadows;
+                word.style.filter = `brightness(${1 + 0.08 * ease})`;
+            });
+
             let lightBar = this.heroText.querySelector('.hero-light-bar');
             if (!lightBar) {
                 lightBar = document.createElement('div');

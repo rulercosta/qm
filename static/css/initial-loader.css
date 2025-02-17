@@ -54,6 +54,7 @@
     transform: translateZ(0);
     backface-visibility: hidden;
     -webkit-font-smoothing: subpixel-antialiased;
+    transition: text-shadow 0.2s ease-out, filter 0.2s ease-out;
 }
 
 .hero-text {
