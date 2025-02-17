@@ -6,7 +6,6 @@ class CertificateGenerator:
     def __init__(self, app):
         self.app = app
         self.fonts_dir = os.path.join('static', 'fonts')
-        self.templates_dir = os.path.join('static', 'images')
         
     def _load_fonts(self):
         fonts = {
@@ -20,9 +19,7 @@ class CertificateGenerator:
             for name, (filename, size) in fonts.items()
         }
 
-    def generate_certificate(self, name, qr_data, workshop, instructor, date):
-        template_path = os.path.join(self.templates_dir, 'certificate_template.png')
-        
+    def generate_certificate(self, name, qr_data, workshop, instructor, date, template_path):
         if not os.path.isfile(template_path):
             raise FileNotFoundError(f"Certificate template not found at {template_path}")
 
