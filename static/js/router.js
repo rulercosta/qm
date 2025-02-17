@@ -86,13 +86,16 @@ class Router {
     async #updatePage(doc, url, pushState) {
         await this.#loadStylesheets(doc);
         
-        const mainContent = doc.querySelector('main');
-        if (!mainContent) throw new Error('Main content not found');
+        const newMain = doc.querySelector('main');
+        const currentMain = document.querySelector('main');
+        
+        if (!newMain || !currentMain) throw new Error('Main content not found');
         
         if (pushState) history.pushState({}, '', url);
         document.title = doc.title;
         
-        document.querySelector('main').innerHTML = mainContent.innerHTML;
+        await PageTransition.crossFade(currentMain, newMain);
+        
         window.scrollTo({ top: 0, behavior: 'instant' });
         await window.ScriptManager?.initAll();
     }
