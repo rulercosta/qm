@@ -1,49 +1,53 @@
-import os
-import logging
-from logging.handlers import RotatingFileHandler
 from flask import Flask
-from app.extensions.extensions import db, session, init_db_events
-from app.configs.config import config
-from app.views import (
-    home, verify, contact,
-    events, explore, static
+from app.configs.config import get_config
+from app.utils.env_loader import load_environment
+from app.utils.app_init import (
+    init_extensions,
+    register_blueprints,
+    init_database,
+    init_request_logging
 )
+from app.utils.logger import setup_loggers
+from app.utils.paths import paths
 
-def create_app(config_name='default'):
-    app = Flask(__name__,
-                template_folder=os.path.join(os.getcwd(), 'templates'),
-                static_folder=os.path.join(os.getcwd(), 'static'))
+def create_app(config_name=None):
+    """Application factory function"""
+    if config_name is None:
+        config_name = load_environment()
     
-    # Load configuration
-    app.config.from_object(config[config_name])
-
-    # Initialize extensions
-    db.init_app(app)
-    session.init_app(app)
-
-    # Setup logging
-    if not app.debug:
-        if not os.path.exists('logs'):
-            os.mkdir('logs')
-        file_handler = RotatingFileHandler('logs/qm.log', maxBytes=10240, backupCount=10)
-        file_handler.setFormatter(logging.Formatter(
-            '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
-        ))
-        file_handler.setLevel(logging.INFO)
-        app.logger.addHandler(file_handler)
-        app.logger.setLevel(logging.INFO)
-        app.logger.info('QM startup')
-
-    with app.app_context():
-        init_db_events()
+    app = Flask(__name__,
+                template_folder=str(paths.templates_path),
+                static_folder=str(paths.static_path))
+    
+    try:
+        # Initialize logging first for better error tracking
+        setup_loggers(app)
+        app.logger.info("=== Starting Application Initialization ===")
         
-        # Register blueprints
-        app.register_blueprint(home.bp)
-        app.register_blueprint(events.bp)
-        app.register_blueprint(verify.bp)
-        app.register_blueprint(contact.bp)
-        app.register_blueprint(explore.bp)
-        app.register_blueprint(static.bp)
-
-    return app
+        # Load configuration
+        config_obj = get_config(config_name)
+        app.config.from_object(config_obj)
+        app.logger.info("Configuration loaded successfully")
+        
+        # Initialize components
+        init_request_logging(app)
+        app.logger.info("Request logging initialized")
+        
+        init_extensions(app)
+        app.logger.info("Extensions initialized")
+        
+        init_database(app)
+        app.logger.info("Database initialized")
+        
+        register_blueprints(app)
+        app.logger.info("Blueprints registered")
+        
+        app.logger.info("=== Application Initialization Complete ===")
+        return app
+        
+    except Exception as e:
+        # Ensure we log any initialization errors
+        if hasattr(app, 'logger'):
+            app.logger.critical(f"Failed to initialize application: {str(e)}", exc_info=True)
+        raise
 
