@@ -13,21 +13,29 @@ def load_environment():
     project_root = get_project_root()
     dotenv_path = os.path.join(project_root, '.env')
     
-    if not os.path.exists(dotenv_path):
-        error_msg = f"No .env file found at {dotenv_path}"
-        logger.critical(error_msg)
-        raise FileNotFoundError(error_msg)
+    # Try to load .env file if it exists, but don't fail if it doesn't
+    if os.path.exists(dotenv_path):
+        load_dotenv(dotenv_path, override=True)
+        logger.info(f"Loaded environment from {dotenv_path}")
+    else:
+        logger.info("No .env file found, using system environment variables")
     
-    load_dotenv(dotenv_path, override=True)
-    logger.info(f"Loaded environment from {dotenv_path}")
-    
+    # Validate required environment variables
     required_vars = ['FLASK_ENV', 'SESSION_SECRET_KEY']
     missing_vars = [var for var in required_vars if not os.getenv(var)]
     
     if missing_vars:
-        error_msg = f"Missing required environment variables: {', '.join(missing_vars)}"
-        logger.critical(error_msg)
-        raise ValueError(error_msg)
+        # Set defaults for development if FLASK_ENV is missing
+        if 'FLASK_ENV' in missing_vars and not os.getenv('FLASK_ENV'):
+            logger.warning("FLASK_ENV not set, defaulting to 'development'")
+            os.environ['FLASK_ENV'] = 'development'
+            missing_vars.remove('FLASK_ENV')
+            
+        # If still have missing vars, raise error
+        if missing_vars:
+            error_msg = f"Missing required environment variables: {', '.join(missing_vars)}"
+            logger.critical(error_msg)
+            raise ValueError(error_msg)
     
     flask_env = os.getenv('FLASK_ENV')
     valid_envs = ['development', 'production', 'testing']
