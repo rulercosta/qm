@@ -20,9 +20,14 @@ def session_scope():
     except Exception as e:
         session.rollback()
         logger.error(f"Database error: {str(e)}", exc_info=True)
+        if 'connection' in str(e) or 'pool' in str(e):
+            logger.error("Database connection error - check DATABASE_URL and connection settings")
         raise DatabaseError(f"Database operation failed: {str(e)}")
     finally:
-        session.close()
+        try:
+            session.close()
+        except Exception as e:
+            logger.warning(f"Error closing session: {str(e)}")
 
 def retry_on_error(retries=3, delay=0.5, exceptions=(DatabaseError,)):
     """Enhanced retry decorator with specific exception handling"""

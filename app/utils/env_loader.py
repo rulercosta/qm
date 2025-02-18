@@ -20,6 +20,14 @@ def load_environment():
     else:
         logger.info("No .env file found, using system environment variables")
     
+    # Check for Render-specific environment
+    if os.getenv('RENDER'):
+        logger.info("Running on Render platform")
+        # Ensure we have the required variables on Render
+        if not os.getenv('DATABASE_URL'):
+            logger.critical("DATABASE_URL not set in Render environment")
+            raise ValueError("DATABASE_URL must be set in Render environment")
+    
     # Validate required environment variables
     required_vars = ['FLASK_ENV', 'SESSION_SECRET_KEY']
     missing_vars = [var for var in required_vars if not os.getenv(var)]

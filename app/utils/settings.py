@@ -1,5 +1,9 @@
 import os
 from pathlib import Path
+import logging
+
+# Initialize logger
+logger = logging.getLogger(__name__)
 
 class Settings:
     _instance = None
@@ -33,17 +37,26 @@ class Settings:
         
         # Database settings
         self.db_url = os.getenv('DATABASE_URL')
-        self.db_pool_size = int(os.getenv('DB_POOL_SIZE', '100'))
-        self.db_max_overflow = int(os.getenv('DB_MAX_OVERFLOW', '50'))
-        self.db_pool_timeout = int(os.getenv('DB_POOL_TIMEOUT', '30'))
-        self.db_pool_recycle = int(os.getenv('DB_POOL_RECYCLE', '1800'))
+        if self.db_url and self.db_url.startswith('postgres://'):
+            # Fix Render's DATABASE_URL format for SQLAlchemy
+            self.db_url = self.db_url.replace('postgres://', 'postgresql://', 1)
         
         if not self.db_url and not self.testing:
             if self.debug:
                 self.db_url = f'sqlite:///{self.root_path}/db.sqlite3'
             else:
                 raise ValueError("DATABASE_URL must be set in production")
-
+        
+        # Log database connection type
+        if self.db_url:
+            db_type = 'SQLite' if 'sqlite' in self.db_url else 'PostgreSQL'
+            logger.info(f"Using {db_type} database")
+        
+        self.db_pool_size = int(os.getenv('DB_POOL_SIZE', '100'))
+        self.db_max_overflow = int(os.getenv('DB_MAX_OVERflow', '50'))
+        self.db_pool_timeout = int(os.getenv('DB_POOL_TIMEOUT', '30'))
+        self.db_pool_recycle = int(os.getenv('DB_POOL_RECYCLE', '1800'))
+        
     def log_config(self, logger):
         """Log critical startup information"""
         startup_messages = [
