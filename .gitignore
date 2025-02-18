@@ -1,5 +1,9 @@
 .env
+logs/
 flask_session/
 __pycache__/
 CHANGED.md
+.flaskenv
+db.sqlite3
+.pytest_cache/
 .gitignore
