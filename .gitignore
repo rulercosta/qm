@@ -5,5 +5,6 @@ __pycache__/
 CHANGED.md
 .flaskenv
 db.sqlite3
+tests/
 .pytest_cache/
 .gitignore
