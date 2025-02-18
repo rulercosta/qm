@@ -18,6 +18,7 @@ class Settings:
         
         # Logging settings
         self.logging_enabled = os.getenv('LOGS', 'true').lower() == 'true'
+        self.file_logging_enabled = os.getenv('FILE_LOGGING', 'true').lower() == 'true'
         
         # Default to DEBUG if logging is enabled and level isn't specified or invalid
         valid_levels = {'DEBUG', 'INFO', 'WARNING', 'ERROR'}

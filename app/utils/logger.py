@@ -34,39 +34,41 @@ def setup_loggers(app):
     # Show startup information
     settings.log_config(app.logger)
     
-    # Setup file handlers
-    app.logger.info("Configuring log handlers...")
-    
-    # Setup file handlers (always enabled)
-    log_handlers = []
-    
-    # Application handler
-    app_handler = RotatingFileHandler(
-        paths.logs_path / 'app.log',
-        maxBytes=10 * 1024 * 1024,
-        backupCount=10
-    )
-    app_handler.setFormatter(logging.Formatter(log_format))
-    app_handler.setLevel(logging.INFO)
-    log_handlers.append(app_handler)
-    
-    # Error handler
-    error_handler = TimedRotatingFileHandler(
-        paths.logs_path / 'error.log',
-        when='midnight',
-        interval=1,
-        backupCount=30
-    )
-    error_handler.setFormatter(logging.Formatter(log_format))
-    error_handler.setLevel(logging.ERROR)
-    log_handlers.append(error_handler)
-    
-    # Add all handlers
-    for handler in log_handlers:
-        app.logger.addHandler(handler)
-    
-    app.logger.info("File handlers configured successfully")
-    app.logger.info(f"Log files will be stored in: {paths.logs_path}")
+    # Setup file handlers if enabled
+    if settings.file_logging_enabled:
+        app.logger.info("Configuring file-based log handlers...")
+        
+        log_handlers = []
+        
+        # Application handler
+        app_handler = RotatingFileHandler(
+            paths.logs_path / 'app.log',
+            maxBytes=10 * 1024 * 1024,
+            backupCount=10
+        )
+        app_handler.setFormatter(logging.Formatter(log_format))
+        app_handler.setLevel(logging.INFO)
+        log_handlers.append(app_handler)
+        
+        # Error handler
+        error_handler = TimedRotatingFileHandler(
+            paths.logs_path / 'error.log',
+            when='midnight',
+            interval=1,
+            backupCount=30
+        )
+        error_handler.setFormatter(logging.Formatter(log_format))
+        error_handler.setLevel(logging.ERROR)
+        log_handlers.append(error_handler)
+        
+        # Add all handlers
+        for handler in log_handlers:
+            app.logger.addHandler(handler)
+        
+        app.logger.info("File handlers configured successfully")
+        app.logger.info(f"Log files will be stored in: {paths.logs_path}")
+    else:
+        app.logger.info("File-based logging is disabled")
     
     if settings.logging_enabled:
         app.logger.info("Console logging is enabled")
@@ -90,12 +92,13 @@ def setup_loggers(app):
     app.logger.setLevel(getattr(logging, settings.log_level))
     
     # Setup database logging
-    db_logger = logging.getLogger('sqlalchemy.engine')
-    db_handler = RotatingFileHandler(
-        paths.logs_path / 'db.log',
-        maxBytes=10 * 1024 * 1024,
-        backupCount=5
-    )
-    db_handler.setFormatter(logging.Formatter(log_format))
-    db_logger.addHandler(db_handler)
-    db_logger.setLevel(logging.WARNING)
+    if settings.file_logging_enabled:
+        db_logger = logging.getLogger('sqlalchemy.engine')
+        db_handler = RotatingFileHandler(
+            paths.logs_path / 'db.log',
+            maxBytes=10 * 1024 * 1024,
+            backupCount=5
+        )
+        db_handler.setFormatter(logging.Formatter(log_format))
+        db_logger.addHandler(db_handler)
+        db_logger.setLevel(logging.WARNING)
