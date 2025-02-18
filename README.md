@@ -1,6 +1,6 @@
-# Quantum Minds Platform
+# Quantum Minds
 
-A technology innovation platform for the United College of Engineering and Research (UCER) student community, focusing on space tech, defense, AI, cybersecurity, and interdisciplinary research.
+A technology innovation hub for the United College of Engineering and Research (UCER) student community, focusing on space tech, defense, AI, cybersecurity, and interdisciplinary research.
 
 ## About Quantum Minds
 
