@@ -31,13 +31,16 @@
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
-
-            <p class="login-box-msg">
-            {% if msg == 'Logged out successfully' %}
-                {{ msg }}<br>Login again
+        <p class="login-box-msg">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <span class="text-{{ 'danger' if category == 'error' else category }}">{{ message }}</span>
+              {% endfor %}
             {% else %}
-                Add your credentials
+              <span class="text-success">Sign in to start your session</span>
             {% endif %}
+          {% endwith %}
         </p>
 
         <form method="post" action="">

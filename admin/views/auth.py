@@ -25,19 +25,17 @@ def login():
     
     if request.method == 'POST':
         if not login_form.validate():
-            flash('Form validation failed. Please try again.', 'error')
+            flash('Invalid form submission. Please check your input.', 'error')
             return render_template('accounts/login.html', form=login_form)
 
         username = login_form.username.data
         password = login_form.password.data
 
-        # Locate user
         user = Users.query.filter_by(username=username).first()
 
-        # Check the password
         if user and verify_pass(password, user.password):
             login_user(user)
-            session.permanent = True  # Make session persistent
+            session.permanent = True
             next_page = request.args.get('next')
             if next_page:
                 return redirect(next_page)
@@ -48,12 +46,12 @@ def login():
 
     return render_template('accounts/login.html', form=login_form)
 
-@bp.route('/logout', methods=['GET', 'POST'])  # Add POST method
+@bp.route('/logout', methods=['GET', 'POST'])
 def logout():
     if current_user.is_authenticated:
         logout_user()
-    session.clear()  # Clear all session data
-    return redirect(url_for('auth.login', msg='Logged out successfully'))
+    session.clear()
+    return redirect(url_for('auth.login'))
 
 
 # Errors
