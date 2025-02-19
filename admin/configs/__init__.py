@@ -1,0 +1,3 @@
+"""
+Config files for admin
+"""

@@ -1,0 +1,958 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Participants {% endblock %} 
+
+{% block stylesheets %}
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="/static/assets/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="/static/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- Datepicker -->
+  <link rel="stylesheet" href="/static/assets/plugins/daterangepicker/daterangepicker.css">
+{% endblock stylesheets %}
+
+{% block content %}  
+  <!-- Add this hidden input at the start of content -->
+  <div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center">
+          <ol class="breadcrumb float-sm-left mb-2 mb-sm-0">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Participants</li>
+          </ol>
+          <h1 class="m-0">Participants</h1>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between mb-3">
+            <div>
+              <button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#modal-participant">
+                <i class="fas fa-plus"></i> Add Participant
+              </button>
+            </div>
+            <div>
+              <button type="button" class="btn btn-primary" id="btnDownload" disabled>
+                <i class="fas fa-download"></i> Download
+              </button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-striped participants">
+              <thead>
+                <tr>
+                  <th>
+                    <input type="checkbox" id="selectAll">
+                  </th>
+                  <th>Code</th>
+                  <th>Name</th>
+                  <th>Education Level</th>
+                  <th>Year</th>
+                  <th>Branch</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th class="text-center">Edit</th>
+                  <th class="text-center">Delete</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <!-- Simplify pagination structure to match events -->
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <div>
+              Showing <span id="showing-entries">0-0</span> of <span id="total-entries">0</span> entries
+            </div>
+            <ul class="pagination mb-0"></ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Simplified Add Participant Modal -->
+    <div class="modal fade" id="modal-participant">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add Participant</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="addParticipantForm">
+              <!-- Single Entry Fields -->
+              <div class="form-group">
+                <label for="participantCode">Code</label>
+                <input type="text" class="form-control" id="participantCode" required>
+              </div>
+              <div class="form-group">
+                <label for="participantName">Name</label>
+                <input type="text" class="form-control" id="participantName" required>
+              </div>
+              <div class="form-group">
+                <label for="educationLevel">Education Level</label>
+                <input type="text" class="form-control" id="educationLevel" required>
+              </div>
+              <div class="form-group">
+                <label for="year">Year</label>
+                <input type="number" class="form-control" id="year">
+              </div>
+              <div class="form-group">
+                <label for="branch">Branch</label>
+                <input type="text" class="form-control" id="branch">
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" class="form-control" id="phone">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" required>
+              </div>
+
+              <!-- OR Separator -->
+              <div class="text-center my-4">
+                <div class="row align-items-center">
+                  <div class="col">
+                    <hr class="border-secondary">
+                  </div>
+                  <div class="col-auto">
+                    <span class="text-secondary font-weight-bold">OR</span>
+                  </div>
+                  <div class="col">
+                    <hr class="border-secondary">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bulk Upload Field -->
+              <div class="form-group mt-4">
+                <label for="participantsFile">Or Upload Participants File</label>
+                <div class="input-group">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="participantsFile" accept=".csv,.xlsx,.xls">
+                    <label class="custom-file-label" for="participantsFile">Choose file</label>
+                  </div>
+                </div>
+                <small class="form-text text-muted">
+                  Supported formats: .csv, .xlsx, .xls<br>
+                </small>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="btnSave">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Participant Modal -->
+    <div class="modal fade" id="modal-edit-participant">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Edit Participant</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="editParticipantForm">
+              <input type="hidden" id="editParticipantId">
+              <div class="form-group">
+                <label for="editParticipantCode">Code</label>
+                <input type="text" class="form-control" id="editParticipantCode" required>
+              </div>
+              <div class="form-group">
+                <label for="editParticipantName">Name</label>
+                <input type="text" class="form-control" id="editParticipantName" required>
+              </div>
+              <div class="form-group">
+                <label for="editEducationLevel">Education Level</label>
+                <input type="text" class="form-control" id="editEducationLevel" required>
+              </div>
+              <div class="form-group">
+                <label for="editYear">Year</label>
+                <input type="number" class="form-control" id="editYear">
+              </div>
+              <div class="form-group">
+                <label for="editBranch">Branch</label>
+                <input type="text" class="form-control" id="editBranch">
+              </div>
+              <div class="form-group">
+                <label for="editPhone">Phone</label>
+                <input type="tel" class="form-control" id="editPhone">
+              </div>
+              <div class="form-group">
+                <label for="editEmail">Email</label>
+                <input type="email" class="form-control" id="editEmail" required>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="btnEditSave">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Participant Modal -->
+    <div class="modal fade" id="modal-delete-participant">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Delete Participant</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete this participant?</p>
+            <input type="hidden" id="deleteParticipantId">
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" id="btnDeleteConfirm">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bulk Delete Modal -->
+    <div class="modal fade" id="modal-bulk-delete">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Delete Participants</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="bulk-delete-message"></p>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" id="btnBulkDeleteConfirm">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  <!-- jQuery -->
+  <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/static/assets/js/adminlte.min.js"></script>
+  <!-- Select2 -->
+  <script src="/static/assets/plugins/select2/js/select2.full.min.js"></script>
+
+  <script>
+    $(function () {
+      // Setup CSRF token for all AJAX requests at the start
+      $.ajaxSetup({
+          beforeSend: function(xhr, settings) {
+              if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                  xhr.setRequestHeader("X-CSRFToken", $('meta[name="csrf-token"]').attr('content'));
+              }
+          }
+      });
+
+      // Add validation helper functions at the start
+      function validateFile(file) {
+        const allowedTypes = [
+          'application/vnd.ms-excel',
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          'text/csv',
+          // Common MIME types for Excel and CSV files
+          'application/excel',
+          'application/x-excel',
+          'application/x-msexcel',
+          'text/comma-separated-values',
+          'text/x-csv',
+          'application/csv'
+        ];
+        const maxSize = 5 * 1024 * 1024; // 5MB
+
+        if (!file) {
+          showToast('Please select a file', 'error');
+          return false;
+        }
+
+        // Check file extension as fallback
+        const validExtensions = ['.csv', '.xlsx', '.xls'];
+        const fileExtension = file.name.toLowerCase().substring(file.name.lastIndexOf('.'));
+        if (!validExtensions.includes(fileExtension)) {
+          showToast('Invalid file type. Please upload CSV or Excel file', 'error');
+          return false;
+        }
+
+        if (file.size > maxSize) {
+          showToast('File size too large. Maximum size is 5MB', 'error');
+          return false;
+        }
+
+        return true;
+      }
+
+      // Add bulk selection tracking variable
+      let isBulkSelectionMode = false;
+
+      let currentPage = 1;
+      let totalPages = 1;
+      let totalEntries = 0;
+
+      // Update loadParticipants function to handle pagination
+      function loadParticipants(page = 1) {
+        $.get(`/participants/list?page=${page}`, function(response) {
+          let tableBody = $('.participants tbody');
+          tableBody.empty();
+          
+          const participants = response.participants;
+          totalPages = response.pages;
+          totalEntries = response.total;
+          currentPage = response.page;
+          
+          // Enable/disable download button based on total entries
+          $('#btnDownload').prop('disabled', totalEntries === 0);
+          
+          if (participants.length === 0) {
+            tableBody.append(`
+              <tr>
+                <td colspan="10" class="text-center text-muted">
+                  <p class="my-3">
+                    <i class="fas fa-users fa-2x mb-3"></i><br>
+                    No participants found
+                  </p>
+                </td>
+              </tr>
+            `);
+            updatePagination();
+            return;
+          }
+          
+          participants.forEach(function(participant) {
+            tableBody.append(`
+              <tr>
+                <td>
+                  <input type="checkbox" class="participant-select" data-id="${participant.id}">
+                </td>
+                <td>${participant.code}</td>
+                <td>${participant.name}</td>
+                <td>${participant.education_level}</td>
+                <td>${participant.year || '-'}</td>
+                <td>${participant.branch || '-'}</td>
+                <td>${participant.email}</td>
+                <td>${participant.phone || '-'}</td>
+                <td class="text-center">
+                  <button class="btn btn-info btn-sm edit-participant" 
+                    data-id="${participant.id}"
+                    data-participant='${JSON.stringify(participant)}'>
+                    <i class="fas fa-pencil-alt"></i>
+                  </button>
+                </td>
+                <td class="text-center">
+                  <button class="btn btn-danger btn-sm delete-participant" 
+                    data-id="${participant.id}">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            `);
+          });
+
+          updatePagination();
+          updateShowingEntries();
+          updateDeleteButton();
+        });
+      }
+
+      // Add pagination update function
+      function updatePagination() {
+        let pagination = $('.pagination');
+        pagination.empty();
+
+        // Previous button
+        pagination.append(`
+          <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+            <a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a>
+          </li>
+        `);
+
+        // Page numbers
+        for (let i = 1; i <= totalPages; i++) {
+          pagination.append(`
+            <li class="page-item ${currentPage === i ? 'active' : ''}">
+              <a class="page-link" href="#" data-page="${i}">${i}</a>
+            </li>
+          `);
+        }
+
+        // Next button
+        pagination.append(`
+          <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+            <a class="page-link" href="#" data-page="${currentPage + 1}">Next</a>
+          </li>
+        `);
+      }
+
+      // Add showing entries update function
+      function updateShowingEntries() {
+        if (totalEntries === 0) {
+          $('#showing-entries').text('0-0');
+          $('#total-entries').text('0');
+          return;
+        }
+        const start = ((currentPage - 1) * 10) + 1;
+        const end = Math.min(currentPage * 10, totalEntries);
+        $('#showing-entries').text(`${start}-${end}`);
+        $('#total-entries').text(totalEntries);
+      }
+
+      // Add pagination click handler
+      $(document).on('click', '.pagination .page-link', function(e) {
+        e.preventDefault();
+        const page = $(this).data('page');
+        if (page && page >= 1 && page <= totalPages) {
+          loadParticipants(page);
+        }
+      });
+
+      // Modify success handlers to reload current page
+      // Update these in your existing AJAX success callbacks:
+      // For add:
+      $('#btnSave').on('click', function() {
+        // ...existing ajax call code...
+        $.ajax({
+          // ...existing ajax options...
+          success: function(response) {
+            if (response.success) {
+              $('#modal-participant').modal('hide');
+              $('#addParticipantForm')[0].reset();
+              $('.custom-file-label').html('Choose file');
+              showToast(response.message, 'success');
+              loadParticipants(1); // Reset to first page after adding
+            }
+          }
+        });
+      });
+
+      // For delete:
+      $('#btnDeleteConfirm').on('click', function() {
+        // ...existing ajax call code...
+        $.ajax({
+          // ...existing ajax options...
+          success: function(response) {
+            if (response.success) {
+              $('#modal-delete-participant').modal('hide');
+              showToast(response.message, 'success');
+              loadParticipants(currentPage); // Reload current page
+            }
+          }
+        });
+      });
+
+      // For bulk delete:
+      $('#btnBulkDeleteConfirm').on('click', function() {
+        // ...existing ajax call code...
+        $.ajax({
+          // ...existing ajax options...
+          success: function(response) {
+            if (response.success) {
+              $('#modal-bulk-delete').modal('hide');
+              showToast(response.message, 'success');
+              loadParticipants(1); // Reset to first page after bulk delete
+              $('#selectAll').prop('checked', false);
+              updateDeleteButton();
+            }
+          }
+        });
+      });
+
+      // Form validation helper
+      function validateForm(data) {
+        if (!data.code || !data.name || !data.education_level || !data.email) {
+          showToast('Please fill in all required fields', 'error');
+          return false;
+        }
+        return true;
+      }
+
+      // Add participant
+      $('#btnAddSave').click(function() {
+        let data = {
+          code: $('#participantCode').val().trim(),
+          name: $('#participantName').val().trim(),
+          education_level: $('#educationLevel').val(),
+          year: $('#year').val() || null,
+          branch: $('#branch').val().trim(),
+          phone: $('#phone').val().trim(),
+          email: $('#email').val().trim()
+        };
+
+        if (!validateForm(data)) return;
+
+        $.ajax({
+          url: '/participants/add',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(data),
+          success: function(response) {
+            if (response.success) {
+              $('#modal-participant').modal('hide');
+              $('#addParticipantForm')[0].reset();
+              showToast(response.message, 'success');
+              loadParticipants();
+            }
+          },
+          error: function(xhr) {
+            showToast(xhr.responseJSON?.message || 'Error adding participant', 'error');
+          }
+        });
+      });
+
+      // Edit participant
+      $(document).on('click', '.edit-participant', function() {
+        let participant = $(this).data('participant');
+        $('#editParticipantId').val(participant.id);
+        $('#editParticipantCode').val(participant.code);
+        $('#editParticipantName').val(participant.name);
+        $('#editEducationLevel').val(participant.education_level);
+        $('#editYear').val(participant.year);
+        $('#editBranch').val(participant.branch);
+        $('#editPhone').val(participant.phone);
+        $('#editEmail').val(participant.email);
+        $('#modal-edit-participant').modal('show');
+      });
+
+      // Update participant
+      $('#btnEditSave').click(function() {
+        let participantId = $('#editParticipantId').val();
+        let data = {
+          code: $('#editParticipantCode').val().trim(),
+          name: $('#editParticipantName').val().trim(),
+          education_level: $('#editEducationLevel').val(),
+          year: $('#editYear').val() || null,
+          branch: $('#editBranch').val().trim(),
+          phone: $('#editPhone').val().trim(),
+          email: $('#editEmail').val().trim()
+        };
+
+        if (!validateForm(data)) return;
+
+        $.ajax({
+          url: `/participants/${participantId}`,
+          type: 'PUT',
+          contentType: 'application/json',
+          data: JSON.stringify(data),
+          success: function(response) {
+            if (response.success) {
+              $('#modal-edit-participant').modal('hide');
+              showToast(response.message, 'success');
+              loadParticipants();
+            }
+          },
+          error: function(xhr) {
+            showToast(xhr.responseJSON?.message || 'Error updating participant', 'error');
+          }
+        });
+      });
+
+      // Modify delete participant handler
+      $(document).on('click', '.delete-participant', function(e) {
+        let selectedCount = $('.participant-select:checked').length;
+        
+        // If clicked row is part of selected rows, do bulk delete
+        if (selectedCount > 0 && $(this).closest('tr').find('.participant-select').is(':checked')) {
+          e.preventDefault();
+          let selectedIds = $('.participant-select:checked').map(function() {
+            return $(this).data('id');
+          }).get();
+          
+          $('#bulk-delete-message').text(`Are you sure you want to delete ${selectedIds.length} participant(s)?`);
+          $('#modal-bulk-delete').modal('show');
+          $('#modal-bulk-delete').data('selectedIds', selectedIds);
+          return;
+        }
+        
+        // Otherwise do single delete
+        let id = $(this).data('id');
+        $('#deleteParticipantId').val(id);
+        $('#modal-delete-participant').modal('show');
+      });
+
+      $('#btnDeleteConfirm').click(function() {
+        let id = $('#deleteParticipantId').val();
+        
+        $.ajax({
+          url: `/participants/${id}`,
+          type: 'DELETE',
+          success: function(response) {
+            if (response.success) {
+              $('#modal-delete-participant').modal('hide');
+              showToast(response.message, 'success');
+              loadParticipants();
+            }
+          },
+          error: function(xhr) {
+            showToast(xhr.responseJSON.message);
+          }
+        });
+      });
+
+      // Handle bulk upload
+      $('#btnUpload').click(function() {
+        let fileInput = $('#participantsFile')[0];
+        if (!fileInput.files.length) {
+          showToast('Please select a file', 'error');
+          return;
+        }
+
+        let formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+
+        $.ajax({
+          url: '/participants/upload',
+          type: 'POST',
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function(response) {
+            if (response.success) {
+              $('#modal-participant').modal('hide');
+              $('#addParticipantForm')[0].reset();
+              showToast(response.message, 'success');
+              loadParticipants();
+            }
+          },
+          error: function(xhr) {
+            showToast(xhr.responseJSON?.message || 'Error uploading file', 'error');
+          }
+        });
+      });
+
+      // Handle download
+      $('#btnDownload').click(function() {
+        window.location.href = '/participants/download';
+      });
+
+      // Handle select all checkbox
+      $('#selectAll').change(function() {
+        isBulkSelectionMode = $(this).is(':checked');
+        $('.participant-select').prop('checked', $(this).is(':checked'));
+        updateDeleteButton();
+      });
+
+      // Handle individual checkboxes
+      $(document).on('change', '.participant-select', function() {
+        updateDeleteButton();
+      });
+
+      // Update delete button state - remove since we don't need it anymore
+      function updateDeleteButton() {
+        // Now only used for internal state tracking
+        let selectedCount = $('.participant-select:checked').length;
+        isBulkSelectionMode = selectedCount > 0;
+        
+        // Disable/enable edit buttons based on selection
+        $('.edit-participant').prop('disabled', isBulkSelectionMode);
+        if (isBulkSelectionMode) {
+          $('.edit-participant').addClass('disabled');
+        } else {
+          $('.edit-participant').removeClass('disabled');
+        }
+      }
+
+      // Handle bulk delete
+      $('#btnDeleteSelected').click(function() {
+        let selectedIds = $('.participant-select:checked').map(function() {
+          return $(this).data('id');
+        }).get();
+
+        if (!selectedIds.length) return;
+
+        $('#bulk-delete-message').text(`Are you sure you want to delete ${selectedIds.length} participant(s)?`);
+        $('#modal-bulk-delete').modal('show');
+
+        // Store selected IDs for the confirm button
+        $('#modal-bulk-delete').data('selectedIds', selectedIds);
+      });
+
+      $('#btnBulkDeleteConfirm').click(function() {
+        let selectedIds = $('#modal-bulk-delete').data('selectedIds');
+        
+        $.ajax({
+          url: '/participants/bulk-delete',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify({ ids: selectedIds }),
+          success: function(response) {
+            if (response.success) {
+              $('#modal-bulk-delete').modal('hide');
+              showToast(response.message, 'success');
+              loadParticipants(1); // Reset to first page after bulk delete
+              $('#selectAll').prop('checked', false);
+              updateDeleteButton();
+            }
+          },
+          error: function(xhr) {
+            showToast(xhr.responseJSON?.message || 'Error deleting participants', 'error');
+          }
+        });
+      });
+
+      // Add handler for clearing bulk selection
+      $('.modal').on('hidden.bs.modal', function () {
+        if (isBulkSelectionMode) {
+          isBulkSelectionMode = false;
+          $('#selectAll').prop('checked', false);
+          $('.participant-select').prop('checked', false);
+          updateDeleteButton();
+        }
+      });
+
+      // Handle file input change
+      $('#participantsFile').on('change', function() {
+        var fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').html(fileName || 'Choose file');
+        toggleFormFields(!!fileName); // Disable/enable fields based on file selection
+      });
+
+      // Single add handler
+      $('#btnSingleAdd').click(function() {
+        let data = {
+          code: $('#participantCode').val().trim(),
+          name: $('#participantName').val().trim(),
+          education_level: $('#educationLevel').val(),
+          year: $('#year').val() || null,
+          branch: $('#branch').val().trim(),
+          phone: $('#phone').val().trim(),
+          email: $('#email').val().trim()
+        };
+
+        if (!validateForm(data)) return;
+
+        $.ajax({
+          url: '/participants/add',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(data),
+          success: function(response) {
+            if (response.success) {
+              $('#modal-participant').modal('hide');
+              $('#addParticipantForm')[0].reset();
+              $('.custom-file-label').html('Choose file');
+              showToast(response.message, 'success');
+              loadParticipants();
+            }
+          },
+          error: function(xhr) {
+            showToast(xhr.responseJSON?.message || 'Error adding participant', 'error');
+          }
+        });
+      });
+
+      // Bulk upload handler
+      $('#btnBulkUpload').click(function() {
+        let fileInput = $('#participantsFile')[0];
+        if (!fileInput.files.length) {
+          showToast('Please select a file to upload', 'error');
+          return;
+        }
+
+        let formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+
+        $.ajax({
+          url: '/participants/upload',
+          type: 'POST',
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function(response) {
+            if (response.success) {
+              $('#modal-participant').modal('hide');
+              $('#addParticipantForm')[0].reset();
+              $('.custom-file-label').html('Choose file');
+              showToast(response.message, 'success');
+              loadParticipants();
+            }
+          },
+          error: function(xhr) {
+            showToast(xhr.responseJSON?.message || 'Error uploading file', 'error');
+          }
+        });
+      });
+
+      // Modal reset handler
+      $('#modal-participant').on('hidden.bs.modal', function () {
+        $('#addParticipantForm')[0].reset();
+        $('.custom-file-label').html('Choose file');
+        toggleFormFields(false); // Re-enable fields when modal is closed
+      });
+
+      // Replace btnSingleAdd and btnBulkUpload handlers with a single handler
+      $('#btnSave').click(function() {
+        const fileInput = $('#participantsFile')[0];
+
+        if (fileInput.files.length > 0) {
+          // Handle bulk upload with frontend validation
+          const file = fileInput.files[0];
+          
+          if (!validateFile(file)) {
+            return;
+          }
+
+          let formData = new FormData();
+          formData.append('file', file);
+
+          $.ajax({
+            url: '/participants/upload',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function(xhr) {
+              xhr.setRequestHeader('X-CSRFToken', $('meta[name=csrf-token]').val());
+            },
+            success: function(response) {
+              if (response.success) {
+                $('#modal-participant').modal('hide');
+                $('#addParticipantForm')[0].reset();
+                $('.custom-file-label').html('Choose file');
+                showToast(response.message, 'success');
+                loadParticipants();
+              }
+            },
+            error: function(xhr) {
+              showToast(xhr.responseJSON?.message || 'Error uploading file', 'error');
+            }
+          });
+        } else {
+          // Handle single add with frontend validation
+          let data = {
+            code: $('#participantCode').val().trim(),
+            name: $('#participantName').val().trim(),
+            education_level: $('#educationLevel').val(),
+            year: $('#year').val() || null,
+            branch: $('#branch').val().trim(),
+            phone: $('#phone').val().trim(),
+            email: $('#email').val().trim()
+          };
+
+          // Enhanced frontend validation
+          if (!data.code) {
+            showToast('Participant code is required', 'error');
+            return;
+          }
+
+          if (!data.name) {
+            showToast('Name is required', 'error');
+            return;
+          }
+
+          if (!data.education_level) {
+            showToast('Education level is required', 'error');
+            return;
+          }
+
+          if (!data.email) {
+            showToast('Email is required', 'error');
+            return;
+          }
+
+          if (data.email && !data.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+            showToast('Please enter a valid email address', 'error');
+            return;
+          }
+
+          if (data.phone && !data.phone.match(/^\+?[\d\s-]+$/)) {
+            showToast('Please enter a valid phone number', 'error');
+            return;
+          }
+
+          $.ajax({
+            url: '/participants/add',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function(response) {
+              if (response.success) {
+                $('#modal-participant').modal('hide');
+                $('#addParticipantForm')[0].reset();
+                $('.custom-file-label').html('Choose file');
+                showToast(response.message, 'success');
+                loadParticipants();
+              }
+            },
+            error: function(xhr) {
+              showToast(xhr.responseJSON?.message || 'Error adding participant', 'error');
+            }
+          });
+        }
+      });
+
+      // Add live validation for email field
+      $('#email, #editEmail').on('input', function() {
+        const email = $(this).val().trim();
+        if (email && !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+          $(this).addClass('is-invalid');
+        } else {
+          $(this).removeClass('is-invalid');
+        }
+      });
+
+      // Add live validation for phone field
+      $('#phone, #editPhone').on('input', function() {
+        const phone = $(this).val().trim();
+        if (phone && !phone.match(/^\+?[\d\s-]+$/)) {
+          $(this).addClass('is-invalid');
+        } else {
+          $(this).removeClass('is-invalid');
+        }
+      });
+
+      // Add this function near the start
+      function toggleFormFields(isFileSelected) {
+        const singleFields = [
+          '#participantCode',
+          '#participantName',
+          '#educationLevel',
+          '#year',
+          '#branch',
+          '#phone',
+          '#email'
+        ];
+        
+        singleFields.forEach(field => {
+          $(field).prop('disabled', isFileSelected);
+          if (isFileSelected) {
+            $(field).val(''); // Clear fields when disabled
+          }
+        });
+      }
+
+      // Initial load
+      loadParticipants();
+    });
+  </script>
+{% endblock javascripts %}

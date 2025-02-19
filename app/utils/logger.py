@@ -72,8 +72,6 @@ def setup_loggers(app):
     
     if settings.logging_enabled:
         app.logger.info("Console logging is enabled")
-    else:
-        app.logger.info("Console logging is disabled (only startup logs will be shown)")
     
     app.logger.info("Logger initialization complete")
     
@@ -92,13 +90,12 @@ def setup_loggers(app):
     app.logger.setLevel(getattr(logging, settings.log_level))
     
     # Setup database logging
-    if settings.file_logging_enabled:
-        db_logger = logging.getLogger('sqlalchemy.engine')
-        db_handler = RotatingFileHandler(
-            paths.logs_path / 'db.log',
-            maxBytes=10 * 1024 * 1024,
-            backupCount=5
-        )
-        db_handler.setFormatter(logging.Formatter(log_format))
-        db_logger.addHandler(db_handler)
-        db_logger.setLevel(logging.WARNING)
+    db_logger = logging.getLogger('sqlalchemy.engine')
+    db_handler = RotatingFileHandler(
+        paths.logs_path / 'db.log',
+        maxBytes=10 * 1024 * 1024,
+        backupCount=5
+    )
+    db_handler.setFormatter(logging.Formatter(log_format))
+    db_logger.addHandler(db_handler)
+    db_logger.setLevel(logging.WARNING)

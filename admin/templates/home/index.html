@@ -1,0 +1,292 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='assets/plugins/fontawesome-free/css/all.min.css') }}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='assets/plugins/jqvmap/jqvmap.min.css') }}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='assets/css/adminlte.min.css') }}">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='assets/plugins/daterangepicker/daterangepicker.css') }}">
+  <!-- summernote -->
+  <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='assets/plugins/summernote/summernote-bs4.min.css') }}">
+  <!-- Chart.js -->
+  <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='assets/plugins/chart.js/Chart.min.css') }}">
+
+{% endblock stylesheets %}
+
+{% block content %}
+  
+  <div class="content-wrapper mt-0">
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark float-sm-right">Dashboard</h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-lg-6 col-12">
+            <div class="small-box" style="min-height: 140px; background: linear-gradient(120deg, #6366f1 0%, #2563eb 100%); border-radius: 15px; box-shadow: 0 8px 25px rgba(99, 102, 241, 0.25); transition: transform 0.3s;">
+              <div class="inner" style="padding: 20px 20px 10px 20px;">
+                <h3 style="font-size: 2.5rem; color: #ffffff; text-shadow: 0 2px 15px rgba(0,0,0,0.2); font-weight: 600;">250</h3>
+                <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9); font-weight: 500; margin-top: 4px;">Certificates Issued</p>
+              </div>
+              <div class="icon" style="font-size: 65px; right: 15px; top: 12px; opacity: 0.8; color: rgba(255,255,255,0.5);">
+                <i class="fas fa-award"></i>
+              </div>
+              <a href="#" class="small-box-footer" style="padding: 6px; font-size: 0.9rem; background: rgba(0,0,0,0.1); transition: all 0.3s; border-radius: 0 0 15px 15px;">More info <i class="fas fa-arrow-circle-right ml-2"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="small-box" style="min-height: 140px; background: linear-gradient(120deg, #ec4899 0%, #be185d 100%); border-radius: 15px; box-shadow: 0 8px 25px rgba(236, 72, 153, 0.25); transition: transform 0.3s;">
+              <div class="inner" style="padding: 20px 20px 10px 20px;">
+                <h3 style="font-size: 2.5rem; color: #ffffff; text-shadow: 0 2px 15px rgba(0,0,0,0.2); font-weight: 600;">12</h3>
+                <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9); font-weight: 500; margin-top: 4px;">Courses</p>
+              </div>
+              <div class="icon" style="font-size: 65px; right: 15px; top: 12px; opacity: 0.8; color: rgba(255,255,255,0.5);">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <a href="#" class="small-box-footer" style="padding: 6px; font-size: 0.9rem; background: rgba(0,0,0,0.1); transition: all 0.3s; border-radius: 0 0 15px 15px;">More info <i class="fas fa-arrow-circle-right ml-2"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="small-box" style="min-height: 140px; background: linear-gradient(120deg, #10b981 0%, #059669 100%); border-radius: 15px; box-shadow: 0 8px 25px rgba(16, 185, 129, 0.25); transition: transform 0.3s;">
+              <div class="inner" style="padding: 20px 20px 10px 20px;">
+                <h3 style="font-size: 2.5rem; color: #ffffff; text-shadow: 0 2px 15px rgba(0,0,0,0.2); font-weight: 600;">85</h3>
+                <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9); font-weight: 500; margin-top: 4px;">Contact Queries</p>
+              </div>
+              <div class="icon" style="font-size: 65px; right: 15px; top: 12px; opacity: 0.8; color: rgba(255,255,255,0.5);">
+                <i class="fas fa-comments"></i>
+              </div>
+              <a href="#" class="small-box-footer" style="padding: 6px; font-size: 0.9rem; background: rgba(0,0,0,0.1); transition: all 0.3s; border-radius: 0 0 15px 15px;">More info <i class="fas fa-arrow-circle-right ml-2"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="small-box" style="min-height: 140px; background: linear-gradient(120deg, #f59e0b 0%, #d97706 100%); border-radius: 15px; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.25); transition: transform 0.3s;">
+              <div class="inner" style="padding: 20px 20px 10px 20px;">
+                <h3 style="font-size: 2.5rem; color: #ffffff; text-shadow: 0 2px 15px rgba(0,0,0,0.2); font-weight: 600;">1,250</h3>
+                <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9); font-weight: 500; margin-top: 4px;">Participants</p>
+              </div>
+              <div class="icon" style="font-size: 65px; right: 15px; top: 12px; opacity: 0.8; color: rgba(255,255,255,0.5);">
+                <i class="fas fa-users"></i>
+              </div>
+              <a href="#" class="small-box-footer" style="padding: 6px; font-size: 0.9rem; background: rgba(0,0,0,0.1); transition: all 0.3s; border-radius: 0 0 15px 15px;">More info <i class="fas fa-arrow-circle-right ml-2"></i></a>
+            </div>
+          </div>
+        </div>
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row mt-4">
+          <!-- Participants Enrolled Chart -->
+          <div class="col-lg-4">
+            <div class="card" style="min-height: 400px;">
+              <div class="card-header border-0">
+                <h3 class="card-title">Participants Enrolled</h3>
+              </div>
+              <div class="card-body">
+                <canvas id="participantsChart" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Queries Chart -->
+          <div class="col-lg-4">
+            <div class="card" style="min-height: 400px;">
+              <div class="card-header border-0">
+                <h3 class="card-title">Monthly Queries</h3>
+              </div>
+              <div class="card-body">
+                <canvas id="queriesChart" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Course Distribution Chart -->
+          <div class="col-lg-4">
+            <div class="card" style="min-height: 400px;">
+              <div class="card-header border-0">
+                <h3 class="card-title">Course Distribution</h3>
+              </div>
+              <div class="card-body">
+                <canvas id="courseDistChart" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <!-- jQuery -->
+  <script src="{{ url_for('dashboard.static', filename='assets/plugins/jquery/jquery.min.js') }}"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="{{ url_for('dashboard.static', filename='assets/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
+    $.widget.bridge('uibutton', $.ui.button)
+  </script>
+  <!-- Bootstrap 4 -->
+  <script src="{{ url_for('dashboard.static', filename='assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <!-- AdminLTE App -->
+  <script src="{{ url_for('dashboard.static', filename='assets/js/adminlte.js') }}"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="{{ url_for('dashboard.static', filename='assets/js/demo.js') }}"></script>
+  <!-- Chart.js -->
+  <script src="{{ url_for('dashboard.static', filename='assets/plugins/chart.js/Chart.min.js') }}"></script>
+  
+  <script>
+    // Participants Enrolled Bar Chart
+    new Chart(document.getElementById('participantsChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Web Dev', 'Mobile Apps', 'Data Science', 'DevOps', 'Cloud', 'Security'],
+        datasets: [{
+          label: 'Enrolled Students',
+          data: [350, 275, 220, 180, 120, 105],
+          backgroundColor: '#6366f1',
+          borderRadius: 8,
+          barThickness: 25,
+          maxBarThickness: 30
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            grid: {
+              borderDash: [8, 4],
+              color: '#e2e8f0'
+            },
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Monthly Queries Line Chart
+    new Chart(document.getElementById('queriesChart'), {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Queries',
+          data: [65, 59, 80, 81, 85, 95],
+          borderColor: '#10b981',
+          backgroundColor: 'rgba(16, 185, 129, 0.1)',
+          borderWidth: 2,
+          tension: 0.4,
+          fill: true,
+          pointBackgroundColor: '#10b981',
+          pointRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              borderDash: [8, 4]
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
+        }
+      }
+    });
+
+    // Course Distribution Doughnut Chart with improved styling
+    new Chart(document.getElementById('courseDistChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Web Dev', 'Mobile', 'Data Science', 'DevOps'],
+        datasets: [{
+          data: [4, 3, 2, 3],
+          backgroundColor: [
+            '#ec4899',
+            '#f59e0b',
+            '#6366f1',
+            '#10b981'
+          ],
+          borderWidth: 0,
+          borderRadius: 3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '75%',
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 20,
+              boxWidth: 12,
+              font: {
+                size: 13
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+{% endblock javascripts %}

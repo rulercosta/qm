@@ -1,0 +1,793 @@
+<div class="modal-header border-0">
+  <h5 class="modal-title">Settings</h5>
+  <button type="button" class="close" data-dismiss="modal">×</button>
+</div>
+<div class="modal-body">
+  <!-- Avatar Settings -->
+  <div class="settings-option mb-4" data-toggle="collapse" data-target="#avatarForm">
+    <div class="d-flex align-items-center">
+      <div class="settings-icon bg-gradient-primary mr-3">
+        <i class="fas fa-user-circle"></i>
+      </div>
+      <div>
+        <h6 class="mb-1">Change Avatar</h6>
+        <small class="text-muted">Update your profile picture</small>
+      </div>
+      <i class="fas fa-chevron-right ml-auto text-muted"></i>
+    </div>
+  </div>
+  <div class="collapse" id="avatarForm">
+    <form id="avatarUploadForm" 
+          hx-post="{{ url_for('settings.update_avatar') }}" 
+          hx-encoding="multipart/form-data"
+          hx-swap="none">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>  <!-- Add CSRF token -->
+      <div class="text-center mb-3">
+        <div class="avatar-preview mb-3">
+          <img src="{{ current_user.avatar_url or url_for('static', filename='assets/img/default-avatar.png') }}" 
+               class="rounded-circle" 
+               style="width: 100px; height: 100px; object-fit: cover;"
+               id="avatarPreview">
+        </div>
+        <div class="custom-file" style="max-width: 300px; margin: 0 auto;">
+          <input type="file" 
+                 class="custom-file-input" 
+                 id="avatarInput" 
+                 name="avatar" 
+                 accept="image/*"
+                 onchange="previewAvatar(this)">
+          <label class="custom-file-label" for="avatarInput">Choose file</label>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">
+        <span class="spinner-border spinner-border-sm htmx-indicator" role="status"></span>
+        Update Avatar
+      </button>
+    </form>
+  </div>
+
+  <!-- Username Settings -->
+  <div class="settings-option mb-4" data-toggle="collapse" data-target="#usernameForm">
+    <div class="d-flex align-items-center">
+      <div class="settings-icon bg-gradient-info mr-3">
+        <i class="fas fa-user"></i>
+      </div>
+      <div>
+        <h6 class="mb-1">Change Username</h6>
+        <small class="text-muted">Current: {{ current_user.username }}</small>
+      </div>
+      <i class="fas fa-chevron-right ml-auto text-muted"></i>
+    </div>
+  </div>
+  <div class="collapse" id="usernameForm">
+    <form hx-post="{{ url_for('settings.update_username') }}" hx-swap="none" hx-target="#usernameForm">
+      <div class="form-group">
+        <input type="text" name="new_username" class="form-control" placeholder="New username" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">
+        <span class="spinner-border spinner-border-sm htmx-indicator" role="status"></span>
+        Update Username
+      </button>
+    </form>
+  </div>
+
+  <!-- Email Settings -->
+  <div class="settings-option mb-4" data-toggle="collapse" data-target="#emailForm">
+    <div class="d-flex align-items-center">
+      <div class="settings-icon bg-gradient-secondary mr-3">
+        <i class="fas fa-envelope"></i>
+      </div>
+      <div>
+        <h6 class="mb-1">Change Email</h6>
+        <small class="text-muted">Current: {{ current_user.email }}</small>
+      </div>
+      <i class="fas fa-chevron-right ml-auto text-muted"></i>
+    </div>
+  </div>
+  <div class="collapse" id="emailForm">
+    <form hx-post="{{ url_for('settings.update_email') }}" 
+          hx-swap="none" 
+          hx-target="#emailForm">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+      <div class="form-group">
+        <input type="email" name="new_email" class="form-control" placeholder="New email address" required>
+      </div>
+      <div class="form-group">
+        <input type="password" name="current_password" class="form-control" placeholder="Current password" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">
+        <span class="spinner-border spinner-border-sm htmx-indicator" role="status"></span>
+        Update Email
+      </button>
+    </form>
+  </div>
+
+  <!-- Password Settings -->
+  <div class="settings-option mb-4" data-toggle="collapse" data-target="#passwordForm">
+    <div class="d-flex align-items-center">
+      <div class="settings-icon bg-gradient-warning mr-3">
+        <i class="fas fa-key"></i>
+      </div>
+      <div>
+        <h6 class="mb-1">Change Password</h6>
+        <small class="text-muted">Update your account password</small>
+      </div>
+      <i class="fas fa-chevron-right ml-auto text-muted"></i>
+    </div>
+  </div>
+  <div class="collapse" id="passwordForm">
+    <form hx-post="{{ url_for('settings.update_password') }}" 
+          hx-swap="none">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+      <div class="form-group">
+        <input type="password" 
+               name="current_password" 
+               class="form-control" 
+               placeholder="Current password" 
+               required>
+      </div>
+      <div class="form-group">
+        <input type="password" 
+               name="new_password" 
+               class="form-control" 
+               placeholder="New password" 
+               required>
+      </div>
+      <div class="form-group">
+        <input type="password" 
+               name="confirm_password" 
+               class="form-control" 
+               placeholder="Confirm password" 
+               required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">
+        <span class="spinner-border spinner-border-sm htmx-indicator" role="status"></span>
+        Update Password
+      </button>
+    </form>
+  </div>
+
+  <!-- Location Settings -->
+  <div class="settings-option mb-4" data-toggle="collapse" data-target="#locationForm">
+    <div class="d-flex align-items-center">
+      <div class="settings-icon bg-gradient-success mr-3">
+        <i class="fas fa-map-marker-alt"></i>
+      </div>
+      <div>
+        <h6 class="mb-1">Change Location</h6>
+        <small class="text-muted">Current: {{ current_user.location or 'Not set' }}</small>
+      </div>
+      <i class="fas fa-chevron-right ml-auto text-muted"></i>
+    </div>
+  </div>
+  <div class="collapse" id="locationForm">
+    <form hx-post="{{ url_for('settings.update_location') }}" 
+          hx-swap="none" 
+          hx-target="#locationForm">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+      <div class="form-group">
+        <input type="text" name="new_location" class="form-control" placeholder="Enter location" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">
+        <span class="spinner-border spinner-border-sm htmx-indicator" role="status"></span>
+        Update Location
+      </button>
+    </form>
+  </div>
+
+  <!-- Social Media Settings -->
+  <div class="settings-option mb-4" data-toggle="collapse" data-target="#socialForm" aria-expanded="false">
+    <div class="d-flex align-items-center">
+      <div class="settings-icon bg-gradient-primary mr-3">
+        <i class="fas fa-share-alt"></i>
+      </div>
+      <div>
+        <h6 class="mb-1">Social Media Links</h6>
+        <small class="text-muted">Update your social profiles</small>
+      </div>
+      <i class="fas fa-chevron-right ml-auto text-muted"></i>
+    </div>
+  </div>
+
+  <div class="collapse" id="socialForm">
+    <form hx-post="{{ url_for('settings.update_social_urls') }}" hx-swap="none" hx-target="#socialForm">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fab fa-linkedin"></i></span>
+          </div>
+          <input type="url" name="linkedin_url" class="form-control" placeholder="LinkedIn URL" value="{{ current_user.linkedin_url or '' }}">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fab fa-twitter"></i></span>
+          </div>
+          <input type="url" name="twitter_url" class="form-control" placeholder="Twitter URL" value="{{ current_user.twitter_url or '' }}">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fab fa-github"></i></span>
+          </div>
+          <input type="url" name="github_url" class="form-control" placeholder="GitHub URL" value="{{ current_user.github_url or '' }}">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">
+        <span class="spinner-border spinner-border-sm htmx-indicator" role="status"></span>
+        Update Social Links
+      </button>
+    </form>
+  </div>
+
+  <!-- Skills Settings -->
+  <div class="settings-option mb-4" data-toggle="collapse" data-target="#skillsForm">
+    <div class="d-flex align-items-center">
+      <div class="settings-icon bg-gradient-danger mr-3">
+        <i class="fas fa-code"></i>
+      </div>
+      <div>
+        <h6 class="mb-1">Manage Skills</h6>
+        <small class="text-muted">Update your technical skills</small>
+      </div>
+      <i class="fas fa-chevron-right ml-auto text-muted"></i>
+    </div>
+  </div>
+  <div class="collapse" id="skillsForm">
+    <form id="skillsManageForm" 
+          hx-post="{{ url_for('settings.update_skills') }}" 
+          hx-trigger="updateSkills from:body"
+          hx-swap="none">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+      <div class="form-group">
+        <div class="skills-input-container mb-3">
+          <input type="text" class="form-control skill-input" placeholder="Enter a skill">
+          <select class="form-control ml-2 skill-color">
+            <option value="primary">Blue</option>
+            <option value="success">Green</option>
+            <option value="warning">Yellow</option>
+            <option value="danger">Red</option>
+            <option value="info">Cyan</option>
+          </select>
+          <button type="button" class="btn btn-sm btn-primary ml-2" onclick="addSkill()">Add</button>
+        </div>
+        <div class="skills-list">
+          {% if current_user.get_skills() %}
+            {% for skill in current_user.get_skills() %}
+            <span class="badge badge-soft-{{ skill.badge_color }} skill-badge mb-2">
+              <span class="skill-text">{{ skill.name }}</span>
+              <i class="fas fa-times ml-1 remove-skill" onclick="removeSkill(this)"></i>
+            </span>
+            {% endfor %}
+          {% endif %}
+        </div>
+        <input type="hidden" name="skills" id="skillsData">
+      </div>
+    </form>
+  </div>
+
+  <!-- Education Settings -->
+  <div class="settings-option mb-4" data-toggle="collapse" data-target="#educationForm">
+    <div class="d-flex align-items-start">
+        <div class="settings-icon bg-gradient-purple mr-3 mt-1">
+            <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="flex-grow-1 min-w-0">
+            <h6 class="mb-1">Education</h6>
+            {% if current_user.get_education() %}
+                <div class="education-preview">
+                    <div class="text-dark mb-1">{{ current_user.get_education().degree }}</div>
+                    <div class="text-muted small mb-1">{{ current_user.get_education().institution }}</div>
+                    <div class="text-muted small">Class of {{ current_user.get_education().graduation_year }}</div>
+                </div>
+            {% else %}
+                <small class="text-muted">Not set</small>
+            {% endif %}
+        </div>
+        <i class="fas fa-chevron-right ml-2 text-muted"></i>
+    </div>
+  </div>
+<div class="collapse" id="educationForm">
+    <form id="educationManageForm" 
+          hx-post="{{ url_for('settings.update_education') }}" 
+          hx-trigger="submit"
+          hx-swap="none">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <div class="bg-light p-3 rounded">
+            <div class="form-group mb-2">
+                <label class="small text-muted">Degree/Certificate</label>
+                <input type="text" 
+                       class="form-control" 
+                       name="degree" 
+                       value="{{ current_user.get_education().degree if current_user.get_education() else '' }}" 
+                       required>
+            </div>
+            <div class="form-group mb-2">
+                <label class="small text-muted">Institution</label>
+                <input type="text" 
+                       class="form-control" 
+                       name="institution" 
+                       value="{{ current_user.get_education().institution if current_user.get_education() else '' }}" 
+                       required>
+            </div>
+            <div class="form-group mb-3">
+                <label class="small text-muted">Graduation Year</label>
+                <input type="number" 
+                       class="form-control" 
+                       name="graduation_year" 
+                       value="{{ current_user.get_education().graduation_year if current_user.get_education() else '' }}" 
+                       min="1900" 
+                       max="2099" 
+                       required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+                <span class="spinner-border spinner-border-sm htmx-indicator" role="status"></span>
+                Update Education
+            </button>
+        </div>
+    </form>
+</div>
+
+</div>
+
+<style>
+/* Add these new styles */
+.skills-input-container {
+  display: flex;
+  align-items: center;
+}
+
+.skill-input {
+  flex: 2;
+}
+
+.skill-color {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 5px;
+  padding: 8px 12px;
+}
+
+.remove-skill {
+  cursor: pointer;
+  margin-left: 5px;
+  font-size: 0.8em;
+}
+
+.bg-gradient-danger {
+  background: linear-gradient(45deg, #dc3545, #ff6b81);
+}
+
+.bg-gradient-purple {
+  background: linear-gradient(45deg, #6f42c1, #a885d8);
+}
+
+.education-item {
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.education-item:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.education-content {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
+
+.education-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #6f42c1, #a885d8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.education-icon i {
+    color: white;
+    font-size: 1.1rem;
+}
+
+.education-details {
+    flex: 1;
+}
+
+.education-details h6 {
+    color: #2d3748;
+    margin: 0;
+    font-weight: 600;
+}
+
+.education-details p {
+    color: #4a5568;
+    font-size: 0.9rem;
+}
+
+.btn-remove-education {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: #cbd5e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.btn-remove-education:hover {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.add-education-form {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.bg-gradient-purple {
+    background: linear-gradient(135deg, #6f42c1, #a885d8);
+}
+
+.education-preview {
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+.min-w-0 {
+    min-width: 0;
+    flex-shrink: 1;
+}
+
+.settings-option .education-preview {
+    margin-top: 0.25rem;
+}
+
+/* Add to existing styles */
+.avatar-preview {
+    position: relative;
+    display: inline-block;
+}
+
+.avatar-preview img {
+    border: 3px solid #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.avatar-preview:hover img {
+    filter: brightness(0.9);
+}
+
+.custom-file {
+    text-align: left;
+}
+
+.htmx-indicator {
+    display: none;
+}
+
+.htmx-request .htmx-indicator {
+    display: inline-block;
+}
+
+.htmx-request.btn {
+    pointer-events: none;
+    opacity: 0.8;
+}
+</style>
+
+<script>
+// Remove the duplicate toast helper function since it's now in base.html
+// Just keep the specific settings functionality
+
+function updateSkillsData() {
+    const skillsList = document.querySelector('.skills-list');
+    const skillsData = document.getElementById('skillsData');
+    const skills = Array.from(skillsList.querySelectorAll('.skill-badge')).map(badge => ({
+        name: badge.querySelector('.skill-text').textContent.trim(),
+        badge_color: badge.className.match(/badge-soft-(\w+)/)[1]
+    }));
+    skillsData.value = JSON.stringify(skills);
+    return skills;
+}
+
+function saveSkills() {
+    const skills = updateSkillsData();
+    if (skills.length === 0) {
+        showToast('Please add at least one skill', 'warning');
+        return;
+    }
+    htmx.trigger('#skillsManageForm', 'updateSkills');
+}
+
+function addSkill() {
+    const skillInput = document.querySelector('.skill-input');
+    const skillColor = document.querySelector('.skill-color');
+    const skillsList = document.querySelector('.skills-list');
+    const name = skillInput.value.trim();
+    const color = skillColor.value;
+
+    if (!name) {
+        showToast('Please enter a skill name', 'warning');
+        return;
+    }
+
+    // Check for duplicates
+    const existingSkills = Array.from(skillsList.querySelectorAll('.skill-text'))
+        .map(el => el.textContent.trim().toLowerCase());
+    
+    if (existingSkills.includes(name.toLowerCase())) {
+        showToast('This skill already exists', 'warning');
+        return;
+    }
+
+    const badge = document.createElement('span');
+    badge.className = `badge badge-soft-${color} skill-badge mb-2`;
+    badge.innerHTML = `
+        <span class="skill-text">${name}</span>
+        <i class="fas fa-times ml-1 remove-skill" onclick="removeSkill(this)"></i>
+    `;
+    
+    skillsList.appendChild(badge);
+    skillInput.value = '';
+    saveSkills();
+    showToast('Skill added successfully');
+}
+
+function removeSkill(element) {
+    const skillBadge = element.closest('.skill-badge');
+    const skillName = skillBadge.querySelector('.skill-text').textContent;
+    skillBadge.remove();
+    saveSkills();
+    showToast(`Skill removed: ${skillName}`);
+}
+
+// Add Enter key support for adding skills
+document.querySelector('.skill-input')?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        addSkill();
+    }
+});
+
+// Initialize skills data
+document.addEventListener('DOMContentLoaded', function() {
+    updateSkillsData();
+});
+
+// Add these new functions
+function updateEducationData() {
+    const educationList = document.querySelector('.education-list');
+    const educationData = document.getElementById('educationData');
+    const education = Array.from(educationList.querySelectorAll('.education-item')).map(item => {
+        const degree = item.querySelector('.education-details h6').textContent;
+        const details = item.querySelector('.education-details p').textContent;
+        const yearMatch = item.querySelector('.education-details small').textContent.match(/Class of (\d+)/);
+        const year = yearMatch ? yearMatch[1] : '';
+        
+        return {
+            degree: degree,
+            institution: details,
+            graduation_year: year
+        };
+    });
+    
+    educationData.value = JSON.stringify(education);
+    return education;
+}
+
+function addEducation() {
+    const degree = document.getElementById('eduDegree').value.trim();
+    const institution = document.getElementById('eduInstitution').value.trim();
+    const year = document.getElementById('eduYear').value.trim();
+    
+    if (!degree || !institution || !year) {
+        showToast('Please fill in all education fields', 'warning');
+        return;
+    }
+
+    const educationItem = document.createElement('div');
+    educationItem.className = 'education-item fade-in';
+    educationItem.innerHTML = `
+        <div class="education-content">
+            <div class="education-icon">
+                <i class="fas fa-university"></i>
+            </div>
+            <div class="education-details">
+                <h6 class="mb-1">${degree}</h6>
+                <p class="mb-0">${institution}</p>
+                <small class="text-muted">Class of ${year}</small>
+            </div>
+            <button type="button" class="btn-remove-education" onclick="removeEducation(this)">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    `;
+    
+    document.querySelector('.education-list').appendChild(educationItem);
+    
+    // Clear inputs
+    document.getElementById('eduDegree').value = '';
+    document.getElementById('eduInstitution').value = '';
+    document.getElementById('eduYear').value = '';
+    
+    saveEducation();
+    showToast('Education added successfully');
+}
+
+function removeEducation(element) {
+    const educationItem = element.closest('.education-item');
+    const degree = educationItem.querySelector('.education-details h6').textContent;
+    educationItem.remove();
+    saveEducation();
+    showToast(`Education entry removed: ${degree}`);
+}
+
+function saveEducation() {
+    const education = updateEducationData();
+    if (education.length === 0) {
+        // Optional: show warning if no education entries
+        // showToast('No education entries to save', 'warning');
+        // return;
+    }
+    htmx.trigger('#educationManageForm', 'updateEducation');
+}
+
+// Initialize education data
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.querySelector('.education-list')) {
+        updateEducationData();
+    }
+});
+
+// Add event listener for removing education (delegated)
+document.querySelector('.education-list')?.addEventListener('click', function(e) {
+    const removeBtn = e.target.closest('.btn-remove-education');
+    if (removeBtn) {
+        removeEducation(removeBtn);
+    }
+});
+
+// Add this to your existing script section
+function previewAvatar(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        const preview = document.getElementById('avatarPreview');
+        const fileLabel = input.nextElementSibling;
+        
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+        fileLabel.textContent = input.files[0].name;
+    }
+}
+
+// Add HTMX event handlers for avatar upload
+document.body.addEventListener('htmx:afterRequest', function(evt) {
+    if (evt.detail.elt.id === 'avatarUploadForm') {
+        const response = JSON.parse(evt.detail.xhr.response);
+        if (response.success) {
+            showToast(response.message, 'success');
+            // Update all instances of user avatar including dropdown
+            document.querySelectorAll('.user-avatar, .dropdown-user-img').forEach(img => {
+                img.src = response.avatar_url;
+            });
+            // Close the collapse
+            $('#avatarForm').collapse('hide');
+        } else {
+            showToast(response.message, 'error');
+        }
+    }
+});
+
+// Add validation for avatar upload
+document.getElementById('avatarInput')?.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        // Check file size (max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+            showToast('File size should not exceed 5MB', 'error');
+            e.target.value = '';
+            return;
+        }
+        
+        // Check file type
+        if (!file.type.match('image.*')) {
+            showToast('Please upload an image file', 'error');
+            e.target.value = '';
+            return;
+        }
+    }
+});
+
+// Add this to your existing script section
+document.body.addEventListener('htmx:beforeRequest', function(evt) {
+    if (evt.detail.elt.closest('#passwordForm')) {
+        const form = evt.detail.elt.closest('form');
+        const newPass = form.querySelector('input[name="new_password"]').value;
+        const confirmPass = form.querySelector('input[name="confirm_password"]').value;
+        
+        if (newPass !== confirmPass) {
+            evt.preventDefault();
+            showToast('New passwords do not match', 'error');
+            return;
+        }
+    }
+});
+
+document.body.addEventListener('htmx:afterRequest', function(evt) {
+    if (evt.detail.elt.closest('#passwordForm')) {
+        const response = JSON.parse(evt.detail.xhr.response);
+        showToast(response.message, response.success ? 'success' : 'error');
+        if (response.success) {
+            $('#passwordForm').collapse('hide');
+            evt.detail.elt.closest('form').reset();
+        }
+    }
+});
+
+// Add education form event handlers
+document.body.addEventListener('htmx:afterRequest', function(evt) {
+    if (evt.detail.elt.id === 'educationManageForm') {
+        const response = JSON.parse(evt.detail.xhr.response);
+        if (response.success) {
+            showToast(response.message, 'success');
+            // Update education preview
+            const educationPreview = document.querySelector('.education-preview');
+            if (educationPreview) {
+                // Update preview with new values
+                const degree = evt.detail.elt.querySelector('input[name="degree"]').value;
+                const institution = evt.detail.elt.querySelector('input[name="institution"]').value;
+                const year = evt.detail.elt.querySelector('input[name="graduation_year"]').value;
+                
+                educationPreview.innerHTML = `
+                    <div class="text-dark mb-1">${degree}</div>
+                    <div class="text-muted small mb-1">${institution}</div>
+                    <div class="text-muted small">Class of ${year}</div>
+                `;
+            }
+            // Close the collapse
+            $('#educationForm').collapse('hide');
+        } else {
+            showToast(response.message, 'error');
+        }
+    }
+});
+</script>

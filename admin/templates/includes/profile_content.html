@@ -1,0 +1,75 @@
+<div class="modal-header border-0 pb-0">
+  <button type="button" class="close" data-dismiss="modal">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body pt-0">
+  <div class="row">
+    <div class="col-md-4 text-center">
+      <div class="position-relative mb-4">
+        <img class="profile-user-img img-fluid rounded-circle border-0 shadow"
+             src="{{ current_user.avatar_url or 'https://res.cloudinary.com/dmtpkmctr/image/upload/v1738868033/gallery/q4tqdpr4ws7uqoazvuk2.jpg' }}"
+             alt="User profile picture"
+             style="width: 150px; height: 150px; object-fit: cover;">
+        <div class="profile-status"></div>
+      </div>
+      <h4 class="profile-username mb-2">{{ current_user.username }}</h4>
+      <p class="text-muted">
+        <i class="fas fa-envelope mr-1"></i>{{ current_user.email }}
+      </p>
+      <div class="social-buttons mt-4">
+        {% if current_user.linkedin_url %}
+        <a href="{{ current_user.linkedin_url }}" class="btn btn-social mx-1"><i class="fab fa-linkedin-in"></i></a>
+        {% endif %}
+        {% if current_user.twitter_url %}
+        <a href="{{ current_user.twitter_url }}" class="btn btn-social mx-1"><i class="fab fa-twitter"></i></a>
+        {% endif %}
+        {% if current_user.github_url %}
+        <a href="{{ current_user.github_url }}" class="btn btn-social mx-1"><i class="fab fa-github"></i></a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-md-8">
+      {% if current_user.get_education() %}
+      <div class="profile-info-box mb-4">
+        <div class="info-icon bg-gradient-primary">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="info-content">
+          <h6 class="mb-1">Education</h6>
+          <p class="mb-1">{{ current_user.get_education().degree }}</p>
+          <small class="text-muted">{{ current_user.get_education().institution }} ({{ current_user.get_education().graduation_year }})</small>
+        </div>
+      </div>
+      {% endif %}
+      
+      {% if current_user.location %}
+      <div class="profile-info-box mb-4">
+        <div class="info-icon bg-gradient-success">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="info-content">
+          <h6 class="mb-1">Location</h6>
+          <p class="mb-0">{{ current_user.location }}</p>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if current_user.get_skills() %}
+      <div class="profile-info-box">
+        <div class="info-icon bg-gradient-warning">
+          <i class="fas fa-code"></i>
+        </div>
+        <div class="info-content">
+          <h6 class="mb-2">Skills</h6>
+          <div class="skills-badges">
+            {% for skill in current_user.get_skills() %}
+            <span class="badge badge-soft-{{ skill.badge_color }}">{{ skill.name }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

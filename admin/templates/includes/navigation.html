@@ -1,0 +1,390 @@
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand bg-black navbar-dark mb-0">
+  <!-- Left navbar links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+    </li>
+  </ul>
+
+  <!-- SEARCH FORM -->
+  <form class="form-inline ml-3">
+    <div class="input-group input-group-sm">
+      <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+      <div class="input-group-append">
+        <button class="btn btn-navbar" type="submit">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <!-- User Dropdown -->
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item dropdown">
+      <a class="nav-link" data-toggle="dropdown">
+        <div class="user-avatar-wrapper">
+          <img src="{{ current_user.avatar_url }}" 
+               class="user-avatar" 
+               alt="User Image">
+        </div>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right user-dropdown">
+        <div class="dropdown-user-info">
+          <img src="{{ current_user.avatar_url }}" class="dropdown-user-img" alt="User Image">
+          <div class="dropdown-user-details">
+            <h6 class="mb-0">{{ current_user.username }}</h6>
+            <small class="text-muted">Administrator</small>
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" 
+           hx-get="{{ url_for('dashboard.profile_view') }}"
+           hx-target="#profileModalContent"
+           hx-trigger="click"
+           data-toggle="modal" 
+           data-target="#profileModal">
+          <i class="fas fa-user-circle mr-2 dropdown-icon"></i> My Profile
+        </a>
+        <a class="dropdown-item"
+           hx-get="{{ url_for('settings.settings_view') }}"
+           hx-target="#settingsModalContent"
+           hx-trigger="click"
+           data-toggle="modal"
+           data-target="#settingsModal">
+          <i class="fas fa-cog mr-2 dropdown-icon"></i> Settings
+        </a>
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
+            <i class="fas fa-sign-out-alt mr-2 text-danger"></i> Logout
+        </a>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<!-- Profile Modal -->
+<div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" id="profileModalContent">
+      <!-- Content loaded via HTMX -->
+    </div>
+  </div>
+</div>
+
+<!-- Settings Modal -->
+<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" id="settingsModalContent">
+      <!-- Content loaded via HTMX -->
+    </div>
+  </div>
+</div>
+
+<!-- Logout Confirmation Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content border-0">
+      <div class="modal-header border-0">
+        <h5 class="modal-title font-weight-bold" id="logoutModalLabel">
+          <i class="fas fa-sign-out-alt mr-2 text-danger"></i>
+          Confirm Logout
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center py-4">
+        <h6 class="mb-0">Are you sure you want to logout?</h6>
+        <p class="text-muted small mt-2 mb-0">You will need to login again to access your account.</p>
+      </div>
+      <div class="modal-footer border-0 d-flex justify-content-between">
+        <button type="button" class="btn btn-light px-4" data-dismiss="modal">
+          <i class="fas fa-times mr-2"></i>Cancel
+        </button>
+        <form action="{{ url_for('auth.logout') }}" method="post" class="d-inline">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <button type="submit" class="btn btn-danger px-4">
+                <i class="fas fa-sign-out-alt mr-2"></i>Confirm Logout
+            </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="login-logo mb-0">
+    <a target="_blank" rel="noopener noreferrer" 
+       href="{{ url_for('dashboard.index') }}"><b>Admin</b>LTE Flask</a>
+</div>
+
+<style>
+.btn-circle {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  padding: 6px 0;
+  text-align: center;
+}
+
+.profile-status {
+  position: absolute;
+  bottom: 10px;
+  right: 50px;
+  width: 15px;
+  height: 15px;
+  background-color: #2ecc71;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.btn-social {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  line-height: 38px;
+  border-radius: 50%;
+  background-color: #f8f9fa;
+  color: #6c757d;
+  transition: all 0.3s ease;
+}
+
+.btn-social:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  color: #007bff;
+}
+
+.profile-info-box {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+.info-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.info-icon i {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.info-content {
+  flex: 1;
+}
+
+.info-content h6 {
+  color: #444;
+  font-weight: 600;
+}
+
+.skills-badges .badge {
+  padding: 8px 15px;
+  border-radius: 20px;
+  margin: 0 5px 5px 0;
+  font-weight: 500;
+}
+
+.badge-soft-primary { background-color: rgba(0,123,255,0.1); color: #007bff; }
+.badge-soft-success { background-color: rgba(40,167,69,0.1); color: #28a745; }
+.badge-soft-danger { background-color: rgba(220,53,69,0.1); color: #dc3545; }
+.badge-soft-warning { background-color: rgba(255,193,7,0.1); color: #ffc107; }
+.badge-soft-info { background-color: rgba(23,162,184,0.1); color: #17a2b8; }
+
+.bg-gradient-primary { background: linear-gradient(45deg, #007bff, #00c6ff); }
+.bg-gradient-success { background: linear-gradient(45deg, #28a745, #84e374); }
+.bg-gradient-warning { background: linear-gradient(45deg, #ffc107, #ffda58); }
+
+.user-avatar-wrapper {
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Remove .user-avatar-ring style block */
+
+.user-dropdown {
+  width: 280px;
+  padding: 0;
+  margin-top: 0.5rem;
+  box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+  border: none;
+  border-radius: 8px;
+  animation: dropdownFade 0.3s ease;
+}
+
+.dropdown-user-info {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to right, #f8f9fa, #ffffff);
+}
+
+.dropdown-user-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 1rem;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  object-fit: cover; /* Add this line to maintain aspect ratio */
+}
+
+.dropdown-user-details {
+  flex: 1;
+}
+
+.dropdown-icon {
+  color: #6c757d;
+  width: 20px;
+  text-align: center;
+}
+
+.user-dropdown .dropdown-item {
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s;
+}
+
+.user-dropdown .dropdown-item:hover {
+  background-color: #f8f9fa;
+  padding-left: 1.75rem;
+}
+
+.user-dropdown .dropdown-item:active {
+  background-color: #e9ecef;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.settings-option {
+  padding: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.settings-option:hover {
+  background-color: #f8f9fa;
+  transform: translateX(5px);
+}
+
+.settings-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-icon i {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.bg-gradient-info {
+  background: linear-gradient(45deg, #17a2b8, #4ad6e8);
+}
+
+.htmx-indicator {
+  display: none;
+  margin-right: 0.5rem;
+}
+.htmx-request .htmx-indicator {
+  display: inline-block;
+}
+.htmx-request.htmx-indicator {
+  display: inline-block;
+}
+
+/* Logout Modal Styles */
+#logoutModal .modal-content {
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+#logoutModal .modal-header .close {
+  padding: 1rem;
+  margin: -1rem -1rem -1rem auto;
+}
+
+#logoutModal .btn {
+  border-radius: 5px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+#logoutModal .btn:hover {
+  transform: translateY(-1px);
+}
+
+#logoutModal .modal-body {
+  padding: 2rem;
+}
+</style>
+
+<!-- Update JavaScript to use global toast system -->
+<script>
+document.body.addEventListener('htmx:afterRequest', function(evt) {
+    if (!evt.detail.successful) return;
+    
+    try {
+        const response = JSON.parse(evt.detail.xhr.response);
+        if (response.success && response.redirect) {
+            window.location = response.redirect;
+        }
+    } catch (e) {
+        // Handle HTML responses for modals
+        const targetId = evt.detail.target.id;
+        if (targetId === 'profileModalContent' || targetId === 'settingsModalContent') {
+            return;
+        }
+    }
+});
+
+// Add listener for form validation
+document.body.addEventListener('htmx:validation:validate', function(evt) {
+    const form = evt.detail.elt;
+    if (!form.checkValidity()) {
+        evt.preventDefault();
+        Array.from(form.elements).forEach(input => {
+            if (!input.validity.valid) {
+                showToast(input.validationMessage, 'error');
+            }
+        });
+    }
+});
+
+// Helper function to refresh profile data
+function refreshProfileData() {
+    htmx.trigger('#profileModalContent', 'refresh');
+}
+</script>

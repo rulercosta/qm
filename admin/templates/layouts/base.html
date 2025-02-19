@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+  <link rel="canonical" href="https://appseed.us/adminlte"/>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  
+  <title>
+    AdminLTE Flask - {% block title %}{% endblock %} | AppSeed
+  </title> 
+
+  {% block stylesheets %}{% endblock stylesheets %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed {% block body_class %}{% endblock body_class %}">
+<div class="wrapper">
+    {% include 'includes/navigation.html' %}
+    {% include 'includes/sidebar.html' %}
+    {% block content %}{% endblock content %}
+    {% include 'includes/footer.html' %}
+    <aside class="control-sidebar control-sidebar-dark">
+    </aside>
+</div>
+{% block javascripts %}{% endblock javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="https://unpkg.com/htmx.org@1.9.6"></script>
+
+<!-- Global toast and HTMX configuration -->
+<script>
+// Configure toastr defaults
+toastr.options = {
+    "closeButton": true,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "timeOut": "3000",
+    "extendedTimeOut": "1000",
+    "preventDuplicates": true
+};
+
+// Global toast message helper function
+window.showToast = function(message, type = 'success') {
+    if (!message) return;
+    
+    switch(type.toLowerCase()) {
+        case 'success':
+            toastr.success(message);
+            break;
+        case 'error':
+            toastr.error(message);
+            break;
+        case 'warning':
+            toastr.warning(message);
+            break;
+        case 'info':
+            toastr.info(message);
+            break;
+        default:
+            toastr.info(message);
+    }
+};
+
+// Global HTMX handlers for toast messages
+document.body.addEventListener('htmx:responseError', function(evt) {
+    try {
+        const response = JSON.parse(evt.detail.xhr.response);
+        showToast(response.message || 'An error occurred', 'error');
+    } catch (e) {
+        showToast('An error occurred. Please try again.', 'error');
+    }
+});
+
+document.body.addEventListener('htmx:afterRequest', function(evt) {
+    if (!evt.detail.successful) return;
+    
+    try {
+        const response = JSON.parse(evt.detail.xhr.response);
+        if (response.success && response.message) {
+            showToast(response.message, 'success');
+        }
+    } catch (e) {
+        // Not JSON response, probably HTML - do nothing
+    }
+});
+
+$(document).ready(function() {
+    // Close all other modals before showing logout confirmation
+    $('.btn-logout').on('click', function(e) {
+        e.preventDefault();
+        // Close any open modals first
+        $('.modal').modal('hide');
+        // Show logout confirmation after a short delay
+        setTimeout(function() {
+            $('#logoutModal').modal('show');
+        }, 200);
+    });
+});
+</script>
+</body>
+</html>

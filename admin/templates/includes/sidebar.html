@@ -1,0 +1,83 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar bg-black elevation-4">
+  <!-- Sidebar -->
+  <!-- Brand Logo -->
+  <span class="mt-1 brand-link mb-3">
+    <img src="https://res.cloudinary.com/dmtpkmctr/image/upload/v1739935036/gallery/cm7vf7nqxm5g43fwp8br.svg" alt="Logo" class="brand-image img-circle elevation-3">
+    <span class="brand-text font-weight-bold text-uppercase text-monospace ml-2">QM Admin</span>
+  </span>
+  <div class="sidebar position-relative" style="height: calc(100vh - 57px);">
+    <!-- Add search form -->
+    <div class="form-inline mt-3 mb-3">
+      <div class="input-group" data-widget="sidebar-search">
+        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" style="border-radius: 20px 0 0 20px;">
+        <div class="input-group-append">
+          <button class="btn btn-sidebar bg-white" style="border-radius: 0 20px 20px 0;">
+            <i class="fas fa-search fa-fw text-dark"></i>
+          </button>
+        </div>
+      </div>
+      <style>
+        /* Style for search results */
+        .sidebar-search-results .list-group-item {
+          color: #000 !important;
+          background-color: #fff !important;
+        }
+        .sidebar-search-results .list-group-item:hover {
+          background-color: #f8f9fa !important;
+        }
+        /* Style for matched text in search results */
+        .sidebar-search-results .text-light {
+          color: #007bff !important;
+          font-weight: bold;
+        }
+      </style>
+    </div>
+    <!-- Sidebar Menu -->
+    <nav class="mt-1">
+      <style>
+        .nav-sidebar .nav-link {
+          padding-top: 0.5rem !important;    /* reduced from 0.8rem */
+          padding-bottom: 0.5rem !important; /* reduced from 0.8rem */
+        }
+        .nav-sidebar .nav-link.active {
+          background: white !important;
+        }
+      </style>
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+        <li class="nav-item">
+          <a href="{{ url_for('dashboard.index') }}" class="nav-link {{ 'active' if active == 'index' }}" data-search="Dashboard home">
+            <i class="nav-icon fas fa-tachometer-alt fa-fw {{ 'text-dark' if active == 'index' else 'text-white' }}"></i>
+            <p class="ml-2 {{ 'text-dark' if active == 'index' else 'text-white' }}">Dashboard</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ url_for('gallery.gallery') }}" class="nav-link {{ 'active' if active == 'gallery' }}" data-search="Gallery photos images">
+            <i class="nav-icon fas fa-image fa-fw {{ 'text-dark' if active == 'gallery' else 'text-white' }}"></i>
+            <p class="ml-2 {{ 'text-dark' if active == 'gallery' else 'text-white' }}">Gallery</p>
+          </a>
+        </li>
+        <li class="nav-header">DATABASE</li>
+      </ul>
+    </nav>
+    <!-- Settings Link - Positioned absolutely at bottom -->
+    <div style="position: absolute; bottom: 0; left: 0; right: 0; padding-bottom: 1rem;">
+      <ul class="nav nav-pills nav-sidebar flex-column">
+        <li class="nav-item">
+          <a class="nav-link py-3" 
+             hx-get="{{ url_for('settings.settings_view') }}"
+             hx-target="#settingsModalContent"
+             hx-trigger="click"
+             data-toggle="modal"
+             data-target="#settingsModal">
+            <i class="nav-icon fas fa-cog fa-fw text-white"></i>
+            <p class="ml-2 text-white">Settings</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- /.sidebar -->
+</aside>
