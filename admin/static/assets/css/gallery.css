@@ -1,0 +1,668 @@
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+  
+  .gallery-item {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    border-radius: 16px;  /* Changed from 8px to 16px for more rounded corners */
+    /* Improve hardware acceleration */
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background: #f8f9fa;
+    margin-bottom: 20px;
+  }
+  
+  .gallery-item.loading {
+    background: linear-gradient(-45deg, #f0f0f0 25%, #f8f8f8 50%, #f0f0f0 75%);
+    background-size: 200% 200%;
+    animation: loading-pulse 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes loading-pulse {
+    0% { background-position: 200% 50%; }
+    100% { background-position: -100% 50%; }
+  }
+  
+  .gallery-item.loading {
+    min-height: 200px;
+  }
+  
+  /* Add loading spinner styles */
+  .loading-spinner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f8f9fa;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease;
+  }
+  
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .gallery-item img.loaded {
+    opacity: 1;
+  }
+  
+  .gallery-item img {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+  }
+  
+  .item-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    opacity: 0;
+    /* Optimize transition */
+    transition: opacity 0.15s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    /* Improve hardware acceleration */
+    transform: translate3d(0, 0, 0);
+    will-change: opacity;
+    pointer-events: none;
+  }
+  
+  .overlay-btn {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    color: #333;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+    backdrop-filter: blur(4px);
+    transform: translate3d(0, 10px, 0);
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  
+  .overlay-btn i {
+    font-size: 1.2rem;
+  }
+  
+  .preview-btn {
+    color: #2196f3;
+  }
+  
+  .edit-btn {
+    color: #4caf50;
+  }
+  
+  .delete-btn {
+    color: #dc3545;
+  }
+  
+  .gallery-item:hover .item-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .gallery-item:hover .overlay-btn {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  
+  .fullscreen-preview {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .fullscreen-preview.active {
+    opacity: 1;
+    display: flex;
+  }
+  
+  .fullscreen-preview img {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .fullscreen-preview.active img {
+    transform: scale(1);
+    opacity: 1;
+  }
+  
+  .fullscreen-preview::before {
+    content: '×';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+    opacity: 0;
+    transform: rotate(-90deg);
+    transition: all 0.3s ease;
+  }
+  
+  .fullscreen-preview.active::before {
+    opacity: 1;
+    transform: rotate(0);
+  }
+  
+  .upload-area {
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  .upload-area.highlight {
+    border-color: #007bff;
+    background-color: rgba(0,123,255,0.1);
+  }
+  
+  /* Modal improvements */
+  .modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  
+  /* Modern checkbox styling */
+  .modern-checkbox {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .modern-checkbox:hover {
+    background: rgba(0,123,255,0.08);
+  }
+  
+  .modern-checkbox input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .checkmark {
+    position: relative;
+    height: 22px;
+    width: 22px;
+    background-color: #fff;
+    border: 2px solid #adb5bd;
+    border-radius: 4px;
+    margin-right: 0.75rem;
+    transition: all 0.2s ease;
+  }
+  
+  .modern-checkbox:hover input ~ .checkmark {
+    border-color: #007bff;
+  }
+  
+  .modern-checkbox input:checked ~ .checkmark {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  
+  .modern-checkbox input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  .modern-checkbox label {
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+    color: #495057;
+  }
+  
+  /* Add some animation to checkboxes */
+  @keyframes checkmark {
+    0% { transform: rotate(45deg) scale(0); }
+    100% { transform: rotate(45deg) scale(1); }
+  }
+  
+  .modern-checkbox input:checked ~ .checkmark:after {
+    animation: checkmark 0.2s ease-in-out forwards;
+  }
+  
+  /* Enhanced image loading animations */
+  .gallery-item img {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .gallery-item img.loaded {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  /* Enhanced fullscreen preview animations */
+  .fullscreen-preview img {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .fullscreen-preview.active img.preview-loaded {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  /* Refined loading spinner for preview */
+  .fullscreen-preview .loading-spinner {
+    background: transparent;
+  }
+  
+  .fullscreen-preview .spinner {
+    width: 60px;
+    height: 60px;
+    border-width: 4px;
+    border-color: rgba(255, 255, 255, 0.2);
+    border-top-color: #fff;
+  }
+  
+  /* Enhanced Loading Spinner */
+  .loading-spinner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(248, 249, 250, 0.9);
+    z-index: 2;  /* Increased z-index to ensure visibility */
+    transition: opacity 0.3s ease;
+  }
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(0, 123, 255, 0.1);
+    border-left-color: #007bff;
+    border-radius: 50%;
+    animation: spinner-rotate 1s linear infinite;
+  }
+  
+  .fullscreen-preview .spinner {
+    width: 70px;
+    height: 70px;
+    border-width: 5px;
+    border-color: rgba(255, 255, 255, 0.2);
+    border-left-color: #ffffff;
+  }
+  
+  @keyframes spinner-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Enhanced Image Loading Animations */
+  .gallery-item img {
+    opacity: 0;
+    transform: scale(0.95);
+    filter: blur(5px);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s ease;
+  }
+  
+  .gallery-item img.loaded {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+  
+  /* Enhanced Fullscreen Preview Animations */
+  .fullscreen-preview {
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  .fullscreen-preview img {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+    filter: blur(10px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .fullscreen-preview.active img.preview-loaded {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+  
+  /* Loading Pulse Animation */
+  .gallery-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transform: translateX(-100%);
+    animation: loading-pulse 1.5s infinite;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+  }
+  
+  .gallery-item.loading::before {
+    opacity: 1;
+  }
+  
+  @keyframes loading-pulse {
+    100% { transform: translateX(100%); }
+  }
+
+  .gallery-item.error .loading-spinner {
+    background: rgba(255, 0, 0, 0.1);
+    padding: 15px;
+    border-radius: 5px;
+  }
+
+  .error-message {
+    color: #dc3545;
+    text-align: center;
+  }
+
+  #uploadProgress {
+    height: 5px;
+    margin-top: 15px;
+  }
+
+  #uploadStatus {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  /* Upload Image Preview */
+  .preview-container {
+    position: relative;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .preview-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .preview-container .remove-preview {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    border-radius: 50%;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .upload-area.has-preview {
+    border-style: solid;
+    background-color: rgba(0,123,255,0.05);
+  }
+
+  /* Upload Area and Preview Styles */
+  #uploadContainer {
+    min-height: 200px;
+    position: relative;
+    margin-bottom: 2rem;  /* Add margin to separate from tags section */
+  }
+  
+  .upload-area {
+    transition: all 0.3s ease;
+    min-height: 200px;  /* Ensure consistent height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .upload-area.hidden {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;  /* Remove from flow when hidden */
+    height: 0;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .preview-area {
+    position: relative;  /* Change from absolute to relative */
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    min-height: 200px;  /* Match upload area height */
+  }
+  
+  .preview-container {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+    height: 200px;  /* Fixed height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .preview-container img {
+    max-width: 100%;
+    max-height: 200px;  /* Match container height */
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .copy-btn {
+    color: #17a2b8;  /* Info color */
+  }
+  
+  /* Add success state for copy animation */
+  .copy-btn.copied {
+    background: #28a745;
+    color: white;
+    animation: copiedAnimation 1s ease;
+  }
+  
+  @keyframes copiedAnimation {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  .gallery-container {
+    position: relative;  /* Add this to contain the main loading spinner */
+    min-height: 200px;  /* Minimum height to show spinner */
+    padding: 1rem;  /* Add padding around the container */
+  }
+
+  .main-loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+  }
+
+  /* Update fullscreen preview spinner positioning */
+  .fullscreen-preview {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+  }
+
+  .fullscreen-preview .loading-spinner {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: none;  /* Remove transform that was causing positioning issues */
+    top: 0;
+    left: 0;
+  }
+
+  .fullscreen-preview .spinner {
+    width: 70px;
+    height: 70px;
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    border-left-color: #ffffff;
+  }
+
+  /* Adjust gallery container to work with fixed footer */
+  .content {
+    padding-bottom: 60px; /* Add padding to prevent content from going under fixed footer */
+  }
+
+  .gallery-container {
+    position: relative;
+    min-height: 200px;
+  }
+
+#galleryGrid {
+  margin: 0 -0.5rem;  /* Negative margin to offset the row padding */
+}
+
+#galleryGrid > [class*='col-'] {
+  padding: 0 0.5rem;  /* Add padding to columns */
+}
+
+/* Fix fullscreen preview z-index and stacking context */
+.fullscreen-preview {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure it's above everything including footer */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none; /* Prevent interaction when hidden */
+}
+
+.fullscreen-preview.active {
+  opacity: 1;
+  pointer-events: auto; /* Re-enable interaction when visible */
+  display: flex;
+}
+
+/* Ensure content wrapper maintains proper stacking context */
+.content-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure gallery container doesn't create new stacking context */
+.gallery-container {
+  position: relative;
+  min-height: 200px;
+  z-index: auto; /* Reset any z-index */
+}
+
+/* Fix content and footer positioning */
+.gallery-page-container {
+  min-height: calc(100vh - 57px - 57px - 80px); /* viewport height - navbar - footer - additional padding */
+  padding-bottom: 1rem;
+}
+
+.content-wrapper {
+  min-height: calc(100vh - 57px) !important;
+  height: auto;
+}
+
+/* Ensure footer stays at bottom */
+.main-footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  margin-left: 250px; /* Match sidebar width */
+}
+
+/* Adjust when sidebar is collapsed */
+body.sidebar-collapse .main-footer {
+  margin-left: 0;
+}
+
+@media (max-width: 991.98px) {
+  .main-footer {
+    margin-left: 0;
+  }
+}
+
+/* Ensure content doesn't get hidden behind footer */
+.content {
+  padding-bottom: 57px; /* Match footer height */
+}
