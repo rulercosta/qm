@@ -19,14 +19,16 @@
     <div class="content-header m-0">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
+          <div class="col-6">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
               <li class="breadcrumb-item active">Gallery</li>
             </ol>
           </div><!-- /.col -->
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark float-sm-right">Gallery</h1>
+          <div class="col-6">
+            <button class="btn btn-primary float-right" id="uploadBtn">
+              <i class="fas fa-upload"></i>
+            </button>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -38,12 +40,6 @@
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-                <div class="d-flex justify-content-end mb-4">
-                  <button class="btn btn-primary" id="uploadBtn">
-                    <i class="fas fa-upload"></i> Upload
-                  </button>
-                </div>
-                </div>
                 <div class="gallery-container">
                   <div class="main-loading-spinner" id="mainLoadingSpinner">
                     <div class="spinner"></div>
