@@ -6,7 +6,7 @@
     <img src="https://res.cloudinary.com/dmtpkmctr/image/upload/v1739935036/gallery/cm7vf7nqxm5g43fwp8br.svg" alt="Logo" class="brand-image img-circle elevation-3">
     <span class="brand-text font-weight-bold text-uppercase text-monospace ml-2">QM Admin</span>
   </span>
-  <div class="sidebar position-relative" style="height: calc(100vh - 57px);">
+  <div class="sidebar d-flex flex-column">
     <!-- Add search form -->
     <div class="form-inline mt-3 mb-3">
       <div class="input-group" data-widget="sidebar-search">
@@ -34,7 +34,7 @@
       </style>
     </div>
     <!-- Sidebar Menu -->
-    <nav class="mt-1">
+    <nav class="mt-1 flex-grow-1">
       <style>
         .nav-sidebar .nav-link {
           padding-top: 0.5rem !important;    /* reduced from 0.8rem */
@@ -62,8 +62,8 @@
         <li class="nav-header">DATABASE</li>
       </ul>
     </nav>
-    <!-- Settings Link - Positioned absolutely at bottom -->
-    <div style="position: absolute; bottom: 0; left: 0; right: 0; padding-bottom: 1rem;">
+    <!-- Settings Link - Using margin instead of absolute positioning -->
+    <div class="mt-auto mb-3">
       <ul class="nav nav-pills nav-sidebar flex-column">
         <li class="nav-item">
           <a class="nav-link py-3" 
