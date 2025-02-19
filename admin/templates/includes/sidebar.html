@@ -42,6 +42,20 @@
         }
         .nav-sidebar .nav-link.active {
           background: white !important;
+          margin: 0 !important;
+          border-radius: 0 !important;
+        }
+        /* Hide desktop settings on mobile */
+        @media (max-width: 767.98px) {
+          .settings-desktop {
+            display: none !important;
+          }
+        }
+        /* Hide mobile settings on desktop */
+        @media (min-width: 768px) {
+          .settings-mobile {
+            display: none !important;
+          }
         }
       </style>
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -60,10 +74,22 @@
           </a>
         </li>
         <li class="nav-header">DATABASE</li>
+        <!-- Mobile Settings Menu Item -->
+        <li class="nav-item settings-mobile bg-white">
+          <a class="nav-link py-3" 
+             hx-get="{{ url_for('settings.settings_view') }}"
+             hx-target="#settingsModalContent"
+             hx-trigger="click"
+             data-toggle="modal"
+             data-target="#settingsModal">
+            <i class="nav-icon fas fa-cog fa-fw text-black"></i>
+            <p class="ml-2 text-black">Settings Manager</p>
+          </a>
+        </li>
       </ul>
     </nav>
-    <!-- Settings Link - Using margin instead of absolute positioning -->
-    <div class="mt-auto mb-3">
+    <!-- Desktop Settings - Bottom of sidebar -->
+    <div class="settings-desktop mb-3">
       <ul class="nav nav-pills nav-sidebar flex-column">
         <li class="nav-item">
           <a class="nav-link py-3" 
