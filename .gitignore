@@ -1,4 +1,5 @@
 .env
+.env.copy
 logs/
 flask_session/
 __pycache__/
