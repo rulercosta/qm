@@ -126,6 +126,7 @@ def verify_certificate():
                 return render_template(
                     'pages/verify.jinja',
                     certificate_id=secure_id,  # Use secure_id instead of cid
+                    cid=None,  
                     name=participant_data['name'],
                     instructor=instructor_data['name'],
                     profile=instructor_data['profile'],
