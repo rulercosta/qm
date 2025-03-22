@@ -15,24 +15,28 @@
                         <span class="cs-name">{{ head.name }}</span>
                         <span class="cs-job-title">{{ head.position }}</span>
                         <div class="cs-social">
+                            {% if head.instagram %}
                             <a href="{{ head.instagram }}" class="cs-link" aria-label="Instagram" target="_blank" rel="noopener">
                                 <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="https://i.postimg.cc/NFBtNmws/instagram-167-svgrepo-com-2.png" alt="instagram" width="15" height="13">
                             </a>
-                            <a href="{{ head.linkedin }}" class="cs-link" aria-label="Linked in" target="_blank" rel="noopener">
+                            {% endif %}
+                            {% if head.linkedin %}
+                            <a href="{{ head.linkedin }}" class="cs-link" aria-label="LinkedIn" target="_blank" rel="noopener">
                                 <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.digitaloceanspaces.com/Meet-Team/linkedin-grey.svg" alt="linkedin" width="17" height="16">
                             </a>
+                            {% endif %}
                         </div>
                     </li>
                 {% endfor %}
             </ul>
-            {% if view_more %}
+            {# {% if view_more %}
                 {% import 'components/button.jinja' as ui %}
                 {{ ui.button(button={"url":url_for('explore.explore'),
                 "label":"view more",
                 "image":"https://i.postimg.cc/XJC4ZrHc/person-svgrepo-com.png",
                 "alt":"members",
                 "text":"View More"}) }}
-            {% endif %}
+            {% endif %} #}
         </div>
     </section>
 {% endmacro %}
