@@ -227,6 +227,57 @@
   } */
 }
 
+@media only screen and (min-width: 64rem) {
+  #services-1628 .photo-carousel {
+    display: none !important; 
+  }
+  
+  #services-1628 .photo-grid {
+    display: grid !important; 
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    list-style: none;
+    padding: 0;
+  }
+  
+  #services-1628 .grid-item {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #services-1628 .grid-item .cs-picture {
+    height: clamp(15rem, 20vw, 25rem);
+    margin-bottom: 1rem;
+    width: 100%;
+    background-color: #000;
+  }
+  
+  #services-1628 .grid-item .cs-picture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+@media only screen and (max-width: 63.9375rem) {
+  #services-1628 .photo-carousel {
+    display: block !important;
+  }
+  
+  #services-1628 .photo-grid {
+    display: none !important;
+  }
+}
+
 .photo-modal {
     display: none;
     position: fixed;
