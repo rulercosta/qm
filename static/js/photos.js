@@ -4,7 +4,7 @@ class PhotoCarousel {
     #modalImg;
     
     init() {
-        if (!document.querySelector('.photo-carousel')) {
+        if (!document.querySelector('#services-1628')) {
             return false;
         }
 
@@ -17,7 +17,7 @@ class PhotoCarousel {
             const instance = new Swiper(carousel, {
                 slidesPerView: 1,
                 spaceBetween: 20,
-                loop: true,
+                loop: false, 
                 speed: 800,
                 autoplay: {
                     delay: 2500,
@@ -28,6 +28,10 @@ class PhotoCarousel {
                 effect: 'fade',
                 fadeEffect: {
                     crossFade: true
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true
                 },
                 on: {
                     slideChangeTransitionEnd: function() {
@@ -57,7 +61,34 @@ class PhotoCarousel {
             this.#instances.push(instance);
         });
         
+        const gridItems = document.querySelectorAll('.photo-grid .cs-picture img');
+        gridItems.forEach(img => {
+            img.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.#showModal(img.src);
+            });
+        });
+        
+        this.#adjustDisplayMode();
+        window.addEventListener('resize', () => this.#adjustDisplayMode());
+        
         return true;
+    }
+
+    #adjustDisplayMode() {
+        const isWideScreen = window.innerWidth >= 1024; 
+        const carousel = document.querySelector('.photo-carousel');
+        const grid = document.querySelector('.photo-grid');
+        
+        if (!carousel || !grid) return;
+        
+        if (isWideScreen) {
+            carousel.style.display = 'none';
+            grid.style.display = 'grid';
+        } else {
+            carousel.style.display = 'block';
+            grid.style.display = 'none';
+        }
     }
 
     #createModal() {
